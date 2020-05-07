@@ -40,6 +40,13 @@ block head
 block scripts
 	script(src='./assets/scripts/index.js')
 block content
+	section.section
+		.main-slaider
+			.main-slaider__item
+				.slider-img
+					span.overlay.overlay__1
+					span.overlay.overlay__2
+					+img('home/2.jpg')
 block footer
 	footer.footer
 		include ../includes/footer.pug
