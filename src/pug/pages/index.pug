@@ -40,16 +40,92 @@ block head
 block scripts
 	script(src='./assets/scripts/index.js')
 block content
-	section.section
+
+	.controll
+		button(type="button").time_scale_025 X 0.25
+		button(type="button").time_scale_075 X 0.5
+		button(type="button").time_scale_050 X 0.75
+		button(type="button").time_scale_1 X 1
+	section.section.section__first.section-slaider
+		span.overlay.overlay__1
+		span.overlay.overlay__2
+		span.overlay.anim-overlay__1
+		span.overlay.anim-overlay__2
+		.main-overlay
+			include ../../assets/images/nav-logo.svg
+			+svg('circ_logo').main-overlay__icon-logo
+			include ../../assets/images/home/log_arr.svg
+			p.main-overlay__text Новий квартал в діловому центрі столиці на Печерську
 		.main-slaider
 			.main-slaider__item
+				.slaider-title
+					span.word-wrapper.slaider-title__top
+						span.word-animate Бізнес класика
+					span.wrap-additional
+						span.wrap-additional__line
+						span.word-wrapper.slaider-title__bottom
+							span.word-animate на Печерську
 				.slider-img
-					span.overlay.overlay__1
-					span.overlay.overlay__2
+					+img('home/1.jpg')
+			.main-slaider__item
+				.slaider-title
+					span.word-wrapper.slaider-title__top
+						span.word-animate класика Бізнес
+					span.wrap-additional
+						span.wrap-additional__line
+						span.word-wrapper.slaider-title__bottom
+							span.word-animate Печерську на
+				.slider-img
 					+img('home/2.jpg')
+			.main-slaider__item
+				.slaider-title
+					span.word-wrapper.slaider-title__top
+						span.word-animate 3класика Бізнес
+					span.wrap-additional
+						span.wrap-additional__line
+						span.word-wrapper.slaider-title__bottom
+							span.word-animate Печерську на
+				.slider-img
+					+img('home/2.jpg')
+
+
+		ul.dots
+			li.dots-item
+				button(type="button" data-slide="0").button--reset.dots-btn.dots-btn--active 01
+					span.line
+			li.dots-item
+				button(type="button" data-slide="1").button--reset.dots-btn 02
+					span.line
+			li.dots-item
+				button(type="button" data-slide="2").button--reset.dots-btn 03
+					span.line
+		.section-footer
+			.section-footer__logo
+				+img('logo-perfect.svg')
+			a(href="#").section-footer__link.footer-link
+				+svg('map').footer-link__icon
+				span.footer-link__text Київ, Предславинська, 35 
+	section.section.section__second.section-second
+		.section-left.section-second-left
+			.section-second-content-wrap
+				h2.section-second__title Бізнес класика на Печерську
+				p.section-second__text Немає кращого способу вийти на новий рівень, як звернутися до цінностей, перевірених часом. Класику можна успадкувати, але ми обираємо створювати її за власними правилами.
+		.section-right
+			+img('home/sec.jpg').section-second__img
+	section.section.section__third.section-third
+		.section-left.section-third-left
+			.section-third-content-wrap
+				h2.section-third__subtitle Stanford – вибір тих, хто вже досяг гармонії та успіху, але завжди прагне більшого.
+				p.section-third__text Це стан душі і особливий настрій, мистецтво стильного і витонченого буття. Унікальна для центру міста оаза спокою, де ніщо не може відволікати від речей, що дійсно важливі.
+				a(href="#").section-third__link.section-link
+					span.section-link__text більше про проект
+					+svg('arrow-link').section-link__icon
+		.section-right
+			+img('home/third.jpg').section-third__img
+
 block footer
-	footer.footer
-		include ../includes/footer.pug
+	//- footer.footer
+	//- 	include ../includes/footer.pug
 
 block header
 	header.header
