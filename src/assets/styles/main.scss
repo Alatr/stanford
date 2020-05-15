@@ -22,29 +22,40 @@
 .transition-effect{
 	position: fixed;
 	display: flex;
-	width: 200px;
-	height: 200px;
-	background: BLACK;
-	z-index: 999;
+	width: 120vw;
+	height: 120vw;
+	background: #3B2E43;
+	z-index: 50;
 	&__1{
 		top: 0;
 		left: 0;
-		transform: translate(-50%,-50%) rotate(45deg);
+		transform: translate(-50%,-50%) rotate(45deg) scale(0);
 	}
 	&__2{
 		top: 0;
 		right: 0;
-		transform: translate(50%, -50%) rotate(45deg);
+		transform: translate(50%, -50%) rotate(45deg) scale(0);
 	}
 	&__3{
 		bottom: 0;
 		right: 0;
-		transform: translate(50%, 50%) rotate(45deg);
+		transform: translate(50%, 50%) rotate(45deg) scale(0);
 	}
 	&__4{
 		bottom: 0;
 		left: 0;
-		transform: translate(-50%, 50%) rotate(45deg);
+		transform: translate(-50%, 50%) rotate(45deg) scale(0);
+	}
+}
+.loader-logo{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+	fill: $mc3;
+	z-index: 51;
+	&__r{
+		transform-origin: 50% 0%;
 	}
 }
 
@@ -65,13 +76,19 @@
 	}
 }
 
+.section{
+	display: flex;
+	padding-left: 65px;
+	position: relative;
+	height: 100vh;
+	width: 100vw;
+	overflow: hidden;
+}
 .js_animation{
 	.section{
-		display: flex;
-		padding-left: 65px;
-		position: relative;
-		height: 100vh;
-		overflow: hidden;
+		position: absolute;
+		top: 0;
+		left: 0;
 	}
 	.section-footer{
 		position: absolute;

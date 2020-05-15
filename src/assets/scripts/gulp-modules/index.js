@@ -1,31 +1,54 @@
+var vertex = `
+varying vec2 vUv;
+void main() {
+	vUv = uv;
+	gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+}
+`;
+
+var fragment = `
+varying vec2 vUv;
+
+uniform sampler2D texture;
+uniform sampler2D texture2;
+uniform sampler2D disp;
+
+// uniform float time;
+// uniform float _rot;
+uniform float dispFactor;
+uniform float effectFactor;
+
+// vec2 rotate(vec2 v, float a) {
+//  float s = sin(a);
+//  float c = cos(a);
+//  mat2 m = mat2(c, -s, s, c);
+//  return m * v;
+// }
+
+void main() {
+
+		vec2 uv = vUv;
+
+		// uv -= 0.5;
+		// vec2 rotUV = rotate(uv, _rot);
+		// uv += 0.5;
+
+		vec4 disp = texture2D(disp, uv);
+
+		vec2 distortedPosition = vec2(uv.x + dispFactor * (disp.r*effectFactor), uv.y);
+		vec2 distortedPosition2 = vec2(uv.x - (1.0 - dispFactor) * (disp.r*effectFactor), uv.y);
+
+		vec4 _texture = texture2D(texture, distortedPosition);
+		vec4 _texture2 = texture2D(texture2, distortedPosition2);
+
+		vec4 finalTexture = mix(_texture, _texture2, dispFactor);
+
+		gl_FragColor = finalTexture;
+		// gl_FragColor = disp;
+}
+`;
 @@include('./libs.js');
-
-// function first_in() {
-// 	const obj = {
-// 		paused: true,
-// 	}
-// 	const tl = gsap.timeline(obj);
-	
-// 	return tl;
-// };
-
-
-(function ($) {
-	const $body = $('body')
-	var loader = function () {
-		$(".loader-wrap").delay(500).fadeOut(500);
-		$body.addClass('js_animation')
-	};
-	loader();
-
-
-	// $('.main-overlay__text').html(spliterText('.main-overlay__text'));
-	// $('.main-overlay__text').html(spliterText(this));
-	
-	spliterText('.main-overlay__text')
-	
-
-	function spliterText($title, type = 'type_text'){
+function spliterText($title, type = 'type_text'){
 		const titleStr = $($title).text().replace(/\s{2,}/gm, '')
 		const titleArr = titleStr.split(' ');
 
@@ -47,7 +70,8 @@
 		$($title).html(newStr)
 	}
 
-	var time_anim = 0.4;
+
+
 	var es = Power2.easeOut;
 	var ex = "expo.inOut";
 	var exI = "expo.in";
@@ -64,6 +88,90 @@
 	var circO = "circ.out";
 	var circI = "circ.in";
 	var bc = "back.inOut(1.7)";
+// function first_in() {
+// 	const obj = {
+// 		paused: true,
+// 	}
+// 	const tl = gsap.timeline(obj);
+	
+// 	return tl;
+// };
+
+
+
+let hoverArrEl = [];
+Array.from(document.querySelectorAll('.js-grid__item-img')).forEach((el) => {
+	const imgs = Array.from(el.querySelectorAll('img'));
+ const hoverEffectInstatse = new hoverEffect({
+	 parent: el,
+	 intensity: el.dataset.intensity || undefined,
+	 speedIn: el.dataset.speedin || undefined,
+	 speedOut: el.dataset.speedout || undefined,
+	 easing: el.dataset.easing || undefined,
+	 hover: false,
+	 image1: imgs[0].getAttribute('src'),
+	 image2: imgs[1].getAttribute('src'),
+	 displacementImage: el.dataset.displacement,
+	 angle2: Math.PI / 2,
+ });
+ 
+ hoverArrEl.push(hoverEffectInstatse)
+});
+
+(function ($) {
+	console.log(`before`);
+	imagesLoaded( document.querySelectorAll('img'), () => {
+console.log(`after`);
+	const $body = $('body')
+	var loader = function () {
+		//$(".loader-wrap").delay(500).fadeOut(500);
+		$(".loader-wrap").fadeOut(1);
+		$body.addClass('js_animation')
+	};
+	loader();
+
+	
+	spliterText('.main-overlay__text')
+	gsap.config({
+		force3D: true,
+	});
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+
+
 
 	function logo() {
 		// DOM
@@ -102,6 +210,9 @@
 		
 		
 		const obj = {
+			onComplete: ()=> {
+				page.canGo = true
+			}
 		}
 
 		gsap.set([letterXL, letterSM, colorOverlayIconLogo,  colorOverlaySmallArrow, colorOverlayLogo, colorOverlayText, firstImg], {autoAlpha:0});
@@ -131,10 +242,7 @@
 
 
 	
-	$('.time_scale_025').on('click', ()=> tl.restart().timeScale(0.25))
-	$('.time_scale_050').on('click', ()=> tl.restart().timeScale(0.50))
-	$('.time_scale_075').on('click', ()=> tl.restart().timeScale(0.75))
-	$('.time_scale_1').on('click', ()=> tl.restart().timeScale(1))
+
 
 
 
@@ -282,18 +390,192 @@ class CustomSl{
 const sl = new CustomSl({
 	container: '.main-slaider',
 	dotsContainer: '.dots',
-})
+});
+
+
+
+
+
+class Paginator {
+	constructor(settings) {
+		this.slides = [...document.querySelectorAll(`${settings.container}`)]
+		this.speed = settings.speed,
+		this.activeSlide = 0;
+		this.canGo = true;
+		this.min = 0;
+		this.max = this.slides.length - 1;
+		
+		this.scrollEvents();
+		this.setStyle();
+	}
+	
+	setStyle() {
+		var self = this;
+
+		self.slides.forEach(el => el.classList.add('slide--hidden'));
+		self.slides[0].classList.remove('slide--hidden')
+
+	}
+	scrollEvents() {
+		var self = this;
+
+
+		$(window).on('wheel', function(e) {
+			if(!self.canGo) return;
+			
+			e = e.originalEvent;
+			var direction = e.deltaY > 0 ? 1 : -1;
+			
+			var newSlide = self.activeSlide + direction;
+			if(newSlide > self.max || newSlide < self.min) return;
+			self.canGo = false;
+			
+			PubSub.publish( 'gotoSlide', {from: self.activeSlide, to: newSlide, direction} );
+			self.activeSlide = newSlide;
+			
+			// add delay
+			setTimeout(()=> { self.canGo = true; }, self.speed);
+		});
+	}
+}
+
+
+
+function pageTransitionLeft(callbackChangeSlide, callbackAnimationSlide) {
+	const obj = {
+		paused: true,
+		onComplete: ()=> {
+			//page.canGo = true;
+		}
+	}
+	const overlay_1 = '.transition-effect__1';
+	const overlay_2 = '.transition-effect__3';
+
+	const tl = gsap.timeline(obj);
+
+	tl.fromTo(overlay_1, 0.4, {rotation: 45, scale: 0}, {rotation: 45, scale: 1, ease: "sine.out"})
+	tl.fromTo(overlay_2, 0.4, {rotation: 45, scale: 0}, {rotation: 45, scale: 1, ease: "sine.out"}, '<')
+	
+	tl.call(()=> logoPageTransitionIn().play(), null, '-=0.25')
+	tl.call(callbackChangeSlide)
+	tl.fromTo(overlay_1, 0.4, {rotation: 45, scale: 1}, {rotation: 45, scale: 0, ease: "sine.out"}, '+=0.4')
+	tl.fromTo(overlay_2, 0.4, {rotation: 45, scale: 1}, {rotation: 45, scale: 0, ease: "sine.out"}, '<')
+	tl.call(()=> logoPageTransitionOut().play(), null, '-=0.4')
+	tl.call(()=> callbackAnimationSlide().play(), null, '<-0.25')
+	
+	return tl;
+};
+function pageTransitionRight(callback) {
+	const obj = {
+		paused: true,
+	}
+	const overlay_1 = '.transition-effect__2';
+	const overlay_2 = '.transition-effect__4';
+	const tl = gsap.timeline(obj);
+
+	tl.fromTo(overlay_1, 0.4, {rotation: 45, scale: 0}, {rotation: 45, scale: 1, ease: 'p4O'})
+	tl.fromTo(overlay_2, 0.4, {rotation: 45, scale: 0}, {rotation: 45, scale: 1, ease: 'p4O'}, '<')
+	tl.fromTo(overlay_1, 0.4, {rotation: 45, scale: 1}, {rotation: 45, scale: 0, ease: 'p4O'}), '-=0.4'
+	tl.fromTo(overlay_2, 0.4, {rotation: 45, scale: 1}, {rotation: 45, scale: 0, ease: 'p4O'}, '<')
+	
+	return tl;
+};
+//pageTransitionRight().play()
+// const page = {};
+const page = new Paginator({
+	container: 'section.section',
+	speed: 2600, // speed animation page transition
+
+});
+page.canGo = false;
+
+
+
+
+PubSub.subscribe('gotoSlide', function(msg, data){
+
+	console.log(msg, data);
+	const changeSlide = function(){
+		page.slides.forEach(el => el.classList.add('slide--hidden'));
+		page.slides[data.to].classList.remove('slide--hidden');
+	}
+	pageTransitionLeft(changeSlide, secondSlAnim).play();
+
+
+
+	function createAnimationTool(fn){
+
+		$('.time_scale_025').on('click', ()=> fn().restart().timeScale(0.50))
+		$('.time_scale_050').on('click', ()=> fn().restart().timeScale(0.50))
+		$('.time_scale_075').on('click', ()=> fn().restart().timeScale(0.75))
+		$('.time_scale_1').on('click', ()=> fn().restart().timeScale(1))
+	}
+	createAnimationTool(pageTransitionLeft(changeSlide, secondSlAnim))
+
+});
+
+
+
+
+
+function secondSlAnim() {
+	const overlay = '.section__img-overlay';
+	const content = '.section-second__title span';
+	const text = '.section-second__text';
+
+	const obj = {
+	paused: true,
+	}
+	const tl = gsap.timeline(obj);
+	gsap.set([content, text], {autoAlpha:0});
+
+	
+	tl.fromTo(overlay, 1, {scaleX: 1}, {scaleX: 0, ease: ex})
+	tl.call(hoverArrEl[0].next, null, '<')
+	tl.staggerFromTo(content, 1.2, {xPercent: -30, autoAlpha: 0}, {xPercent: 0, autoAlpha: 1, ease: p4}, 0.1, '<-0.2')
+	tl.fromTo(text, 1.2, {yPercent: 100, autoAlpha: 0}, {yPercent: 0, ease: ex, autoAlpha: 1}, '<')
+
+	return tl;
+};
+secondSlAnim()
+//secondSlAnim().play()
+
+
+
+function logoPageTransitionIn () {
+	const logoL = '.loader-logo__l';
+	const logoR = '.loader-logo__r';
+	gsap.set([logoL, logoR], {autoAlpha: 0});
+	const obj = {
+	paused: true,
+	}
+	const tl = gsap.timeline(obj);
+		tl.fromTo(logoL, 0.25, {x: -30, y: -30, rotation: -25, autoAlpha: 0}, {overwrite: 'auto',x: 0, y: 0, rotation: 0, autoAlpha: 1, ease: circ})
+		tl.fromTo(logoR, 0.25, {x: 30, y:30, autoAlpha: 0, rotation: -25}, {overwrite: 'auto', x: 0, y:0, autoAlpha: 1, rotation: 0, ease: circ}, '<')
+	return tl;
+};
+logoPageTransitionIn();
+
+function logoPageTransitionOut () {
+	const logoL = '.loader-logo__l';
+	const logoR = '.loader-logo__r';
+	const obj = {
+	paused: true,
+	}
+	const tl = gsap.timeline(obj);
+		// tl.fromTo(logoL, 0.2, {x: 0, y: 0, rotation: 0, autoAlpha: 1}, {immediateRender: false ,x: -30, y: -30, rotation: -25, autoAlpha: 0, ease: 'none'})
+		// tl.fromTo(logoR, 0.2,  { x: 0, y:0, autoAlpha: 1, rotation: 0}, {immediateRender: false ,x: 30, y:30, autoAlpha: 0, rotation: -25, ease: 'none'}, '<')
+
+		tl.fromTo(logoL, 0.05, { autoAlpha: 1}, {immediateRender: false , autoAlpha: 0, ease: 'none'})
+		tl.fromTo(logoR, 0.05,  { autoAlpha: 1}, {immediateRender: false , autoAlpha: 0, ease: 'none'}, '<')
+	return tl;
+};
 
 
 
 
 
 
-
-
-
-
-
-
+	});
 
 })(jQuery);

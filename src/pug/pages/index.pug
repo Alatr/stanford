@@ -108,9 +108,13 @@ block content
 	section.section.section__second.section-second
 		.section-left.section-second-left
 			.section-second-content-wrap
-				h2.section-second__title Бізнес класика на Печерську
-				p.section-second__text Немає кращого способу вийти на новий рівень, як звернутися до цінностей, перевірених часом. Класику можна успадкувати, але ми обираємо створювати її за власними правилами.
-		.section-right
+				h2.stagger-content.section-second__title
+					span Бізнес класика
+					span на Печерську
+				p.stagger-content.section-second__text Немає кращого способу вийти на новий рівень, як звернутися до цінностей, перевірених часом. Класику можна успадкувати, але ми обираємо створювати її за власними правилами.
+		.section-right.js-grid__item-img(data-intensity="0.7" data-easing="Power2.easeOut" data-displacement="assets/images/displacement/1.jpg")
+			span.section__img-overlay
+			+img('home/third.jpg').section-second__img
 			+img('home/sec.jpg').section-second__img
 	section.section.section__third.section-third
 		.section-left.section-third-left
@@ -120,8 +124,9 @@ block content
 				a(href="#").section-third__link.section-link
 					span.section-link__text більше про проект
 					+svg('arrow-link').section-link__icon
-		.section-right
+		.section-right.js-grid__item-img(data-intensity="0.7" data-easing="Power2.easeOut" data-displacement="assets/images/displacement/13.jpg")
 			+img('home/third.jpg').section-third__img
+			+img('home/sec.jpg').section-third__img
 
 block footer
 	//- footer.footer

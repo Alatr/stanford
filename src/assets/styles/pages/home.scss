@@ -480,7 +480,14 @@ ul.dots{
 	align-items: center;
 }
 .section-right{
+	position: relative;
 	width: 50%;
+	img{
+		position: absolute;
+		top: 0;
+		left: 0;
+		display: none;
+	}
 }
 .section-second{
 	&__title{
@@ -489,6 +496,10 @@ ul.dots{
 		font-size: 40px;
 		line-height: 1.3em;
 		color: #343434;
+		span{
+			display: flex;
+			flex-direction: column;
+		}
 	}
 	&__text{
 		font-size: 14px;
@@ -498,6 +509,9 @@ ul.dots{
 	&__img{
 		height: 100%;
 		object-fit: cover;
+	}
+	.section__img-overlay{
+		transform-origin: right;
 	}
 }
 .section-third{
@@ -549,3 +563,12 @@ ul.dots{
 	}
 }
 
+.section__img-overlay{
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: flex;
+	width: 100%;
+	height: 100%;
+	background-color: $wc;
+}
