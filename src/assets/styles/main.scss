@@ -48,9 +48,12 @@
 	}
 }
 .loader-logo{
-	position: absolute;
+	position: fixed;
 	top: 50%;
 	left: 50%;
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
 	transform: translate(-50%,-50%);
 	fill: $mc3;
 	z-index: 51;
@@ -95,6 +98,9 @@
 		bottom: 0;
 		left: 0;
 		width: 100%;
+	}
+	.section__img-overlay{
+		display: flex;
 	}
 }
 .section-slaider:not(#d){
