@@ -98,37 +98,39 @@ function spliterText($title, type = 'type_text'){
 // };
 
 
-
 let hoverArrEl = [];
+	
 Array.from(document.querySelectorAll('.js-grid__item-img')).forEach((el) => {
 	const imgs = Array.from(el.querySelectorAll('img'));
- const hoverEffectInstatse = new hoverEffect({
-	 parent: el,
-	 intensity: el.dataset.intensity || undefined,
-	 speedIn: el.dataset.speedin || undefined,
-	 speedOut: el.dataset.speedout || undefined,
-	 easing: el.dataset.easing || undefined,
-	 hover: false,
-	 image1: imgs[0].getAttribute('src'),
-	 image2: imgs[1].getAttribute('src'),
-	 displacementImage: el.dataset.displacement,
-	 angle2: Math.PI / 2,
- });
- 
- hoverArrEl.push(hoverEffectInstatse)
+	const hoverEffectInstatse = new hoverEffect({
+		parent: el,
+		intensity: el.dataset.intensity || undefined,
+		speedIn: el.dataset.speedin || undefined,
+		speedOut: el.dataset.speedout || undefined,
+		easing: el.dataset.easing || undefined,
+		hover: false,
+		image1: imgs[0].getAttribute('src'),
+		image2: imgs[1].getAttribute('src'),
+		displacementImage: el.dataset.displacement,
+				 angle2: Math.PI / 2,
+				});
+				
+			 hoverArrEl.push(hoverEffectInstatse)
 });
+			//});
 
 (function ($) {
-	console.log(`before`);
-	imagesLoaded( document.querySelectorAll('img'), () => {
-console.log(`after`);
+	imagesLoaded( document.querySelectorAll('img.displacement__img'), () => {
+
+				console.clear();
+	
 	const $body = $('body')
 	var loader = function () {
 		//$(".loader-wrap").delay(500).fadeOut(500);
 		$(".loader-wrap").fadeOut(1);
-		//$body.addClass('js_animation')
 	};
 	loader();
+//	$body.addClass('js_animation')
 
 	
 	spliterText('.main-overlay__text')
@@ -277,7 +279,7 @@ class CustomSl{
 	}
 
 	bindAll() {
-		['nextSlide']
+		['nextSlide', 'transitionNext']
 		.forEach(fn => this[fn] = this[fn].bind(this))
 	}
 	
@@ -297,9 +299,11 @@ class CustomSl{
 		})
 	}
 
-	transitionNext(nextIdx) {
-
-		const current = this.slides[this.data.current];
+	transitionNext(currentIdx, nextIdx) {
+		console.log(currentIdx, nextIdx);
+		
+		const self = this;
+		const current = this.slides[currentIdx];
 		const next = this.slides[nextIdx];
 		const overlayL = '.anim-overlay__1';
 		const overlayR = '.anim-overlay__2';
@@ -313,57 +317,77 @@ class CustomSl{
 		const nextImg = next.querySelectorAll('.slider-img img')
 		const nextTextLine = next.querySelectorAll('.wrap-additional__line')
 		
-		const currentBullet = this.bullets[this.data.current]
+		const currentBullet = this.bullets[currentIdx]
 		const nextBullet = this.bullets[nextIdx];
 		
-		currentBullet.classList.add('dots-btn--not-active');
+		//currentBullet.classList.add('dots-btn--not-active');
+		
+		this.bullets.forEach( bullet => bullet.classList.add('dots-btn--not-active'))
 		nextBullet.classList.remove('dots-btn--not-active');
-
-		const tl = new TimelineMax({
-			onComplete: () => {
-				this.state.animating = false;
-			}
-		});
+		function transitionAnim() {
+			console.log('transitionAnim');
+			
+			const tl = new TimelineMax({
+				onComplete: () => {
+					self.state.animating = false;
+				}
+			});
+			
+			gsap.set(nextText, {clearProps: 'all'})
 	
+	
+			TweenMax.set(nextImg, {scale: 1.2});
+			// IN
+			tl.fromTo(overlayR, 1.5, {scaleX: 0, autoAlpha: 1}, {scaleX: 1, autoAlpha: 1, ease: p2I})
+			tl.fromTo(overlayL, 1.1, {scaleX: 0, autoAlpha: 1}, {scaleX: 1, autoAlpha: 1, ease: p2I}, '<0.4')
+			tl.fromTo(currentText, 0.7, {yPercent: 0}, {yPercent: -100, ease: p2I, stagger: 0.1}, '-=1.3' )
+			tl.fromTo(currentTextLine, 0.7, {width: 120, y: 0}, {width: 0, y: -50, ease: p2I}, "<")
+	
+			tl.call(()=> gsap.fromTo(currentImg, 1.5, {scale: 1}, {scale: 1.3, ease: p2I}), null, '<0.1')
+	
+			tl.call(()=>{
+				self.slides.forEach(el => el.classList.add('slide--hidden'));
+				next.classList.remove('slide--hidden');
+			}, null, null)
+	
+			// OUT
+			tl.fromTo(overlayR, 1, {scaleX: 1, autoAlpha: 1}, {scaleX: 0, autoAlpha: 1, immediateRender: false,  ease: "power1.out"}, '<')
+			tl.fromTo(overlayL, 0.8, {scaleX: 1, autoAlpha: 1}, {scaleX: 0, autoAlpha: 1, immediateRender: false,  ease: "power1.out"}, '<')
+			tl.fromTo(nextText, 2.3, {yPercent: -100}, {yPercent: 0, ease: p4O, stagger: 0.1}, '-=1')
+			tl.fromTo(nextTextLine, 1.5, {width: 0, y: -50}, {width: 120, y: 0, ease: p4O}, '<')
+			tl.call(()=> gsap.fromTo(nextImg, 1.3, {scale: 1.2}, {scale: 1, ease: "power1.out"}), null, '<-0.5')
 
-
-		TweenMax.set(nextImg, {scale: 1.2});
-		// IN
-		tl.fromTo(overlayR, 1.5, {scaleX: 0, autoAlpha: 1}, {scaleX: 1, autoAlpha: 1, ease: p2I})
-		tl.fromTo(overlayL, 1.1, {scaleX: 0, autoAlpha: 1}, {scaleX: 1, autoAlpha: 1, ease: p2I}, '<0.4')
-		tl.fromTo(currentText, 0.7, {yPercent: 0}, {yPercent: -100, ease: p2I, stagger: 0.1}, '-=1.3' )
-		tl.fromTo(currentTextLine, 0.7, {width: 120, y: 0}, {width: 0, y: -50, ease: p2I}, "<")
-
-		tl.call(()=> gsap.fromTo(currentImg, 1.5, {scale: 1}, {scale: 1.3, ease: p2I}), null, '<0.1')
-
-		tl.call(()=>{
-			this.slides.forEach(el => el.classList.add('slide--hidden'));
-			next.classList.remove('slide--hidden');
-		}, null, null)
-
-		// OUT
-		tl.fromTo(overlayR, 1, {scaleX: 1, autoAlpha: 1}, {scaleX: 0, autoAlpha: 1, immediateRender: false,  ease: "power1.out"}, '<')
-		tl.fromTo(overlayL, 0.8, {scaleX: 1, autoAlpha: 1}, {scaleX: 0, autoAlpha: 1, immediateRender: false,  ease: "power1.out"}, '<')
-		tl.staggerFromTo(nextText, 2.3, {yPercent: -100}, {yPercent: 0, ease: p4O}, 0.1, '-=1')
-		tl.fromTo(nextTextLine, 1.5, {width: 0, y: -50}, {width: 120, y: 0, ease: p4O}, '<')
-		tl.call(()=> gsap.fromTo(nextImg, 1.3, {scale: 1.2}, {scale: 1, ease: "power1.out"}), null, '<-0.5')
-	//	tl.timeScale(0.1)
+		return tl
+	}
+	transitionAnim().play()
 	}
 
 	nextSlide(e) {
-		const idxSlide = (e !== null) ? $(e.target).closest('.dots-btn').data().slide : this.data.next;
-		console.log(`idxSlide`, idxSlide);
-	//	this.data.current = idxSlide;
-
 		if (this.state.animating) return
-
 		this.state.animating = true
-
-		this.transitionNext(idxSlide)
-		console.log(this.data.next, 'next');
 		
-		this.data.current = this.data.current === this.data.total ? 0 : this.data.current + 1
-		this.data.next = this.data.current === this.data.total ? 0 : this.data.current + 1
+		if(e !== null){
+			const idxCurent = this.data.current;
+			const idxNext = $(e.target).closest('.dots-item').data().slide;
+
+			this.transitionNext(idxCurent, idxNext);
+
+			this.data.current = idxNext;
+			this.data.next = this.data.current === this.data.total ? 0 : this.data.current + 1
+			console.log(this.data.next);
+			
+		} else {
+			const idxCurent = this.data.current;
+			const idxNext = this.data.next;
+			
+			this.transitionNext(idxCurent, idxNext);
+
+			this.data.current = idxNext;
+			this.data.next = this.data.current === this.data.total ? 0 : this.data.current + 1
+			
+			
+			console.log(this.data.next);
+		}
 	}
 
 	listeners() {
@@ -374,9 +398,14 @@ class CustomSl{
 		// window.addEventListener('touchmove', ()=>{
 		// 	this.nextSlide(null);
 		// });
-
-
-		$('body').on('click', '.dots-btn', this.nextSlide,)
+		const self = this;
+		// setTimeout(()=>{
+		// 	console.log(2000);
+		// 	setInterval(function(){
+		// 		self.nextSlide(null)
+		// 	}, 3000)
+		// }, 2000)
+		// $('.dots-btn').on('click', this.nextSlide)
 	}
 
 
@@ -403,7 +432,7 @@ const sl = new CustomSl({
 */ 
 
 let page = {};
-if( $body.hasClass('js-animate') ){
+if( $body.hasClass('js_animation') ){
 
 
 
@@ -452,12 +481,9 @@ if( $body.hasClass('js-animate') ){
 
 
 
-	function pageTransitionLeft(callbackChangeSlide, callbackAnimationSlide) {
+	function pageTransitionLeft(callbackChangeSlide, callbackAnimationSlide = ()=>{}) {
 		const obj = {
-			paused: true,
-			onComplete: ()=> {
-				//page.canGo = true;
-			}
+			paused: true
 		}
 		const overlay_1 = '.transition-effect__1';
 		const overlay_2 = '.transition-effect__3';
@@ -510,48 +536,29 @@ if( $body.hasClass('js-animate') ){
 			page.slides.forEach(el => el.classList.add('slide--hidden'));
 			page.slides[data.to].classList.remove('slide--hidden');
 		}
-		pageTransitionLeft(changeSlide, secondSlAnim).play();
-
-
-
-		function createAnimationTool(fn){
-
-			$('.time_scale_025').on('click', ()=> fn().restart().timeScale(0.50))
-			$('.time_scale_050').on('click', ()=> fn().restart().timeScale(0.50))
-			$('.time_scale_075').on('click', ()=> fn().restart().timeScale(0.75))
-			$('.time_scale_1').on('click', ()=> fn().restart().timeScale(1))
+		switch (data.to) {
+			case 1:
+				pageTransitionLeft(changeSlide, secondSlAnim).play();
+				break;
+			case 2:
+				pageTransitionLeft(changeSlide, threeSlAnim).play();
+				break;
+			case 3:
+				pageTransitionLeft(changeSlide, fourSlAnim).play();
+				break;
+			case 4:
+				pageTransitionLeft(changeSlide, fourSlAnim).play();
+				break;
+			case 5:
+				pageTransitionLeft(changeSlide, sixSlAnim).play();
+				break;
+				
+			default:
+				pageTransitionLeft(changeSlide).play();
+				break;
 		}
-		createAnimationTool(pageTransitionLeft(changeSlide, secondSlAnim))
 
 	});
-
-
-
-
-
-	function secondSlAnim() {
-		const overlay = '.section__img-overlay';
-		const content = '.section-second__title span';
-		const text = '.section-second__text';
-
-		const obj = {
-		paused: true,
-		}
-		const tl = gsap.timeline(obj);
-		gsap.set([content, text], {autoAlpha:0});
-
-		
-		tl.fromTo(overlay, 1, {scaleX: 1}, {scaleX: 0, ease: ex})
-		tl.call(hoverArrEl[0].next, null, '<')
-		tl.staggerFromTo(content, 1.2, {xPercent: -30, autoAlpha: 0}, {xPercent: 0, autoAlpha: 1, ease: p4}, 0.1, '<-0.2')
-		tl.fromTo(text, 1.2, {yPercent: 100, autoAlpha: 0}, {yPercent: 0, ease: ex, autoAlpha: 1}, '<')
-
-		return tl;
-	};
-	secondSlAnim()
-	//secondSlAnim().play()
-
-
 
 	function logoPageTransitionIn () {
 		const logoL = '.loader-logo__l';
@@ -565,7 +572,7 @@ if( $body.hasClass('js-animate') ){
 			tl.fromTo(logoR, 0.25, {x: 30, y:30, autoAlpha: 0, rotation: -25}, {overwrite: 'auto', x: 0, y:0, autoAlpha: 1, rotation: 0, ease: circ}, '<')
 		return tl;
 	};
-	//logoPageTransitionIn();
+	logoPageTransitionIn();
 
 	function logoPageTransitionOut () {
 		const logoL = '.loader-logo__l';
@@ -586,7 +593,398 @@ if( $body.hasClass('js-animate') ){
 
 
 
-}
-});
 
+
+/*
+	* secondSlAnim start
+	*/
+
+	function secondSlAnim() {
+		const overlay = '.section__img-overlay';
+		const content = '.section-second__title span';
+		const text = '.section-second__text';
+
+		const obj = {
+		paused: true,
+		}
+		const tl = gsap.timeline(obj);
+		gsap.set([content, text], {autoAlpha:0});
+
+		
+		tl.fromTo(overlay, 1, {scaleX: 1}, {scaleX: 0, ease: ex})
+		tl.call(()=>{
+			hoverArrEl.forEach(el=> el.previous());
+			hoverArrEl[0].next();
+		}, null, '<')
+		tl.staggerFromTo(content, 1.2, {xPercent: -30, autoAlpha: 0}, {xPercent: 0, autoAlpha: 1, ease: p4}, 0.1, '<-0.2')
+		tl.fromTo(text, 1.2, {yPercent: 100, autoAlpha: 0}, {yPercent: 0, ease: ex, autoAlpha: 1}, '<')
+
+		return tl;
+	};
+	secondSlAnim()
+
+/*
+	* secondSlAnim end
+	*/
+
+	/*
+	* threeSlAnim start
+	*/
+	
+	function threeSlAnim() {
+	const overlay = '.section-third .section__img-overlay';
+	const title = '.section-third__subtitle';
+	const text = '.section-third__text';
+	const link = '.section-third__link';
+	gsap.set([], {autoAlpha:0});
+	const obj = {
+	paused: true,
+	}
+	const tl = gsap.timeline(obj);
+	
+	gsap.set([title, text, link], {autoAlpha:0});
+	
+		
+	tl.fromTo(overlay, 1, {scaleX: 1}, {scaleX: 0, ease: ex})
+	tl.call(()=>{
+		hoverArrEl.forEach(el=> el.previous());
+		hoverArrEl[1].next();
+	}, null, '<')
+	tl.staggerFromTo(title, 1.2, {xPercent: -30, autoAlpha: 0}, {xPercent: 0, autoAlpha: 1, ease: p4}, 0.1, '<-0.2')
+	tl.fromTo(text, 1.2, {yPercent: 100, autoAlpha: 0}, {yPercent: 0, ease: ex, autoAlpha: 1}, '<')
+	tl.fromTo(link, 1.2, {yPercent: 100, autoAlpha: 0}, {yPercent: 0, ease: ex, autoAlpha: 1}, '<')
+	
+	
+	return tl;
+	};
+	threeSlAnim();
+	
+	/*
+	* threeSlAnim end
+	*/
+	
+	/*
+	* fourSlAnim start
+	*/
+	
+	function fourSlAnim() {
+		const overlayBox = '.section-four-content';
+		const content = '.js-data-four_stagger';
+		const desc = '.features-item__desc';
+		const num = '.features-item__num';
+		gsap.set([overlayBox, content, num], {autoAlpha: 0});
+		const obj = {
+			paused: true,
+		}
+		
+		const tl = gsap.timeline(obj);
+		
+		tl.fromTo(overlayBox, 1.1, {scaleY: 0, autoAlpha: 0}, {scaleY: 1, autoAlpha: 1, ease: ex})
+		tl.call(()=>{
+			hoverArrEl.forEach(el=> el.previous());
+			hoverArrEl[2].next();
+		}, null, '<')
+		tl.fromTo(content, 1, {y: 100, autoAlpha: 0}, {y: 0, autoAlpha: 1, ease: ex, stagger: 0.1}, '<')
+		tl.fromTo(desc, 1, {x: -50, autoAlpha: 0}, {x: 0, autoAlpha: 1, ease: ex, stagger: 0.1}, '<0.1')
+		tl.fromTo(num, 1, {y: 50, autoAlpha: 0}, {y: 0, autoAlpha: 1, ease: ex, stagger: 0.1}, '<')
+		tl.call(()=>{
+			$('.js_num_1').animateNumber(
+				{ number: 5 },{
+					easing: 'swing',
+					duration: 1200
+				});
+			$('.js_num_2').animateNumber(
+				{ number: 17 },{
+					easing: 'swing',
+					duration: 1200
+				});
+			$('.js_num_3').animateNumber(
+				{ number: 10 },{
+					easing: 'swing',
+					duration: 1200
+				});
+	
+		}, null, '<')
+	
+	
+		return tl;
+	};
+	
+	fourSlAnim();
+	/*
+	* fourSlAnim end
+	*/
+
+	/*
+	* sixSlAnim start
+	*/
+	function sixSlAnim() {
+		const news = '.section__six .card';
+		const title = '.section__six .card .card__title';
+		const text = '.section__six .card .card__text';
+		const titleSec = '.section__six .section-title';
+		const overlay = '.section__six .hover-overlay';
+		const logo = '.section__six .card .hover-logo';
+		const logoL = '.section__six .card .hover-logo__l';
+		const logoR = '.section__six .card .hover-logo__r';
+		const btn1 = '.news-nav-link__goup';
+		const btn2 = '.all-news';
+	
+		gsap.set([news, title, text, titleSec, logo, btn1, btn2], {autoAlpha: 0});
+		gsap.set([logoL, logoR], {x: 0, y: 0, rotation: 0});
+		gsap.set([overlay], {autoAlpha: 1});
+		const obj = {
+			paused: true,
+			onComplete: ()=>{
+				gsap.set([logoL, logoR, logo, overlay], {clearProps: 'all'});
+	
+		}
+		}
+		const tl = gsap.timeline(obj);
+			tl.fromTo([titleSec, btn1, btn2], 1, {y: 80, autoAlpha: 0}, {y:0, autoAlpha: 1, ease: ex})
+			tl.fromTo(news, 1, {y: 80, autoAlpha: 0}, {y:0, autoAlpha: 1, stagger: 0.1, ease: ex}, '<')
+			tl.fromTo(title, 1, {x: -120, autoAlpha: 0}, {x: 0, autoAlpha: 1, ease: ex}, '<')
+			tl.fromTo(text, 1, {y: 120, autoAlpha: 0}, {y:0, autoAlpha: 1, ease: ex}, '<')
+			tl.fromTo(logo, 1, {y: 120, autoAlpha: 0}, {y:0, autoAlpha: 1, ease: ex}, '<')
+		return tl;
+	};
+	sixSlAnim()
+	/*
+	* sixSlAnim end
+	*/
+
+	
+	
+
+
+}
+
+
+
+
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+	
+
+	function createAnimationTool(fn){
+
+		$('.time_scale_025').on('click', ()=> fn().restart().timeScale(0.50))
+		$('.time_scale_050').on('click', ()=> fn().restart().timeScale(0.50))
+		$('.time_scale_075').on('click', ()=> fn().restart().timeScale(0.75))
+		$('.time_scale_1').on('click', ()=> fn().restart().timeScale(1))
+	}
+	createAnimationTool(sixSlAnim)
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	/*
+	* slider start
+	*/
+	console.log(`$('.gallary).width()`, $('.gallery').width());
+    var 
+        $gallery = $(".gallery"),
+    		$galleryPictures = $(".gallery-pictures"),
+        $galleryPicture = $(".gallery-picture"),
+        lastPos = {x:0},
+        galleryPos = {x:0},
+        currentImage = -1,
+        imageWidth = $('.gallery').width(),
+        imageSpacing = 120,
+        imageTotalWidth= $('.gallery').width(),
+        speedLog=[],
+        speedLogLimit=5,
+        minBlur=2,
+        maxBlur=200,
+        blurMultiplier=0.25,
+        lastBlur=0,
+        dragging=false,
+        lastDragPos={x:0},
+        dragPos={x:0},
+        totalDist=0,
+        distThreshold=10,
+        distLog=[],
+        distLogLimit=10,
+        momentumTween=null
+    ;
+
+	function setBlur(v){
+		if(v<minBlur) v=0;
+		if(v>maxBlur) v=maxBlur;
+		if(v!=lastBlur){
+			$("#blur").get(0).firstElementChild.setAttribute("stdDeviation",v+",0");
+		}
+		lastBlur=v;
+	}
+
+	$galleryPictures.css({
+		webkitFilter:"url('#blur')",
+		filter:"url('#blur')"
+	});
+    $galleryPicture.each(function(i) {
+        var cur = $(this);
+  		cur.click(function(){
+  			if(Math.abs(totalDist)<distThreshold)
+  				setGalleryPos(i);
+  		});
+  		$(".gallery-pagination-dot").eq(i).click(function(){
+  			setGalleryPos(i);
+  		})
+    });
+
+    function setGalleryPos(v,anim){
+    	if(typeof anim=="undefined") anim=true;
+    	stopMomentum();
+    	TweenMax.to(galleryPos,anim?0.8:0,{
+    		x:-v*imageTotalWidth,
+    		ease:Quint.easeOut,
+    		onUpdate:updateGalleryPos,
+    		onComplete:updateGalleryPos
+    	});
+    }
+
+    function updateGalleryPos(){
+			TweenMax.set($galleryPictures,{
+				x:galleryPos.x+(imageWidth),
+    		force3D:true,
+    		lazy:true
+    	});
+    	var speed=lastPos.x-galleryPos.x;
+    	var blur=Math.abs(Math.round(speed*blurMultiplier));
+	    setBlur(blur);
+    	lastPos.x=galleryPos.x;
+
+	    var _currentImage=Math.round(-galleryPos.x/imageTotalWidth);
+	    if(_currentImage!=currentImage){
+	    	currentImage=_currentImage;
+	    	$(".gallery-pagination-dot-selected").removeClass('gallery-pagination-dot-selected');
+	    	$(".gallery-pagination-dot").eq(currentImage).addClass('gallery-pagination-dot-selected')
+	    }
+
+    }
+    $gallery.mousedown(function(event){
+    	event.preventDefault();
+    	dragging=true;
+    	dragPos.x=event.pageX;
+    	lastDragPos.x=dragPos.x;
+    	totalDist=0;
+    	distLog=[];
+
+    	stopMomentum();
+
+    	updateGalleryPosLoop();
+    });
+    $(document).mousemove(function(event){
+    	if(dragging){
+    		dragPos.x=event.pageX;
+    	}
+    });
+    function updateGalleryPosLoop(){
+    	if(dragging){
+    		updateGalleryPos();
+    		var dist=dragPos.x-lastDragPos.x;
+    		lastDragPos.x=dragPos.x;
+    		totalDist+=dist;
+    		distLog.push(dist);
+    		while(distLog.length>distLogLimit){
+    			distLog.splice(0,1);
+    		};
+    		galleryPos.x+=dist;
+    		requestAnimationFrame(updateGalleryPosLoop)
+    	}
+    }
+    $(document).mouseup(function(event){
+    	if(dragging){
+	    	dragging=false;
+	    	var releaseSpeed=0;
+	    	for (var i = 0; i < distLog.length; i++) {
+	    		releaseSpeed+=distLog[i];
+	    	};
+	    	releaseSpeed/=distLog.length;
+
+	    	var targetX=galleryPos.x+(releaseSpeed*20);
+	    	targetX=Math.round(targetX/imageTotalWidth)*imageTotalWidth;
+	    	var targetImage=-targetX/imageTotalWidth;
+	    	var excess=0;
+	    	if(targetImage<0){
+	    		// excess=targetImage;
+	    		// targetImage=0;
+	    	}else if(targetImage>=$galleryPicture.length){
+	    		excess=targetImage-($galleryPicture.length-1);
+	    		targetImage=$galleryPicture.length-1;
+	    	}
+	    	if(excess!=0){
+	    	//	targetX=-targetImage*imageTotalWidth;
+	    	}
+	    	momentumTween=TweenMax.to(galleryPos,1-(Math.abs(excess)/20),{
+	    		x:targetX,
+	    		ease:Quint.easeOut,
+	    		onUpdate:updateGalleryPos,
+	    		onComplete:updateGalleryPos
+	    	});
+
+	    	if(Math.abs(totalDist)>=distThreshold){
+	    		event.preventDefault();
+	    		event.stopPropagation();
+	    	}
+	    }
+    });
+    function stopMomentum(){
+    	if(momentumTween!=null){
+	    	momentumTween.kill();
+	    	momentumTween=null;
+	    	updateGalleryPos();
+	    }
+    }
+
+    setGalleryPos(1,false);
+	/*
+	* slider end
+	*/
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+	
+	});
 })(jQuery);
+
+

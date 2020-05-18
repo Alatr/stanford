@@ -438,6 +438,8 @@ ul.dots{
 	text-transform: uppercase;
 	color: #FFF0E0;
 	font-size: 14px;
+	pointer-events: none;
+	user-select: none;
 	.line{
 		position: absolute;
 		top: 50%;
@@ -453,10 +455,18 @@ ul.dots{
 }
 
 .dots-btn--not-active .dots-btn{
-	font-size: 11px;
-	color: #978E88;
+	pointer-events: auto;
+	span{
+		font-size: 11px;
+		display: flex;
+		color: #978E88;
+
+	}
 		&:hover{
-			color: #FFF0E0;
+			span{
+
+				color: #FFF0E0;
+			}
 			.line{
 				transform: translateY(-50%) scaleX(1);
 			}
@@ -488,6 +498,13 @@ ul.dots{
 		left: 0;
 		display: none;
 	}
+}
+.displacement__img{
+	
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: none;
 }
 .section-second{
 	&__title{
@@ -535,8 +552,8 @@ ul.dots{
 		height: 100%;
 		object-fit: cover;
 	}
-	&__link{
-	
+	.section__img-overlay{
+		transform-origin: right;
 
 	}
 }
@@ -589,7 +606,7 @@ ul.dots{
 	&-content{
 		z-index: 1;
 		overflow: hidden;
-		padding: 48px 42px 69px 78px;
+		padding: 40px 42px 69px 78px;
 		display: flex;
 		max-width: 650px;
 		width: 100%;
@@ -597,6 +614,7 @@ ul.dots{
 		flex-direction: column;
 		border-left: 7px solid $mc3;
 		background-color: #2F2536;
+		transform-origin: bottom;
 	}
 }
 
@@ -611,7 +629,7 @@ ul.dots{
 	color: #9A959E;
 }
 .content-block-1{
-	margin-bottom: 50px;
+	margin-bottom: 46px;
 	&__title{
 		font-family: $default-font2;
 		margin-bottom: 20px;
@@ -620,7 +638,7 @@ ul.dots{
 		color: #FFF0E0
 	}
 	&__text{
-		
+		line-height: 1.8em;
 	}
 }
 .content-block-2{
@@ -657,7 +675,6 @@ ul.dots{
 	justify-content: space-between;
 	span{
 		display: flex;
-		line-height: 1.3em;
 	}
 	&-item{
 		max-width: 130px;
@@ -665,10 +682,11 @@ ul.dots{
 		display: flex;
 		flex-direction: column;
 		&__num{
-			margin-bottom: 10px;
+			margin-bottom: 6px;
 			font-family: $default-font2;
 			font-weight: bold;
 			font-size: 50px;
+			line-height: 1.3em;
 			color: #CE8163;
 		}
 		&__desc{
@@ -795,6 +813,7 @@ ul.dots{
 	}
 	&__title{
 		margin-bottom: 10px;
+		padding-left: 20px;
 		min-height: 65px;
 		font-family: $default-font2;
 		font-size: 22px;
@@ -804,8 +823,9 @@ ul.dots{
 	}
 	&__text{
 		margin-bottom: 14px;
+		padding-left: 20px;
 		font-size: 14px;
-		line-height: 1.6em;
+		line-height: 1.9em;
 		color: #706A75;
 		overflow: hidden;
     text-overflow: ellipsis;
@@ -835,6 +855,121 @@ ul.dots{
 		color: #34293D;
 	}
 }
+.news-nav-link-wrap{
+	margin-top: 20px;
+	justify-content: space-between;
+}
+.news-nav-link{
+	margin: 0 20px;
+	&__goup{
+		span{
+			margin-left: 5px;
+			margin-right: 0;
+			max-width: 78px;
+			font-size: 10px;
+			font-weight: 500;
+			color: #9A959E;
+		}
+		svg{
+			stroke: #9A959E;
+			transform: rotate(-90deg);
+		}
+	}
+}
+.news-nav-link--ml{
+	margin-right: 110px;
+}
 /*
 	* Six section end
+*/
+
+
+/*
+* fivesl start
+*/
+
+.section__five{
+	display: flex;
+	
+	.content-section-height-section__five{
+		position: relative;
+		height: calc(100vh - 80px);
+		overflow: hidden;
+	}
+}
+.gallery-pagination{
+	position: absolute;
+	left: 50%;
+	display: flex;
+	align-items: center;
+	bottom: 30px;
+	transform: translateX(-50%);
+	button{
+		margin: 0 10px;
+		width: 8px;
+		height: 8px;
+		background: #9A959E;
+		opacity: 0.5;
+		border-radius: 50%;
+	}
+}
+.gallery-pictures, .gallery-pictures li, .gallery-pictures li img{
+	height: 100%;
+}
+.gallery-pagination-dot-selected {
+	background: #7D87AE;
+}
+.gallery-pictures {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	background: transparent;
+	cursor: -webkit-grab;
+	-webkit-transform: rotateY(0);
+	white-space: nowrap;
+	font-size: 0;
+}
+.gallery-picture {
+	width: 100%;
+	margin-right: 0px;
+	display: inline-block;
+	-webkit-transform: rotateY(0);
+	transform: rotateY(0);
+}
+.gallery-pictures li img{
+	object-fit: cover;
+}
+.gallery-pagination-arrows{
+	position: absolute;
+	right: 0;
+	bottom: 67px;
+	display: flex;
+	flex-direction: column;
+	.gallery-pagination-arrow__prev svg{
+		transform: rotate(180deg);
+	}
+	.gallery-pagination-arrow{
+		display: flex;
+		width: 60px;
+		height: 60px;
+		min-width: 60px;
+		min-height: 60px;
+		justify-content: center;
+		align-items: center;
+		background-color: #CE8163;
+		transition: all 0.3s;
+		&:hover{
+			background-color: #FF996F;
+		}
+		svg{
+			height: 10px;
+			width: 26px;
+			fill: $wc;
+			stroke: $wc;
+		}
+	}
+}
+
+/*
+* fivesl end
 */

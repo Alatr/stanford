@@ -56,7 +56,7 @@
 	pointer-events: none;
 	transform: translate(-50%,-50%);
 	fill: $mc3;
-	z-index: 51;
+	z-index: 55;
 	&__r{
 		transform-origin: 50% 0%;
 	}
@@ -101,6 +101,13 @@
 	}
 	.section__img-overlay{
 		display: flex;
+	}
+	.section__img-overlay{
+		display: flex;
+	}
+	.loader-logo{
+		opacity: 1;
+		visibility: visible;
 	}
 }
 .section-slaider:not(#d){

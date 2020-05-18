@@ -6,3 +6,4 @@
 @@include('../libs/three/three.js')
 @@include('../libs/hover/imagesloaded.js')
 @@include('../libs/hover/hover.js')
+@@include('../libs/number/number.js')
