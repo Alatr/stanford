@@ -102,12 +102,13 @@ let hoverArrEl = [];
 	
 Array.from(document.querySelectorAll('.js-grid__item-img')).forEach((el) => {
 	const imgs = Array.from(el.querySelectorAll('img'));
+
+	const imagesRatioNum = ($(el).height() / $(el).width()).toFixed(2)
 	const hoverEffectInstatse = new hoverEffect({
 		parent: el,
 		intensity: el.dataset.intensity || undefined,
-		speedIn: el.dataset.speedin || undefined,
-		speedOut: el.dataset.speedout || undefined,
 		easing: el.dataset.easing || undefined,
+		imagesRatio: imagesRatioNum || undefined,
 		hover: false,
 		image1: imgs[0].getAttribute('src'),
 		image2: imgs[1].getAttribute('src'),
@@ -122,15 +123,26 @@ Array.from(document.querySelectorAll('.js-grid__item-img')).forEach((el) => {
 (function ($) {
 	imagesLoaded( document.querySelectorAll('img.displacement__img'), () => {
 
-				console.clear();
+				//console.clear();
 	
 	const $body = $('body')
+	const $window = $(window)
 	var loader = function () {
 		//$(".loader-wrap").delay(500).fadeOut(500);
 		$(".loader-wrap").fadeOut(1);
 	};
 	loader();
-//	$body.addClass('js_animation')
+
+	$window.resize(checkWidthAnimation)
+	function checkWidthAnimation(){
+		
+		if(window.screen.width > 1020){
+			$body.addClass('js_animation');
+		} else {
+			$body.removeClass('js_animation');
+		}
+	}
+	checkWidthAnimation();
 
 	
 	spliterText('.main-overlay__text')
@@ -213,7 +225,8 @@ Array.from(document.querySelectorAll('.js-grid__item-img')).forEach((el) => {
 		
 		const obj = {
 			onComplete: ()=> {
-				page.canGo = true
+				page.canGo = true;
+				$body.attr('data-active', 1);
 			}
 		}
 
@@ -481,7 +494,7 @@ if( $body.hasClass('js_animation') ){
 
 
 
-	function pageTransitionLeft(callbackChangeSlide, callbackAnimationSlide = ()=>{}) {
+	function pageTransitionLeft(callbackChangeSlide, callbackAnimationSlide = null) {
 		const obj = {
 			paused: true
 		}
@@ -498,8 +511,11 @@ if( $body.hasClass('js_animation') ){
 		tl.fromTo(overlay_1, 0.4, {rotation: 45, scale: 1}, {rotation: 45, scale: 0, ease: "sine.out"}, '+=0.4')
 		tl.fromTo(overlay_2, 0.4, {rotation: 45, scale: 1}, {rotation: 45, scale: 0, ease: "sine.out"}, '<')
 		tl.call(()=> logoPageTransitionOut().play(), null, '-=0.4')
-		tl.call(()=> callbackAnimationSlide().play(), null, '<-0.25')
-		
+		tl.call(()=> {
+			if(callbackAnimationSlide !== null) {
+				callbackAnimationSlide().play();
+			}
+		}, null, '<-0.25');
 		return tl;
 	};
 	function pageTransitionRight(callback) {
@@ -538,18 +554,28 @@ if( $body.hasClass('js_animation') ){
 		}
 		switch (data.to) {
 			case 1:
+				$body.attr('data-active', 2);
 				pageTransitionLeft(changeSlide, secondSlAnim).play();
 				break;
 			case 2:
+				$body.attr('data-active', 3);
 				pageTransitionLeft(changeSlide, threeSlAnim).play();
 				break;
 			case 3:
+				setGalleryPos($galleryPicture.length)
+				$body.attr('data-active', 4);
 				pageTransitionLeft(changeSlide, fourSlAnim).play();
 				break;
 			case 4:
-				pageTransitionLeft(changeSlide, fourSlAnim).play();
+				$body.attr('data-active', 5);
+				const callback = ()=> {
+					return {play: ()=> setGalleryPos(1)}
+				}
+				pageTransitionLeft(changeSlide, callback).play();
 				break;
 			case 5:
+				setGalleryPos($galleryPicture.length)
+				$body.attr('data-active', 6);
 				pageTransitionLeft(changeSlide, sixSlAnim).play();
 				break;
 				
@@ -806,14 +832,13 @@ if( $body.hasClass('js_animation') ){
 	/*
 	* slider start
 	*/
-	console.log(`$('.gallary).width()`, $('.gallery').width());
     var 
         $gallery = $(".gallery"),
     		$galleryPictures = $(".gallery-pictures"),
         $galleryPicture = $(".gallery-picture"),
         lastPos = {x:0},
         galleryPos = {x:0},
-        currentImage = -1,
+        currentImage = 1,
         imageWidth = $('.gallery').width(),
         imageSpacing = 120,
         imageTotalWidth= $('.gallery').width(),
@@ -848,12 +873,12 @@ if( $body.hasClass('js_animation') ){
 	});
     $galleryPicture.each(function(i) {
         var cur = $(this);
-  		cur.click(function(){
-  			if(Math.abs(totalDist)<distThreshold)
-  				setGalleryPos(i);
-  		});
+  		// cur.click(function(){
+  		// 	if(Math.abs(totalDist)<distThreshold)
+  		// 		setGalleryPos(i);
+  		// });
   		$(".gallery-pagination-dot").eq(i).click(function(){
-  			setGalleryPos(i);
+  			setGalleryPos(i+1);
   		})
     });
 
@@ -883,7 +908,7 @@ if( $body.hasClass('js_animation') ){
 	    if(_currentImage!=currentImage){
 	    	currentImage=_currentImage;
 	    	$(".gallery-pagination-dot-selected").removeClass('gallery-pagination-dot-selected');
-	    	$(".gallery-pagination-dot").eq(currentImage).addClass('gallery-pagination-dot-selected')
+	    	$(".gallery-pagination-dot").eq(currentImage-1).addClass('gallery-pagination-dot-selected')
 	    }
 
     }
@@ -927,19 +952,19 @@ if( $body.hasClass('js_animation') ){
 	    	};
 	    	releaseSpeed/=distLog.length;
 
-	    	var targetX=galleryPos.x+(releaseSpeed*20);
-	    	targetX=Math.round(targetX/imageTotalWidth)*imageTotalWidth;
+				var targetX=galleryPos.x+(releaseSpeed*20);
+				targetX=Math.round(targetX/imageTotalWidth)*imageTotalWidth;
 	    	var targetImage=-targetX/imageTotalWidth;
-	    	var excess=0;
-	    	if(targetImage<0){
-	    		// excess=targetImage;
-	    		// targetImage=0;
+	    	var excess=1;
+	    	if(targetImage<1){
+	    		excess=targetImage;
+	    		targetImage=1;
 	    	}else if(targetImage>=$galleryPicture.length){
 	    		excess=targetImage-($galleryPicture.length-1);
 	    		targetImage=$galleryPicture.length-1;
 	    	}
-	    	if(excess!=0){
-	    	//	targetX=-targetImage*imageTotalWidth;
+	    	if(excess!=1){
+	    		targetX=-targetImage*imageTotalWidth;
 	    	}
 	    	momentumTween=TweenMax.to(galleryPos,1-(Math.abs(excess)/20),{
 	    		x:targetX,
@@ -962,7 +987,20 @@ if( $body.hasClass('js_animation') ){
 	    }
     }
 
-    setGalleryPos(1,false);
+		setGalleryPos($galleryPicture.length,false);
+		
+		const gallPrevBtn = $('.js-gallery-pagination-arrow__prev');
+		const gallNextBtn = $('.js-gallery-pagination-arrow__next');
+			gallPrevBtn.on('click', function(){
+				const idx = (currentImage === 1) ? $galleryPicture.length : currentImage - 1
+				setGalleryPos(idx);
+			});
+			
+			gallNextBtn.on('click', function(){
+				const idx = (currentImage === $galleryPicture.length) ? 1 : currentImage + 1
+				setGalleryPos(idx);
+		});
+
 	/*
 	* slider end
 	*/
@@ -971,6 +1009,20 @@ if( $body.hasClass('js_animation') ){
 	
 	
 	
+
+	/*
+	* menu site start
+	*/
+
+	const $menuBtn = $('.js-menu-btn');
+
+	$menuBtn.on('click', function(){
+		
+	});
+
+	/*
+	* menu site end
+	*/
 	
 	
 	

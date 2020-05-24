@@ -1,6 +1,8 @@
-//- .container
-//- 	.row
-//- 		.footer__copy 
-//- 			p © Усі права захищено. Saga Apartments
-//- 		a(href='https://smarto.agency/' rel="nofollow" target="_blank").footer__link
-//- 			img(src='./assets/images/smarto.svg' alt="" title="")
+.section-footer
+	.section-footer__logo
+		+img('logo-perfect.svg')
+	a(href="#").section-footer__link.footer-link
+		+svg('map').footer-link__icon
+		span.footer-link__text Київ, Предславинська, 35 
+	a(href='https://smarto.agency/' rel="nofollow" target="_blank").footer-logo
+		img(src='./assets/images/smarto.svg' alt="" title="")

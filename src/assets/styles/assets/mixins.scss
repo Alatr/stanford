@@ -17,3 +17,9 @@
     $remSize: $size / 14px;
     @return #{$remSize}rem;
   }
+
+  @mixin toh($max_height){
+    @media screen and (max-height: $max_height){
+        @content;
+    }
+}

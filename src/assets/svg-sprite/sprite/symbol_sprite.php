@@ -1,5 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="0" height="0" style="position:absolute">
 	
+		<symbol id="icon-arr" viewBox="0 0 8 5">
+			<path fill="#CE8163" d="M0 .904L.685.17l3.641 3.464-.685.735z"></path><path d="M6.34 0l.728.693-3.427 3.675-.728-.693L6.34 0z" fill="#CE8163"></path>
+		</symbol>
+	
 		<symbol id="icon-arrow-link" viewBox="0 0 24 9">
 			<path d="M22.5 4.59l-3 3v-6l3 3z"></path><path d="M0 4.59h22.5m0 0l-3 3v-6l3 3z"></path>
 		</symbol>
@@ -22,6 +26,10 @@
 	
 		<symbol id="icon-map" viewBox="0 0 8 10">
 			<path d="M3.955 10C1.622 6.955.455 4.788.455 3.5a3.5 3.5 0 1 1 7 0c0 1.288-1.166 3.455-3.5 6.5zm0-4.5a2 2 0 1 0 0-4 2 2 0 0 0 0 4z" fill="#CE8163"></path>
+		</symbol>
+	
+		<symbol id="icon-menu_mob" viewBox="0 0 21 11">
+			<path stroke="#FFF0E0" d="M0 .5h21M0 5.5h21"></path><path stroke="#CE8163" d="M0 10.5h12"></path>
 		</symbol>
 	
 		<symbol id="icon-phone" viewBox="0 0 19 20">

@@ -198,7 +198,7 @@ function libs() {
 			prefix: '@@', // импортим все файлы, описанные в результируещем js
 			basepath: '@file' //
 		}))
-		.pipe(uglify())
+		//.pipe(uglify())
 		.pipe(gulp.dest(paths.libs.dest))
 }
 
