@@ -231,6 +231,38 @@ block content
 						span.section-link__text читати
 						+svg('arrow-link').section-link__icon
 				// end
+				// start
+				a(href="#").card
+					.card-img-wrap
+						.hover-overlay
+							include ../../assets/images/logo_hover.svg
+						+img('home/1.jpg').card__img
+						.card-data-wrap.card-data
+							+svg('data').card-data__icon
+							time.card-data__text(pubdate datetime="2012-12-23") 25.03.2019
+					h4.card__title Відділ продажу вже відкрито
+					p.card__text вже відкрито!Раді повідомити, що відділ продажу...
+					
+					.card__btn.section-link
+						span.section-link__text читати
+						+svg('arrow-link').section-link__icon
+				// end
+				// start
+				a(href="#").card
+					.card-img-wrap
+						.hover-overlay
+							include ../../assets/images/logo_hover.svg
+						+img('home/1.jpg').card__img
+						.card-data-wrap.card-data
+							+svg('data').card-data__icon
+							time.card-data__text(pubdate datetime="2012-12-23") 25.03.2019
+					h4.card__title Відділ продажу вже відкрито
+					p.card__text вже відкрито!Раді повідомити, що відділ продажу...
+					
+					.card__btn.section-link
+						span.section-link__text читати
+						+svg('arrow-link').section-link__icon
+				// end
 			.row-items.news-nav-link-wrap
 				a(href="#").all-news.section-link.news-nav-link__goup.news-nav-link
 					+svg('arrow-link').section-link__icon
@@ -238,6 +270,39 @@ block content
 				a(href="#").all-news.section-link.news-nav-link.news-nav-link--ml
 					span.section-link__text всі новини
 					+svg('arrow-link').section-link__icon
+	// popup start
+	.popup-call#popup-call.mfp-hide.mfp-with-anim
+		button(type="button").button-reset--default-styles.popup-close.popup-call__close.js-close-btn
+			+svg('close').popup-close__icon
+		+img('popup_overlay.jpg').popup-call__bg-overlay
+		.popup-call__title-wrap
+			h5.popup-call__title Наш менеджер зв'яжеться з вами у зручний час
+			span.popup-call-notice замовити дзвінок
+		
+		form(autocomplete="off").main-form#call-form.call-form
+			.main-form-block.requaired
+				input(name="name" type="text" data-rule="empty").main-form__input.main-form__input-requaired.js-main-form__input
+				span( data-defaultMessage="Ваше ім'я:*" data-errorMessage="Ваше ім'я не заповнено:").main-form-content
+					span.main-form__text Iм'я:*
+			.main-form-block.requaired
+				input(name="tel" type="text" data-rule="empty").main-form__input.main-form__input-requaired.js-main-form__input
+				span( data-defaultMessage="Введіть телефон:*" data-errorMessage="Телефон: не заповнено:").main-form-content
+					span.main-form__text Телефон:*
+			.radio-block
+				input#time_1.js-time-call(type="radio" value="0" name="time_call" checked)
+				label(for="time_1") Зателефонуйте зараз
+			.radio-block
+				input#time_2.js-time-call(type="radio" value="1" name="time_call")
+				label(for="time_2") Вказати зручний час
+			.main-form-block.requaired.main-form-block__data-time.js-main-form-block__data-time
+				input(name="time" type="text" data-rule="empty").main-form__input.js-main-form__input.js-datetimepicker_dark
+				span(data-type="tel" data-defaultMessage="Вказати зручний час" data-errorMessage="Час не заповнено:").main-form-content
+					span.main-form__text Вказати зручний час
+
+			button(type="submit").button-reset--default-styles.section-link.popup-call__submit-btn
+					span.section-link__text відправити
+					+svg('arrow-link').section-link__icon
+	// popup end
 block footer
 	include ../includes/footer.pug
 

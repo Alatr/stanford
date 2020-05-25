@@ -7,3 +7,6 @@
 @@include('../libs/hover/imagesloaded.js')
 @@include('../libs/hover/hover.js')
 @@include('../libs/number/number.js')
+@@include('../libs/datetimepicker/datetimepicker.js')
+@@include('../libs/datetimepicker/datetimepicker_1.js')
+@@include('../libs/magnific-popup/dist/magnific-popup.js')

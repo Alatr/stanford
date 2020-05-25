@@ -303,6 +303,9 @@ span.overlay__2{
 	left: 0;
 	padding-left: 22px;
 	width: 100%;
+	@include from(1021px) {
+		display: none;
+	}
 }
 .main-slaider{
 	position: relative;
@@ -343,9 +346,15 @@ span.overlay__2{
 		line-height: 1.2em;
 		z-index: 2;
 		font-size: 5.5vw;
+		@include from(1439px){
+			max-width: 750px;
+		}
 		@include to(1280px){
 			font-size: 70px;
-
+		}
+		@include to(992px){
+			max-width: 510px;
+			margin-right: 3%;
 		}
 		.word-wrapper{
 			display: flex;
@@ -367,6 +376,10 @@ span.overlay__2{
 				content: '';
 				background-color: #CE8163;
 				transform: translateX(calc(-100% - 60px));
+				@include to(992px){
+					left: 80px;
+					height: 2px;
+				}
 			}
 		}
 	}
@@ -406,12 +419,18 @@ span.overlay__2{
 	display: flex;
 	max-width: 540px;
 	width: 100%;
-	//width: 45%;
 	height: calc(100vh - 105px);
 	flex-direction: column;
 	justify-content: space-between;
 	overflow: hidden;
 	transform-origin: bottom;
+	@include from(1439px){
+		max-width: 45%;
+		.logo-site{
+			width: 340px;
+			height: 100px;
+		}
+	}
 	&__text{
 		margin-left: auto;
 		display: flex;
@@ -502,9 +521,15 @@ ul.dots{
 
 .section-second-left{
 	padding: 0 10% 0 6.6%;
+	@include to(992px){
+		padding: 0 20px;
+	}
 }
 .section-third-left{
 	padding: 0 12.4% 0 8%;
+	@include to(992px){
+		padding: 0 20px 0 50px;
+	}
 }
 .section-left{
 	width: 50%;
@@ -518,7 +543,9 @@ ul.dots{
 	margin-bottom: 70px;
 	background: #FFFFFC;
 	box-shadow: 0px 4px 30px rgba(177, 177, 177, 0.25);
-
+	@include to(1020px){
+		margin-bottom: 0;
+	}
 }
 .section-right{
 	position: relative;
@@ -537,7 +564,19 @@ ul.dots{
 	left: 0;
 	display: none;
 }
+.section-second:not(#H),
+.section-third:not(#H) {
+	@include to(992px){
+		min-height: 520px;
+	}
+}
 .section-second{
+	@include to(1020px){
+		margin-bottom: -6px;
+	}
+	@include to(992px){
+		min-height: 520px;
+	}
 	&__title{
 		margin-bottom: 20px;
 		font-family: $default-font2;
@@ -571,6 +610,9 @@ ul.dots{
 .section-third{
 	flex-direction: row-reverse;
 	padding-left: 0;
+	@include to(1020px) {
+		margin-bottom: -6px;
+	}
 	&__subtitle{
 		margin-bottom: 16%;
 		padding-bottom: 27px;
@@ -630,7 +672,7 @@ ul.dots{
 		text-transform: uppercase;
 	}
 	&__icon{
-		height: 10px;
+		height: 8px;
 		width: 27px;
 		fill: #2F2536;
 		stroke: #2F2536;
@@ -664,7 +706,10 @@ ul.dots{
 		top: auto;
 		left: auto;
 		width: 100%;
-		height: 70vh;
+		height: 85vh;
+	}
+	@include to(992px){
+		height: 520px;
 	}
 }
 .section-four{
@@ -860,7 +905,7 @@ ul.dots{
 		display: flex;
 		flex-direction: column;
 		justify-content: flex-end;
-		padding: 11% 11.1% 3.1% 6.65%;
+		padding: 11% 0 3.1% 6.65%;
 		@include to(1020px){
 			padding: 6.5% 0 50px 65px;
 
@@ -897,6 +942,7 @@ ul.dots{
 	width: 285px;
 	flex-direction: column;
 	text-decoration: none;
+	flex-shrink: 0;
 	overflow: hidden;
 	@include to(1200px){
 		width: 260px;
@@ -1105,9 +1151,17 @@ ul.dots{
 		font-family: $default-font2;
 	}
 }
+.section__five:not(#H){
+	@include to(992px){
+		height: 100vh;
+	}
+}
 .section__five{
 	display: flex;
 	flex-direction: column;
+	@include to(992px){
+		height: 100vh;
+	}
 	.content-section-height-section__five{
 		position: relative;
 		height: calc(100vh - 80px);
@@ -1164,7 +1218,7 @@ ul.dots{
 .gallery-pagination-arrows{
 	position: absolute;
 	right: 0;
-	bottom: 67px;
+	bottom: 30%;
 	display: flex;
 	flex-direction: column;
 	@include to(1020px){
@@ -1206,4 +1260,7 @@ ul.dots{
 	margin-left: auto;
 	width: 70px;
 	height: 28px;
+	@include from(1021px){
+		display: none;
+	}
 }

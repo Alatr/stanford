@@ -216,7 +216,7 @@
 
 	0%,
 	to {
-		transform: translateZ(0);
+		transform: translate3d(25px, -50%, 0);
 	}
 
 	10%,
@@ -224,20 +224,20 @@
 	50%,
 	70%,
 	90% {
-		transform: translate3d(-10px, 0, 0);
+		transform: translate3d(15px, -50%, 0);
 	}
 
 	30%,
 	40%,
 	60%,
 	80% {
-		transform: translate3d(10px, 0, 0);
+		transform: translate3d(35px, -50%, 0);
 	}
 }
 
 .shake {
 	animation-name: shake;
-	animation-duration: 1s;
+	animation-duration: 1.2s;
 }
 
 @keyframes shake-focus {

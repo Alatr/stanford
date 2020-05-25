@@ -1023,6 +1023,10 @@ if( $body.hasClass('js_animation') ){
 	/*
 	* menu site end
 	*/
+	/*
+	* form submit site start
+	*/
+	
 	
 	
 	
@@ -1034,9 +1038,246 @@ if( $body.hasClass('js_animation') ){
 	
 	
 
+	
+	$('.js-main-form__input').on('focus', function () {
+		$(this).parent().addClass('js-input-focus');
+	}).blur(function () {
+		if ($(this).val() === '') {
+			$(this).parent().removeClass('js-input-focus');
+		}
+	});
+	
+	$('#call-form').on('submit', function (e) {
+		event.preventDefault();
+		var parent = e.target;
+		ajax_form(parent);
+	});
+	
+	function ajax_form(e) {
+		event.preventDefault();
+		var err = [];
+		let serverAnsver = {};
+		var rulesPattern = {
+			email: /^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/,
+			tel: /^\+38\(\d{3}\)\d{7}$/
+		};
+		var validatorMethods = {
+			empty: function (el) {
+				return (el === '') ? true : false;
+			},
+			pattern: function (el, pattern) {
+				return pattern.test(el);
+			},
+			contains: function (el1, el2) {
+				return (el1 == el2) ? false : true;
+			},
+			check: function (el) {
+				return (el.checked) ? false : true;
+			},
+			max: function (el) {
+				return (el.length > 5) ? true : false;
+			}
+		}
+		var removeAnimationClass = function (selector, classAnimation) {
+			selector.addClass(classAnimation);
+			selector.on("animationend", function () {
+				selector.removeClass(classAnimation);
+			});
+		}
+		var pushError = function (key) {
+			err.push(key);
+		}
+		var showError = function (key) {
+			var errorMessage = $(this).next().data("errormessage"); // добавляем в input сообщение об ошибке из dataAttr и class
+			var inputText = $(this).next().find('.main-form__text');
+			($(this).closest('.main-form-block').hasClass('js-input-focus')) ? removeAnimationClass(inputText, 'shake-focus'): removeAnimationClass(inputText, 'shake')
+	
+			inputText.text(errorMessage);
+			$(this).addClass('js-no-valid');
+			pushError(key)
+		}
+		var showDefaultMessage = function () {
+			var defaultMessage = $(this).next().data("defaultmessage"); // при клике на input убираем сообщение и class
+			$(this).next().find('.main-form__text').text(defaultMessage);
+	
+			$(this).removeClass('js-no-valid');
+		}
+		var str = $("#" + e.id).serialize();
+		//var x = document.forms[e.id]["name"].value;
+		//var y = document.forms[e.id]["tel"].value;
+		//	console.log(str);
+	
+	
+		var errors = true; // по умолчанию ошибок в форме нет
+		$(e).find('.main-form__input-requaired').each(function () {
+			var rule = $(this).data("rule").split(' ');
+			if ($(this).data("patterns") != undefined) {
+				var pattern = $(this).data("patterns").split(' ');
+			}
+			if ($(this).data("compare") != undefined) {
+				var compare = $(this).data("compare").split(' ');
+			}
+	
+			rule.forEach((el) => {
+	
+	
+				switch (el) {
+					case 'pattern':
+						pattern.forEach((elPat) => {
+							errors = !validatorMethods[el]($.trim($(this).val()), rulesPattern[elPat]);
+							if (errors) showError.call($(this), elPat);
+						});
+						break;
+					case 'contains':
+						var compareElemOne = $('#' + compare[0]).val();
+						var compareElemTwo = $('#' + compare[1]).val();
+						errors = validatorMethods[el](compareElemOne, compareElemTwo);
+						if (errors) showError.call($(this), el);
+						break;
+					case 'check':
+						errors = validatorMethods[el]($(this)[0]);
+						if (errors) showError.call($(this), el);
+						break;
+					default:
+						errors = validatorMethods[el]($.trim($(this).val()));
+						if (errors) showError.call($(this), el);
+				}
+			})
+	
+			$(".main-form__input").on("mouseup", showDefaultMessage);
+	
+		});
+		if (err.length == 0) {
+			get(str, "./static/val.php", true, (data) => {
+				serverAnsver = data.error;
+				for (let key in serverAnsver) {
+					showErrorMessage.call(e, key, serverAnsver[key])
+				};
+	
+				if (serverAnsver.length == 0) {
+					get(str, "./static/val.php", true, () => {
+						$.ajax({
+								method: "POST",
+								url: "./static/val.php",
+								data: str,
+								beforeSend: function () {
+									$(e).find('button.js-main-form__button').text('Отправка...') // замена текста в кнопке при отправке
+									$('body').css('cursor', 'wait')
+								},
+								error: function () {
+									$(e).find('button.js-main-form__button').text('Ошибка отправки!'); // замена текста в кнопке при отправке в случае
+								}
+							})
+							.done(function (msg) {
+								$('.form-succses').addClass('form-succses-active');
+								$(e).find('.main-form__input-requaired').each(function (el) {
+									$(this).val('');
+									showDefaultMessage.call($(this));
+								});
+								$(e).find('.main-form-block.requaired').removeClass('js-input-focus');
+								$('body').css('cursor', 'default');
+								//location.replace('/message/');
+								$(e).find('button.js-main-form__button').text('Отправить');
+							});
+					});
+				}
+			});
+	
+		}
+	
+		function showErrorMessage(elem, text) {
+			const element = $(this).find(`[data-type="${elem}"] .main-form__text`);
+			const inp = element.closest('.requaired').find('.main-form__input-requaired');
+			inp.addClass('js-no-valid');
+			removeAnimationClass(element, 'shake-focus')
+			element.text(text);
+		}
+	}
+	
+	/*
+	 * form submit site end
+	 */
+	/**********************************/
+	/*
+		* data time start
+	*/
+		$.datetimepicker.setLocale('ru');
+		var logic1 = function (currentDateTime) {
+			if (currentDateTime.getDate() == new Date().getDate()) {
+				this.setOptions({
+					minTime: new Date()
+				});
+			} else {
+				this.setOptions({
+					minTime: '9:00'
+				});
+			}
+		};
+	
+		$('.js-datetimepicker_dark').datetimepicker({
+			//            theme:'dark',
+			// value: 'trololo',
+			// value: new Date(),
+			minDate: new Date(),
+			maxTime: '20:00',
+			yearStart: 2019,
+			yearEnd: 2019,
+			dayOfWeekStart: 1,
+			onSelectDate: logic1,
+			onShow: logic1
+	
+		});
+	/*
+		* data time end
+	*/
+	/**********************************/
+	/*
+		* popup open start
+	*/
 
+	const callTimeRadio = $('.js-time-call');
+	const inputTime = $('.js-main-form-block__data-time');
+
+	callTimeRadio.on('change', function(){
+		const val = +$(this).val();
+		if(val === 0){
+			inputTime.slideUp(300);
+			inputTime.find('.main-form__input').removeClass('main-form__input-requaired');
+		} else {
+			inputTime.slideDown(300);
+			inputTime.find('.main-form__input').addClass('main-form__input-requaired');
+		}
+		
+	});
+		      $('.js-call-popup').magnificPopup({
+		      	callbacks: {
+		      		beforeOpen: function () {
+		      			// ANIMATION MODAL POPUP
+		      			const blockModal = $(this.st.el),
+		      				overlayClass = blockModal.attr('data-modal-class'),
+		      				animationClass = blockModal.attr('data-effect');
+		      			if (overlayClass) this.st.mainClass = `${this.st.mainClass} ${overlayClass} ${animationClass} `;
+		      		},
+		      		beforeClose: function () {
+
+		      		},
+
+		      		open: function () {
+		      			// DOM ELEMENTS
+		      			let closeModalBtn = $('.js-close-btn');
+		      			let link = $('.js-u-deal-modal__close-btn');
+		      			closeModalBtn.on('click', () => $.magnificPopup.close());
+
+		      
+
+		      		}
+
+		      	}
+		      });
+	/*
+		* popup open end
+	*/
+	/**********************************/
 	
 	});
 })(jQuery);
-
-
