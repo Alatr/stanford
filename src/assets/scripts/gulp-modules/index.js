@@ -245,7 +245,7 @@ Array.from(document.querySelectorAll('.js-grid__item-img')).forEach((el) => {
 		tl.fromTo(overlayR, 2.3, {scaleX: 1, autoAlpha: 1}, {scaleX: 0, autoAlpha: 1, ease: ex}, '<-0.3')
 		tl.add(logo().play(), '<-0.3')
 		tl.fromTo(title, 2.3, {yPercent: -100}, {yPercent: 0, ease: p4O, stagger: 0.1, clearProps: 'all'}, '<1')
-		tl.fromTo(titleLine, 1.5, {width: 0, y: -50}, {width: 120, y: 0, ease: p4O}, '<')
+		tl.fromTo(titleLine, 1.5, {width: 0,  y: -50}, {width: '100%',  y: 0, ease: p4O}, '<')
 		
 		return tl;
 	})();

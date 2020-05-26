@@ -131,6 +131,7 @@
 	display: flex;
 	align-items: center;
 	height: 70px;
+	flex-wrap: wrap;
 	width: 100%;
 	@include to(1020px){
 		padding-left: 0;
@@ -143,6 +144,13 @@
 		@include to(1024px){
 			margin-right: 10%;
 		}
+		@include to(576px){
+			width: 128px;
+			height: 22px;
+		}
+		@include to(475px) {
+			order: 1;
+		}
 	}
 	&__link{
 		margin-bottom: -6px;
@@ -153,6 +161,12 @@
 	display: flex;
 	align-items: center;
 	text-decoration: none;
+	@include to(475px){
+		margin-top: -4px;
+		margin-bottom: 10px;
+		min-width: 300px;
+		order: 3;
+	}
 	&__icon{
 		margin-right: 10px;
 		width: 7px;
@@ -162,7 +176,13 @@
 		font-weight: 500;
 		font-size: 10px;
 		text-transform: uppercase;
-		color: #C2BFC4
+		color: #C2BFC4;
+		white-space: nowrap;
+			@include to(375px) {
+				.footer-link__text {
+					font-size: 8px;
+			}
+			}
 	}
 }
 .slide--hidden{
@@ -201,6 +221,10 @@ body[data-active="3"]{
 	@include from(1021px){
 		display: none;
 	}
+	@include to(576px){
+		padding: 0 10px;
+		height: 52px;
+	}
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -210,6 +234,11 @@ body[data-active="3"]{
 	&-logo{
 		width: 114px;
 		height: 45px;
+		@include to(576px){
+			width: 74px;
+			height: 30px;
+
+		}
 		svg{
 			width: 100%;
 			height: 100%;
@@ -224,6 +253,11 @@ body[data-active="3"]{
 	display: flex;
 	flex-direction: column;
 	align-items: flex-end;
+	@include to(576px){
+		padding-right: 15px;
+		margin-right: 15px;
+
+	}
 	&::after{
 		position: absolute;
 		top: 50%;
@@ -244,6 +278,10 @@ body[data-active="3"]{
 	&__text{
 		font-size: 12px;
 		color: #9A959E;
+		@include to(576px){
+			font-size: 10px;
+			line-height: 0.8em;
+		}
 		&::after{
 			position: absolute;
 			bottom: -1px;
@@ -253,6 +291,9 @@ body[data-active="3"]{
 			height: 0.8px;
 			width: 100%;
 			background-color: #9A959E;
+			@include to(576px){
+				bottom: 3px;
+			}
 		}
 	}
 }
@@ -295,6 +336,9 @@ body[data-active="3"]{
 			line-height: 1.5em;
 			text-transform: uppercase;
 			color: #FFF0E0;
+			@include to(576px){
+				line-height: 1.1em;
+			}
 		}
 	}
 }
@@ -302,13 +346,20 @@ body[data-active="3"]{
 .mobile-nav-wrap{
 	display: flex;
 	align-items: center;
-
+	@include to(576px){
+		height: 90%;
+	}
 }
 
 .mobile-nav__btn{
 	margin-left: 30px;
 	width: 21px;
 	height: 10px;
+	@include to(576px){
+		margin-top: -4px;
+		margin-left: 17px;
+
+	}
 	svg{
 		width: 100%;
 		height: 100%;

@@ -236,10 +236,17 @@
 		margin-right: 15px;
 		width: 25px;
 		height: 25px;
+		@include to(576px){
+			display: none;
+		}
 	}
 	&__text{
 		font-family: $default-font2;
 		font-size: 18px;
+		@include to(576px){
+			font-size: 12px;
+			line-height: 0.8em;
+		}
 	}
 }
 .phone-link-color--dark .phone-link__text{
@@ -301,11 +308,30 @@ span.overlay__2{
 	position: absolute;
 	bottom: 0;
 	left: 0;
+	z-index: 1;
 	padding-left: 22px;
 	width: 100%;
 	@include from(1021px) {
 		display: none;
 	}
+	@include to(576px){
+		display: flex;
+		justify-content: space-between;
+		.section-footer__logo {
+			margin-right: 0;
+		}
+	}
+	@include to(475px){
+		.section-footer__link.footer-link {
+			margin-bottom: 0;
+			margin-top: 0;
+			min-width: auto;
+		}
+		.section-footer__logo{
+			width: 100px;
+		}
+	}
+
 }
 .main-slaider{
 	position: relative;
@@ -354,7 +380,21 @@ span.overlay__2{
 		}
 		@include to(992px){
 			max-width: 510px;
+			margin-top: 0;
 			margin-right: 3%;
+		}
+		@include to(668px){
+			font-size: 50px;
+			max-width: 400px;
+		}
+		@include to(425px){
+			font-size: 40px;
+			max-width: 300px;
+		}
+		@include to(375px){
+			margin-right: 15px;
+			font-size: 36px;
+			max-width: 280px;
 		}
 		.word-wrapper{
 			display: flex;
@@ -371,14 +411,21 @@ span.overlay__2{
 				top: 56%;
 				left: 0;
 				display: flex;
-				width: 162px;
+				max-width: 162px;
 				height: 4px;
 				content: '';
 				background-color: #CE8163;
-				transform: translateX(calc(-100% - 60px));
+				transform: translateX(calc(-100% - 200px));
 				@include to(992px){
 					left: 80px;
 					height: 2px;
+					max-width: 50px;
+					transform: translateX(calc(-160px));
+				}
+				@include to(375px){
+					max-width: 30px;
+					transform: translateX(calc(-130px));
+
 				}
 			}
 		}
@@ -431,15 +478,43 @@ span.overlay__2{
 			height: 100px;
 		}
 	}
+	@include to(768px){
+		height: calc(60vh - 105px);
+		.arr_logo_svg{
+			display: none;
+		}
+		
+	}
+	@include to(576px){
+		right: 0;
+		height: 43vh;
+		max-width: none;
+		padding: 30px 30px 30px 30px;
+		.logo-site{
+			width: 180px;
+			height: 55px;
+		}
+	}
 	&__text{
 		margin-left: auto;
 		display: flex;
 		flex-wrap: wrap;
 		width: 70%;
 		font-weight: 400;
-		font-size: 20px;
+		font-size: 1.7vw;
 		line-height: 1.6em;
 		color: $wc;
+		@include to(1200px){
+			font-size: 20px;
+		}
+		@include to(425px){
+			font-size: 18px;
+			width: 80%;
+		}
+		@include to(375px){
+			font-size: 16px;
+			width: 85%;
+		}
 	}
 	&__icon-logo{
 		width: 220px;
@@ -449,6 +524,11 @@ span.overlay__2{
 		right: 0;
 		fill: #3B2E43;
 		transform: translate(40%,-50%);
+		@include from(1339px){
+			width: 420px;
+			height: 420px;
+
+		}
 	}
 	&__log_arr{
 		position: absolute;
@@ -466,6 +546,9 @@ ul.dots{
 	display: flex;
 	width: 54px;
 	flex-direction: column;
+	@include to(576px){
+		width: 40px;
+	}
 
 }
 
@@ -483,6 +566,10 @@ ul.dots{
 	font-size: 14px;
 	pointer-events: none;
 	user-select: none;
+	@include to(576px){
+		height: 34px;
+		font-size: 12px;
+	}
 	.line{
 		position: absolute;
 		top: 50%;
@@ -503,6 +590,10 @@ ul.dots{
 		font-size: 11px;
 		display: flex;
 		color: #978E88;
+		@include to(576px){
+			font-size: 9px;
+
+		}
 
 	}
 		&:hover{
@@ -524,19 +615,33 @@ ul.dots{
 	@include to(992px){
 		padding: 0 20px;
 	}
+	@include to(576px){
+		margin: 0 auto;
+		max-width: 80%;
+		padding: 80px 20px 30px;
+	}
 }
 .section-third-left{
 	padding: 0 12.4% 0 8%;
 	@include to(992px){
 		padding: 0 20px 0 50px;
 	}
+	@include to(576px){
+		padding: 30px 20px;
+	}
 }
 .section-left{
+	position: relative;
 	width: 50%;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	@include to(576px){
+		margin: 0 auto;
+		width: 100%;
+		max-width: 420px;
+	}
 
 }
 .section-shadow{
@@ -546,10 +651,20 @@ ul.dots{
 	@include to(1020px){
 		margin-bottom: 0;
 	}
+	@include to(576px){
+		box-shadow: none;
+	}
 }
 .section-right{
 	position: relative;
 	width: 50%;
+	@include to(576px){
+		width: 100%;
+		height: 480px;
+	}
+	@include to(425px){
+		height: 380px;
+	}
 	img{
 		position: absolute;
 		top: 0;
@@ -570,6 +685,7 @@ ul.dots{
 		min-height: 520px;
 	}
 }
+
 .section-second{
 	@include to(1020px){
 		margin-bottom: -6px;
@@ -577,18 +693,37 @@ ul.dots{
 	@include to(992px){
 		min-height: 520px;
 	}
+	@include to(576px){
+		margin-bottom: 0;
+		flex-direction: column;
+	}
 	&__title{
 		margin-bottom: 20px;
 		font-family: $default-font2;
 		font-size: 3.4vw;
 		line-height: 1.3em;
 		color: #343434;
+		display: flex;
+		justify-content: flex-start;
+		align-items: flex-start;
+		flex-direction: column;
 		@include to(1280px){
 			font-size: 40px;
 		}
+		@include to(668px){
+			font-size: 30px;
+		}
 		span{
+			position: relative;
 			display: flex;
-			flex-direction: column;
+		}
+		.icon--sign{
+			position: absolute;
+			top: 0;
+			right: 0;
+			width: 108px;
+			height: 108px;
+			transform: rotate(13deg) translate(50%, -45%);
 		}
 	}
 	&__text{
@@ -597,6 +732,9 @@ ul.dots{
 		color: #706A75;
 		@include to(1280px){
 			font-size: 14px;
+		}
+		@include to(668px) {
+			font-size: 13px;
 		}
 	}
 	&__img{
@@ -613,6 +751,11 @@ ul.dots{
 	@include to(1020px) {
 		margin-bottom: -6px;
 	}
+	@include to(576px){
+		flex-direction: column;
+		margin-bottom: 0;
+	}
+
 	&__subtitle{
 		margin-bottom: 16%;
 		padding-bottom: 27px;
@@ -624,6 +767,13 @@ ul.dots{
 		@include to(1280px){
 			font-size: 22px;
 		}
+		@include to(668px) {
+			font-size: 18px;
+		}
+		@include to(576px) {
+			margin-bottom: 30px;
+			font-size: 20px;
+		}
 	}
 	&__text{
 		margin-bottom: 29%;
@@ -632,6 +782,12 @@ ul.dots{
 		color: #706A75;
 		@include to(1280px){
 			font-size: 14px;
+		}
+		@include to(668px) {
+			font-size: 13px;
+		}
+		@include to(576px) {
+			margin-bottom: 35px;
 		}
 	}
 	&__img{
@@ -648,6 +804,10 @@ ul.dots{
 }
 .section-third-content-wrap{
 	position: relative;
+	@include to(576px){
+		width: 100%;
+		max-width: 420px;
+	}
 }
 .section-third-bgc-overlay{
 	position: absolute;
@@ -656,6 +816,12 @@ ul.dots{
 	max-width: 400px;
 	width: 100%;
 	pointer-events: none;
+	@include to(576px){
+		transform: translatex(30%);
+	}
+	@include to(420px){
+		transform: translatex(0%);
+	}
 }
 .section-link{
 	display: flex;
@@ -711,6 +877,9 @@ ul.dots{
 	@include to(992px){
 		height: 520px;
 	}
+	@include to(576px){
+		display: none;
+	}
 }
 .section-four{
 	display: flex;
@@ -742,13 +911,21 @@ ul.dots{
 		transform: translateY(70px);
 		@include to(1280px){
 			padding: 40px 42px 44px 60px;
-			
+		}
+		@include to(1020px){
+			padding: 30px 42px 44px 60px;
 		}
 		@include to(1020px){
 			max-width: none;
 			width: 100%;
 			height: auto;
 			transform: translateY(0);
+		}
+		@include to(576px){
+			padding: 32px 10px 20px 20px;
+			border-left: 10px solid $mc3;
+
+			
 		}
 		.main-overlay__icon-logo{
 			z-index: -1;
@@ -780,6 +957,12 @@ ul.dots{
 	@include to(1020px){
 		max-width: 430px;
 	}
+	@include to(1020px){
+		margin-bottom: 35px;
+	}
+	@include to(576px){
+		margin-bottom: 25px;
+	}
 	&__title{
 		font-family: $default-font2;
 		margin-bottom: 20px;
@@ -788,6 +971,13 @@ ul.dots{
 		color: #FFF0E0;
 		@include to(1280px){
 			margin-bottom: 0;
+		}
+		@include to(1020px){
+			margin-bottom: 20px;
+		}
+		@include to(576px){
+			margin-bottom: 8px;
+			font-size: 28px;
 		}
 	}
 	&__text{
@@ -798,6 +988,11 @@ ul.dots{
 	margin-bottom: 30px;
 	display: flex;
 	align-items: center;
+	@include to(576px){
+		align-items: flex-start;
+		flex-direction: column;
+
+	}
 	&-wrap{
 		max-width: 310px;
 		width: 100%;
@@ -810,8 +1005,15 @@ ul.dots{
 		margin-bottom: 12px;
 		font-size: 28px;
 		line-height: 1.6em;
-		color: #FFF0E0
-
+		color: #FFF0E0;
+		@include to(576px){
+			font-size: 20px;
+		}
+	}
+	&__text{
+		@include to(576px){
+			margin-bottom: 40px;
+		}
 	}
 	&__link{
 		width: 100%;
@@ -822,6 +1024,9 @@ ul.dots{
 		text-decoration-line: underline;
 		text-transform: uppercase;
 		color: #CE8163;
+		@include to(576px){
+			text-align: left;
+		}
 	}
 }
 
@@ -851,12 +1056,23 @@ ul.dots{
 			font-size: 50px;
 			line-height: 1.3em;
 			color: #CE8163;
+			@include to(576px){
+				font-size: 38px;
+			}
 		}
 		&__desc{
+			min-height: 30px;
 			font-size: 12px;
 			line-height: 1.7em;
 			text-transform: uppercase;
 			color: #FFF0E0;
+			@include to(576px){
+				font-size: 9px;
+			}
+			@include to(425px){
+				min-height: 45px;
+				font-size: 9px;
+			}
 		}
 	}
 }
@@ -869,6 +1085,10 @@ ul.dots{
 	font-size: 40px;
 	line-height: 1.1em;
 	color: #2F2536;
+	@include to(768px){
+		font-size: 28px;
+
+	}
 }
 .content-section-height:not(#K){
 	
@@ -897,6 +1117,9 @@ ul.dots{
 		left: 50%;
 		transform: translate(-50%, 0%);
 	}
+	@include to(576px){
+		display: none;
+	}
 }
 .section__six{
 	display: flex;
@@ -908,14 +1131,13 @@ ul.dots{
 		padding: 11% 0 3.1% 6.65%;
 		@include to(1020px){
 			padding: 6.5% 0 50px 65px;
+		}
+		@include to(576px){
+			padding: 40px 0 36px 15px;
+		}
+		
+	}
 
-		}
-	}
-	.section-shadow{
-		@include to(1020px){
-			margin-bottom: 15px;
-		}
-	}
 	.section-title{
 		margin-bottom: 30px;
 
@@ -1021,7 +1243,9 @@ ul.dots{
 		height: 172px;
 		@include to(1024px){
 			height: 150px;
-
+		}
+		@include to(768px){
+			margin-bottom: 20px;
 		}
 		.card__img{
 			height: 100%;
@@ -1105,8 +1329,17 @@ ul.dots{
 		transform: translateY(0);
 		.all-news{
 			margin-right: 17%;
-
 		}
+	}
+	@include to(576px){
+		margin-top: 13px;
+		.all-news{
+			margin-right: 0;
+			.section-link__text{
+				margin-right: 5px;
+			}
+		}
+		
 	}
 }
 .news-nav-link{
@@ -1139,21 +1372,30 @@ ul.dots{
 */
 .section-five__link{
 	position: absolute;
-	bottom: 35px;
+	bottom: 26px;
 	right: 0;
 	margin-right: 17%;
 	transform: translateY(50%);
 	@include to(1020px){
 		margin-right: 10%;
-
 	}
+	@include to(1020px){
+		margin-right: 20px;
+	}
+
 	span{
 		font-family: $default-font2;
 	}
 }
 .section__five:not(#H){
 	@include to(992px){
-		height: 100vh;
+		height: 578px;
+	}
+	@include to(576px){
+		height: 380px;
+	}
+	@include to(425px){
+		height: 280px;
 	}
 }
 .section__five{
@@ -1168,7 +1410,15 @@ ul.dots{
 		overflow: hidden;
 		@include to(1020px){
 			height: calc(100vh - 60px);
-
+		}
+		@include to(992px){
+			height: calc(578px - 60px);
+		}
+		@include to(576px){
+			height: calc(380px - 47px);
+		}
+		@include to(425px){
+			height: calc(280px - 47px);
 		}
 	}
 }
@@ -1240,6 +1490,13 @@ ul.dots{
 		align-items: center;
 		background-color: #CE8163;
 		transition: all 0.3s;
+		@include to(576px){
+			width: 47px;
+			height: 47px;
+			min-width: 47px;
+			min-height: 47px;
+
+		}
 		&:hover{
 			background-color: #FF996F;
 		}
@@ -1262,5 +1519,8 @@ ul.dots{
 	height: 28px;
 	@include from(1021px){
 		display: none;
+	}
+	@include to(475px) {
+		order: 2;
 	}
 }
