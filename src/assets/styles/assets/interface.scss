@@ -19,7 +19,7 @@
 
 
 .radio-block{
-	margin-bottom: 20px;
+	margin-bottom: 30px;
 	[type="radio"]:checked,
 	[type="radio"]:not(:checked) {
 		position: absolute;
@@ -36,8 +36,13 @@
 		align-items: center;
 		font-weight: 500;
 		font-size: 20px;
-
 		color: #FFF0E0;
+		@include to(1280px) {
+			font-size: 18px;
+		}
+		@include to(576px) {
+			font-size: 14px;
+		}
 	}
 
 	[type="radio"]:checked+label:before,

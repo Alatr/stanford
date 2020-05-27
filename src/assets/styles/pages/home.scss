@@ -723,7 +723,13 @@ ul.dots{
 			right: 0;
 			width: 108px;
 			height: 108px;
-			transform: rotate(13deg) translate(50%, -45%);
+			transform: translate(70%, -40%);
+			transform-origin: 100% 0;
+			@include to(768px){
+				width: 82px;
+				height: 82px;
+
+			}
 		}
 	}
 	&__text{

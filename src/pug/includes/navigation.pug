@@ -18,7 +18,7 @@
 				.desktop-header-phone__icon.phone-link__icon
 					include ../../assets/images/icon-phone.svg
 				span.desktop-header-phone__text.phone-link__text +3 044 299 4600
-			a(href="#popup-call").call-link.js-call-popup
+			button(type="button").call-link.js-call-popup.button-reset--default-styles
 				span.call-link__text замовити дзвінок
 		.lang-list-vertical-wrap
 			ul.lang-list-vertical
@@ -52,10 +52,10 @@
 		span.nav-menu-button-wrap
 			span.nav-menu-button__text меню
 	.desktop-nav-icon-wrap
-		a(href="#").button.button-reset--default-styles.desktop-nav-btn.nav-btn--margin
+		a(href="#").button.button-reset--default-styles.desktop-nav-btn.nav-btn--margin.js-call-popup
 			+svg('phone').desktop-nav-btn__icon
 			.desktop-nav-btn-text-wrap
-				span обрати квартиру
+				span замовити дзвінок
 		a(href="#").button.button-reset--default-styles.desktop-nav-btn.nav-btn--margin
 			+svg('keys').desktop-nav-btn__icon
 			.desktop-nav-btn-text-wrap

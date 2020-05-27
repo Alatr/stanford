@@ -48,6 +48,7 @@ void main() {
 }
 `;
 @@include('./libs.js');
+
 function spliterText($title, type = 'type_text'){
 		const titleStr = $($title).text().replace(/\s{2,}/gm, '')
 		const titleArr = titleStr.split(' ');
@@ -1249,31 +1250,120 @@ if( $body.hasClass('js_animation') ){
 		}
 		
 	});
-		      $('.js-call-popup').magnificPopup({
-		      	callbacks: {
-		      		beforeOpen: function () {
-		      			// ANIMATION MODAL POPUP
-		      			const blockModal = $(this.st.el),
-		      				overlayClass = blockModal.attr('data-modal-class'),
-		      				animationClass = blockModal.attr('data-effect');
-		      			if (overlayClass) this.st.mainClass = `${this.st.mainClass} ${overlayClass} ${animationClass} `;
-		      		},
-		      		beforeClose: function () {
+		      // $('.js-call-popup').magnificPopup({
+		      // 	callbacks: {
+		      // 		beforeOpen: function () {
+		      // 			// ANIMATION MODAL POPUP
+		      // 			const blockModal = $(this.st.el),
+		      // 				overlayClass = blockModal.attr('data-modal-class'),
+		      // 				animationClass = blockModal.attr('data-effect');
+		      // 			if (overlayClass) this.st.mainClass = `${this.st.mainClass} ${overlayClass} ${animationClass} `;
+		      // 		},
+		      // 		beforeClose: function () {
 
-		      		},
+		      // 		},
 
-		      		open: function () {
-		      			// DOM ELEMENTS
-		      			let closeModalBtn = $('.js-close-btn');
-		      			let link = $('.js-u-deal-modal__close-btn');
-		      			closeModalBtn.on('click', () => $.magnificPopup.close());
+		      // 		open: function () {
+		      // 			// DOM ELEMENTS
+		      // 			let closeModalBtn = $('.js-close-btn');
+		      // 			let link = $('.js-u-deal-modal__close-btn');
+		      // 			closeModalBtn.on('click', () => $.magnificPopup.close());
 
 		      
 
-		      		}
+		      // 		}
 
-		      	}
-		      });
+		      // 	}
+					// });
+					
+
+
+
+					var $modal = $(".js-modal"),
+					$overlay = $(".js-modal-overlay"),
+					blocked = false,
+					unblockTimeout = null;
+					
+					console.log($modal, $overlay);
+		TweenMax.set($modal, {
+			autoAlpha: 0
+		})
+
+		var isOpen = false;
+
+		function openModal() {
+			if (!blocked) {
+				block(400);
+
+				$body.addClass('modal-active');
+				
+				TweenMax.to($overlay, 0.3, {
+					autoAlpha: 1
+				});
+				let customEase = gsap.parseEase("Elastic.easeOut(0.4, 0.3)");
+
+				TweenMax.fromTo($modal, 0.5, {
+					x: (-$(window).width() - $modal.width()) / 2 - 50,
+					scale: 0.9,
+					autoAlpha: 1
+				}, {
+					delay: 0.1,
+					rotationY: 0,
+					scale: 1,
+					opacity: 1,
+					x: 0,
+					z: 0,
+					ease: customEase,
+					force3D: false
+				});
+				$.startUpdatingBlur(800);
+			}
+		}
+
+		function closeModal() {
+			if (!blocked) {
+				$body.removeClass('modal-active');
+
+				block(400);
+				TweenMax.to($overlay, 0.3, {
+					delay: 0.3,
+					autoAlpha: 0
+				});
+				TweenMax.to($modal, 0.3, {
+					x: ($(window).width() + $modal.width()) / 2 + 100,
+					scale: 0.9,
+					ease: Quad.easeInOut,
+					force3D: false,
+					onComplete: function () {
+						TweenMax.set($modal, {
+							autoAlpha: 0
+						});
+					}
+				});
+				$.startUpdatingBlur(400);
+			}
+		}
+
+		function block(t) {
+			blocked = true;
+			if (unblockTimeout != null) {
+				clearTimeout(unblockTimeout);
+				unblockTimeout = null;
+			}
+			unblockTimeout = setTimeout(unblock, t);
+		}
+
+		function unblock() {
+			blocked = false;
+		}
+		$body.on('click', '.js-call-popup', function () {
+			openModal();
+		});
+		$body.on('click', ".modal-overlay,.js-close-btn", function () {
+			closeModal();
+		});
+
+		$modal.initBlur(0.5);
 	/*
 		* popup open end
 	*/

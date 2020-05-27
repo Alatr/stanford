@@ -1,0 +1,36 @@
+// popup start
+.modal-overlay.js-modal-overlay
+//- .popup-call#popup-call.mfp-hide.mfp-with-anim
+.modal-wrapper
+	.popup-call.js-blur.js-modal
+		button(type="button").button-reset--default-styles.popup-close.popup-call__close.js-close-btn
+			+svg('close').popup-close__icon
+		+img('popup_overlay.jpg').popup-call__bg-overlay
+		.popup-call__title-wrap
+			h5.popup-call__title Наш менеджер зв'яжеться з вами у зручний час
+			span.popup-call-notice замовити дзвінок
+		
+		form(autocomplete="off").main-form#call-form.call-form
+			.main-form-block.requaired
+				input(name="name" type="text" data-rule="empty").main-form__input.main-form__input-requaired.js-main-form__input
+				span( data-defaultMessage="Ваше ім'я:*" data-errorMessage="Ваше ім'я не заповнено:").main-form-content
+					span.main-form__text Iм'я:*
+			.main-form-block.requaired
+				input(name="tel" type="text" data-rule="empty").main-form__input.main-form__input-requaired.js-main-form__input
+				span( data-defaultMessage="Введіть телефон:*" data-errorMessage="Телефон: не заповнено:").main-form-content
+					span.main-form__text Телефон:*
+			.radio-block
+				input#time_1.js-time-call(type="radio" value="0" name="time_call" checked)
+				label(for="time_1") Зателефонуйте зараз
+			.radio-block
+				input#time_2.js-time-call(type="radio" value="1" name="time_call")
+				label(for="time_2") Вказати зручний час
+			.main-form-block.requaired.main-form-block__data-time.js-main-form-block__data-time
+				input(name="time" type="text" data-rule="empty").main-form__input.js-main-form__input.js-datetimepicker_dark
+				span(data-type="tel" data-defaultMessage="Вказати зручний час" data-errorMessage="Час не заповнено:").main-form-content
+					span.main-form__text Вказати зручний час
+
+			button(type="submit").button-reset--default-styles.section-link.popup-call__submit-btn
+					span.section-link__text відправити
+					+svg('arrow-link').section-link__icon
+	// popup end

@@ -9,4 +9,5 @@
 @@include('../libs/number/number.js')
 @@include('../libs/datetimepicker/datetimepicker.js')
 @@include('../libs/datetimepicker/datetimepicker_1.js')
+@@include('../libs/blur/blur.js')
 @@include('../libs/magnific-popup/dist/magnific-popup.js')
