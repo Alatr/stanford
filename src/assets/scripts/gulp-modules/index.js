@@ -51,16 +51,19 @@ void main() {
 
 function spliterText($title, type = 'type_text'){
 		const titleStr = $($title).text().replace(/\s{2,}/gm, '')
-		const titleArr = titleStr.split(' ');
+		let titleArr = [];
 
 		let newStr = '';
 		let wrap = ()=>{};
 		switch (type) {
-			case 'title':
+			case 'latter':
 				
+				titleArr = titleStr.split('');
+				wrap = (word)=> `<span class="gsap_latter">${word}</span>`
 				break;
 		
 			default:
+				titleArr = titleStr.split(' ');
 				wrap = (word)=> `<span class="gsap_word">${word}</span>&nbsp;`
 				break;
 		}
@@ -804,14 +807,6 @@ if( $body.hasClass('js_animation') ){
 
 	
 
-	function createAnimationTool(fn){
-
-		$('.time_scale_025').on('click', ()=> fn().restart().timeScale(0.50))
-		$('.time_scale_050').on('click', ()=> fn().restart().timeScale(0.50))
-		$('.time_scale_075').on('click', ()=> fn().restart().timeScale(0.75))
-		$('.time_scale_1').on('click', ()=> fn().restart().timeScale(1))
-	}
-	createAnimationTool(sixSlAnim)
 	
 	
 	
@@ -1368,6 +1363,129 @@ if( $body.hasClass('js_animation') ){
 		* popup open end
 	*/
 	/**********************************/
+	/**********************************/
+	/*
+	* menu start
+	*/
+	spliterText('.js-menu__title-text', 'latter');
+
+	var menuIsOpen = false,
+		$menu = $(".js-menu"),
+		$menuItem = $(".menu-item"),
+		$menuBg = $(".menu-bg"),
+		$menuToggle = $(".menu-toggle")
+		;
+		
+		gsap.set($menu, {xPercent: -150});
+		
+		
+function openMenu() {
+		const	$menuTitle = [...$(".js-menu .gsap_latter")].reverse(),
+					$footerItem = [...$(".js-menu .gsap-footer-stagger")].reverse();
+		menuIsOpen = true;
+	gsap.set([], {autoAlpha:0});
+	const obj = {
+	paused: true,
+	}
 	
+	const tl = gsap.timeline(obj);
+		tl.fromTo($menu, 1, {
+			xPercent: -150,
+			skewX: -25,
+		}, {
+			xPercent: 0,
+			skewX: 0,
+			ease: exO,
+		})
+		tl.fromTo([$footerItem, $menuTitle], 0.7, {
+			x: -80,
+			autoAlpha: 0,
+		}, {
+			x: 0,
+			ease: exO,
+			autoAlpha: 1,
+			stagger: 0.05
+		}, '0.05')
+		tl.fromTo('.icon--sign', 0.5, {
+			rotation: -80,
+			autoAlpha: 0
+		}, {
+			rotation: 0,
+			autoAlpha: 1
+		}, '-=0.6')
+	return tl;
+};
+
+
+
+
+function closeMenu() {
+	const $menuTitle = [...$(".js-menu .gsap_latter")],
+				$footerItem = [...$(".js-menu .gsap-footer-stagger")];
+	menuIsOpen = false;
+	gsap.set([], {autoAlpha:0});
+	const obj = {
+	paused: true,
+	}
+	
+	const tl = gsap.timeline(obj);
+		tl.fromTo($menu, 1.3, {
+			xPercent: 0,
+			skewX: 0,
+		}, {
+			xPercent: -150,
+			skewX: 2,
+			ease: ex,
+		})
+		tl.fromTo([$footerItem, $menuTitle], 0.7, {
+			x: 0,
+			autoAlpha: 1,
+		}, {
+			x: -80,
+			autoAlpha: 0,
+			ease: ex,
+			stagger: 0.05
+		}, '0.05')
+		tl.fromTo('.icon--sign', 0.5, {
+			rotation: 0,
+			autoAlpha: 1
+		}, {
+			rotation: -80,
+			autoAlpha: 0
+		}, '-=0.6')
+	return tl;
+};
+
+	function toggleMenu() {
+		if (menuIsOpen) {
+			$body.removeClass('menu-open');
+			closeMenu().play().timeScale(0.9);
+		} else {
+			$body.addClass('menu-open');
+			openMenu().play().timeScale(0.9);
+		}
+	}
+	$body.on('click', '.js-menu-btn, .js-close-menu-btn', function () {
+		toggleMenu();
+	});
+
+
+
+	//openMenu().play();
+
+function createAnimationTool(fn) {
+
+	$('.time_scale_025').on('click', () => fn().restart().timeScale(0.05))
+	$('.time_scale_050').on('click', () => fn().restart().timeScale(0.50))
+	$('.time_scale_075').on('click', () => fn().restart().timeScale(0.75))
+	$('.time_scale_090').on('click', () => fn().restart().timeScale(0.9))
+	$('.time_scale_1').on('click', () => fn().restart().timeScale(1.1))
+}
+createAnimationTool(closeMenu)
+
+	/*
+	* menu end
+	*/
+	/**********************************/
 	});
 })(jQuery);

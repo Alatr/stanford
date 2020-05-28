@@ -1,6 +1,5 @@
 // popup start
 .modal-overlay.js-modal-overlay
-//- .popup-call#popup-call.mfp-hide.mfp-with-anim
 .modal-wrapper
 	.popup-call.js-blur.js-modal
 		button(type="button").button-reset--default-styles.popup-close.popup-call__close.js-close-btn
@@ -33,4 +32,60 @@
 			button(type="submit").button-reset--default-styles.section-link.popup-call__submit-btn
 					span.section-link__text відправити
 					+svg('arrow-link').section-link__icon
-	// popup end
+// popup end
+// menu start
+.menu.js-menu
+	+svg('circ_logo').main-overlay__icon-logo
+	button(type="button").button-reset--default-styles.popup-close.menu__close.js-close-menu-btn
+		+svg('close').popup-close__icon
+	h4.menu__title
+		span.menu__title-wrap
+			span.js-menu__title-text Меню
+			+svg('sign')
+	.menu-list.custom-scroll
+		.menu-item-wrap
+			.menu-item
+				h4.menu-item__title.menu-item-title Про комплекс
+				ul.submenu-item
+					li.submenu__item
+						a(href="#") Технічні характеристики
+					li.submenu__item
+						a(href="#") Філософія Stanford
+					li.submenu__item
+						a(href="#") Галерея
+					li.submenu__item
+						a(href="#") Хід будівництва
+			.menu-item
+				h4.menu-item__title.menu-item-title Вібір квартири
+				ul.submenu-item
+					li.submenu__item
+						a(href="#") Вибір за поверхом
+					li.submenu__item
+						a(href="#") Підбір по параметрам
+		.menu-item-wrap
+			ul.submenu-main-link
+				li.submenu-main-link__item
+					a(href="#").menu-item-title Інфраструктура
+				li.submenu-main-link__item
+					a(href="#").menu-item-title Документи
+				li.submenu-main-link__item
+					a(href="#").menu-item-title Новини
+				li.submenu-main-link__item
+					a(href="#").menu-item-title Девелопер
+				li.submenu-main-link__item
+					a(href="#").menu-item-title Контакти
+
+	.menu-foter
+		a(href="#").menu__footer-link.footer-link.gsap-footer-stagger
+			+svg('map').footer-link__icon
+			span.footer-link__text Київ, Предславинська, 35
+		span.menu-footer-line.gsap-footer-stagger
+		a(href="tel:1234567890").menu__footer-link.footer-link.gsap-footer-stagger
+			+svg('phone_1').footer-link__icon
+			span.footer-link__text +1 234 567 8900
+		span.menu-footer-line.gsap-footer-stagger
+		a(href="#").menu__footer-link.footer-link.menu__footer-link-social.gsap-footer-stagger
+			+svg('insta').footer-link__icon
+		a(href="#").menu__footer-link.footer-link.menu__footer-link-social.gsap-footer-stagger
+			+svg('facebook').footer-link__icon
+// menu end
