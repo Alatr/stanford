@@ -38,7 +38,8 @@ block meta
 block head
 		link(rel='stylesheet', href="./assets/styles/main.min.css")
 block scripts
-	script(src='./assets/scripts/index.js')
+	script(defer src='./assets/scripts/index.js')
+	script(defer src='./assets/scripts/home.js')
 block content
 
 	.controll
@@ -277,6 +278,4 @@ block footer
 	include ../includes/footer.pug
 
 block header
-	header.header
-		include ../includes/header.pug
 

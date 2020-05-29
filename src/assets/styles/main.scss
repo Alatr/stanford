@@ -138,6 +138,17 @@
 		padding-left: 0;
 		padding: 0 20px;
 	}
+			a span{
+				transition: all 0.25s ease-in-out;
+			}
+			a:hover span {
+				transition: color 0.3s ease-in-out;
+			}
+			a:hover span{
+				color: $mc3;
+				transform: translateX(8px);
+				transition: all 0.3s ease-in-out;
+			}
 	&__logo{
 		width: 155px;
 		height: 27px;
@@ -604,6 +615,11 @@ body.modal-active{
 	display: flex;
 	line-height: 1em;
 }
+.popup-close{
+	&:hover {
+		transform: scale(0.9) rotate(90deg);
+	}
+}
 .menu{
 	position: fixed;
 	top: 0;
@@ -620,14 +636,43 @@ body.modal-active{
 	@include to(576px){
 		padding: 15px 0 15px 15px;
 	}
+	.menu-list{
+
+		a{
+			transition: all 0.25s ease-in-out;
+		}
+		a:hover span {
+	
+			transition: color 0.3s ease-in-out;
+		}
+		a:hover{
+			color: $mc3;
+			transform: translateX(8px);
+			transition: all 0.3s ease-in-out;
+		}
+	}
+	a svg {
+		fill: #706A75;
+	}
+	a span, a svg {
+
+		transition: color 0.25s ease-in-out, fill 0.3s ease-in-out;
+	}
+	a:hover span, a:hover svg{
+		color: $mc3;
+		fill: $mc3;
+		transition: color 0.3s ease-in-out, fill 0.3s ease-in-out;
+	}
 	&__close{
 		position: absolute;
 		top: 44px;
 		right: 30px;
+		transition: all 0.3s ease-in-out;
 		@include to(576px){
 			top: 20px;
 			right: 20px;
 		}
+		
 	}
 	&__title{
 		margin-bottom: 46px;
@@ -668,8 +713,7 @@ body.modal-active{
 		display: none;
 	}
 }
-.menu__footer-link{
-}
+
 .menu-footer-line{
 	margin: 0 25px;
 	height: 1px;

@@ -373,7 +373,7 @@ span.overlay__2{
 		z-index: 2;
 		font-size: 5.5vw;
 		@include from(1439px){
-			max-width: 750px;
+			max-width: 950px;
 		}
 		@include to(1280px){
 			font-size: 70px;
@@ -800,6 +800,17 @@ ul.dots{
 		height: 100%;
 		object-fit: cover;
 	}
+	&__link{
+					span {
+						transition: all 0.25s ease-in-out;
+					}
+
+					&:hover span {
+						transform: translateX(8px);
+						transition: all 0.3s ease-in-out;
+						color: $mc;
+					}
+	}
 	.section__img-overlay{
 		transform-origin: right;
 
@@ -833,7 +844,15 @@ ul.dots{
 	display: flex;
 	align-items: center;
 	text-decoration: none;
+		span {
+			transition: all 0.25s ease-in-out;
+		}
 
+		&:hover span {
+			transform: translateX(8px);
+			transition: all 0.3s ease-in-out;
+			color: $mc;
+		}
 	&__text{
 		margin-right: 20px;
 		display: flex;
@@ -1123,6 +1142,16 @@ ul.dots{
 		left: 50%;
 		transform: translate(-50%, 0%);
 	}
+	@include from(1439px){
+		width: 400px;
+		height: 400px;
+		right: auto;
+		top: 0;
+		bottom: auto;
+		z-index: 0;
+		left: 50%;
+		transform: translate(-50%, 0%);
+	}
 	@include to(576px){
 		display: none;
 	}
@@ -1378,15 +1407,19 @@ ul.dots{
 */
 .section-five__link{
 	position: absolute;
-	bottom: 26px;
+	bottom: 40px;
 	right: 0;
 	margin-right: 17%;
 	transform: translateY(50%);
-	@include to(1020px){
+	@include to(1280px){
 		margin-right: 10%;
 	}
 	@include to(1020px){
 		margin-right: 20px;
+		bottom: 30px;
+	}
+	@include to(576px){
+		bottom: 23.5px;
 	}
 
 	span{
