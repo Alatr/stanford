@@ -1,7 +1,7 @@
 (function ($) {
 	imagesLoaded(document.querySelectorAll('img.displacement__img'), () => {
 	/**********************************/
-	console.log(2);
+	//console.clear();
 	/*
 	* change slide wheel scroll start
 	*/
@@ -9,6 +9,105 @@
 /*
 	* page transition site start
 */ 
+
+
+var controller = new ScrollMagic.Controller();
+var scene = new ScrollMagic.Scene({
+		triggerElement: ".section__third",
+		triggerHook: 0.5
+	})
+	.addIndicators({
+		colorTrigger: "white",
+		colorStart: "white",
+		colorEnd: "white",
+		indent: 5
+	})
+	.setTween(threeSlAnim())
+	.addTo(controller);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	/*
+	* threeSlAnim start
+	*/
+	
+	function threeSlAnim() {
+	const overlay = '.section-third .section__img-overlay';
+	const title = '.section-third__subtitle';
+	const text = '.section-third__text';
+	const link = '.section-third__link';
+	gsap.set([], {autoAlpha:0});
+	console.log(text);
+	
+	const obj = {
+	}
+	const tl = gsap.timeline(obj);
+	
+	gsap.set([title, text, link], {autoAlpha:0});
+	
+		
+	tl.fromTo(overlay, 1, {scaleX: 1}, {scaleX: 0, ease: ex})
+	tl.call(()=>{
+		hoverArrEl.forEach(el=> el.previous());
+		hoverArrEl[1].next();
+	}, null, '<')
+	tl.staggerFromTo(title, 1.2, {xPercent: -30, autoAlpha: 0}, {xPercent: 0, autoAlpha: 1, ease: p4}, 0.1, '<-0.2')
+	tl.fromTo(text, 1.2, {yPercent: 100, autoAlpha: 0}, {yPercent: 0, ease: ex, autoAlpha: 1}, '<')
+	tl.fromTo(link, 1.2, {yPercent: 100, autoAlpha: 0}, {yPercent: 0, ease: ex, autoAlpha: 1}, '<')
+	
+	
+	return tl;
+	};
+	
+	/*
+	* threeSlAnim end
+	*/
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 let page = {};
 if( $body.hasClass('js_animation') ){
@@ -342,7 +441,6 @@ if( $body.hasClass('js_animation') ){
 		}
 
 		transitionNext(currentIdx, nextIdx) {
-			console.log(currentIdx, nextIdx);
 
 			const self = this;
 			const current = this.slides[currentIdx];
@@ -368,7 +466,6 @@ if( $body.hasClass('js_animation') ){
 			nextBullet.classList.remove('dots-btn--not-active');
 
 			function transitionAnim() {
-				console.log('transitionAnim');
 
 				const tl = new TimelineMax({
 					onComplete: () => {
@@ -499,7 +596,6 @@ if( $body.hasClass('js_animation') ){
 				this.data.next = this.data.current === this.data.total ? 0 : this.data.current + 1
 
 
-				console.log(this.data.next);
 			}
 		}
 
@@ -513,7 +609,6 @@ if( $body.hasClass('js_animation') ){
 			// });
 			const self = this;
 			setTimeout(()=>{
-				console.log(2000);
 				setInterval(function(){
 					self.nextSlide(null)
 				}, 3000)

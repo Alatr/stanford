@@ -1,52 +1,3 @@
-var vertex = `
-varying vec2 vUv;
-void main() {
-	vUv = uv;
-	gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
-}
-`;
-
-var fragment = `
-varying vec2 vUv;
-
-uniform sampler2D texture;
-uniform sampler2D texture2;
-uniform sampler2D disp;
-
-// uniform float time;
-// uniform float _rot;
-uniform float dispFactor;
-uniform float effectFactor;
-
-// vec2 rotate(vec2 v, float a) {
-//  float s = sin(a);
-//  float c = cos(a);
-//  mat2 m = mat2(c, -s, s, c);
-//  return m * v;
-// }
-
-void main() {
-
-		vec2 uv = vUv;
-
-		// uv -= 0.5;
-		// vec2 rotUV = rotate(uv, _rot);
-		// uv += 0.5;
-
-		vec4 disp = texture2D(disp, uv);
-
-		vec2 distortedPosition = vec2(uv.x + dispFactor * (disp.r*effectFactor), uv.y);
-		vec2 distortedPosition2 = vec2(uv.x - (1.0 - dispFactor) * (disp.r*effectFactor), uv.y);
-
-		vec4 _texture = texture2D(texture, distortedPosition);
-		vec4 _texture2 = texture2D(texture2, distortedPosition2);
-
-		vec4 finalTexture = mix(_texture, _texture2, dispFactor);
-
-		gl_FragColor = finalTexture;
-		// gl_FragColor = disp;
-}
-`;
 
 @@include('./libs.js');
 
@@ -125,7 +76,7 @@ Array.from(document.querySelectorAll('.js-grid__item-img')).forEach((el) => {
 
 // GLOBAL ANIMATION GSAP
 
-	function logo() {
+	function logo(additionalSettings = {}) {
 		// DOM
 		const overlayLogo = '.desktop-header-logo-wrap';
 		const letterXL = '.desktop-header-logo-wrap .logo-letter--big';
@@ -133,6 +84,12 @@ Array.from(document.querySelectorAll('.js-grid__item-img')).forEach((el) => {
 
 		const obj = {
 			paused: true,
+			...additionalSettings
+			// onUpdate: ()=>{
+			// 	const self = this
+			// 	console.log(123, self);
+				
+			// }
 		}
 
 		gsap.set([overlayLogo, letterSM, letterXL], {autoAlpha:0});
@@ -289,7 +246,6 @@ Array.from(document.querySelectorAll('.js-grid__item-img')).forEach((el) => {
 
 
 
-console.log(1);
 
 
 
@@ -739,11 +695,3 @@ $body.on('click', '.js-menu-btn, .js-close-menu-btn', function () {
 
 })(jQuery);
 
-function createAnimationTool(fn) {
-
-	$('.time_scale_025').on('click', () => fn().restart().timeScale(0.05))
-	$('.time_scale_050').on('click', () => fn().restart().timeScale(0.50))
-	$('.time_scale_075').on('click', () => fn().restart().timeScale(0.75))
-	$('.time_scale_090').on('click', () => fn().restart().timeScale(0.9))
-	$('.time_scale_1').on('click', () => fn().restart().timeScale(1.1))
-}

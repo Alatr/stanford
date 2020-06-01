@@ -19,6 +19,38 @@
 @import './loader';
 
 @import './pages/home';
+@import './assets/ui';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .transition-effect{
 	position: fixed;
@@ -64,22 +96,7 @@
 }
 
 
-.controll{
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 20px;
-	display: flex;
-	display: none;
-	align-items: center;
-	z-index: 998;
-	padding: 0 40px;
-	background-color: #cccccc;
-	button{
-		margin: 0 10px;
-	}
-}
+
 
 .section{
 	display: flex;
@@ -212,6 +229,11 @@ body[data-active="1"], body[data-active="2"]{
 	}
 }
 body[data-active="3"]{
+	.nav-menu-button__icon{
+		line{
+			stroke: $wc 
+		}
+	}
 	.desktop-nav, .desktop-nav-btn{
 		background-color: transparent;
 	}
@@ -636,13 +658,21 @@ body.modal-active{
 	@include to(576px){
 		padding: 15px 0 15px 15px;
 	}
+	.main-overlay__icon-logo{
+		width: 390px;
+		height: 390px;
+		fill: #3E3247;
+		transform: translate(40%, -25%);
+	}
 	.menu-list{
 
 		a{
 			transition: all 0.25s ease-in-out;
+			span{
+			}
 		}
 		a:hover span {
-	
+			
 			transition: color 0.3s ease-in-out;
 		}
 		a:hover{
@@ -655,13 +685,17 @@ body.modal-active{
 		fill: #706A75;
 	}
 	a span, a svg {
-
+		
 		transition: color 0.25s ease-in-out, fill 0.3s ease-in-out;
 	}
 	a:hover span, a:hover svg{
 		color: $mc3;
 		fill: $mc3;
 		transition: color 0.3s ease-in-out, fill 0.3s ease-in-out;
+	}
+	.footer-link__text{
+		
+		color: #706a75;
 	}
 	&__close{
 		position: absolute;

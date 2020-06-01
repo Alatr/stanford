@@ -42,12 +42,7 @@ block scripts
 	script(defer src='./assets/scripts/home.js')
 block content
 
-	.controll
-		button(type="button").time_scale_025 X 0.25
-		button(type="button").time_scale_075 X 0.5
-		button(type="button").time_scale_050 X 0.75
-		button(type="button").time_scale_090 X 0.9
-		button(type="button").time_scale_1 X 1
+
 	section.section.section__first.section-slaider
 		span.overlay.overlay__1
 		span.overlay.overlay__2
@@ -182,6 +177,8 @@ block content
 			span.section-link__text більше фото
 			+svg('arrow-link').section-link__icon
 	section.section.section__six
+		a(href='https://smarto.agency/' rel="nofollow" target="_blank").footer-logo
+			img(src='./assets/images/smarto.svg' alt="" title="")
 		.section-shadow.content-section-height
 			+svg('circ_logo').section__six-icon-logo
 			h2.section-title Новини

@@ -1,7 +1,7 @@
 // desktop header start
 .desktop-header
 	.desktop-header-logo
-		.desktop-header-logo-wrap
+		a(href="/").desktop-header-logo-wrap
 			include ../../assets/images/nav-logo.svg
 	a(href="tel:+30442994600").desktop-header-phone.phone-link.phone-link-color--dark
 		.desktop-header-phone__icon.phone-link__icon
@@ -10,7 +10,7 @@
 // desktop header end
 // mobile header start
 .mobile-nav
-	.mobile-nav-logo
+	a(href="/").mobile-nav-logo
 		include ../../assets/images/nav-logo.svg
 	.mobile-nav-wrap
 		.mobile-phone-wrap
@@ -36,19 +36,9 @@
 .desktop-nav
 	button(type="button").js-menu-btn.button.button-reset--default-styles.nav-menu-button
 		svg(width="29" height="19" viewbox="0 0 29 19" fill="none" xmlns="http://www.w3.org/2000/svg").nav-menu-button__icon
-			g(filter="url(#filter0_d)")
-				line(x1="4" y1="0.5" x2="25" y2="0.5" stroke="#2F2536")
-				line(x1="4" y1="5.5" x2="25" y2="5.5" stroke="#2F2536")
-				line(x1="4" y1="10.5" x2="16" y2="10.5" stroke="#CE8163")
-			defs
-				filter#filter0_d(x="0" y="0" width="29" height="19" filterunits="userSpaceOnUse" color-interpolation-filters="sRGB")
-					feflood(flood-opacity="0" result="BackgroundImageFix")
-					fecolormatrix(in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0")
-					feoffset(dy="4")
-					fegaussianblur(stddeviation="2")
-					fecolormatrix(type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0")
-					feblend(mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow")
-					feblend(mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape")
+			line(x1="4" y1="0.5" x2="25" y2="0.5" stroke="#2F2536")
+			line(x1="4" y1="5.5" x2="25" y2="5.5" stroke="#2F2536")
+			line(x1="4" y1="10.5" x2="16" y2="10.5" stroke="#CE8163")
 		span.nav-menu-button-wrap
 			span.nav-menu-button__text меню
 	.desktop-nav-icon-wrap
