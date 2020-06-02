@@ -11,31 +11,6 @@
 */ 
 
 
-var controller = new ScrollMagic.Controller();
-var scene = new ScrollMagic.Scene({
-		triggerElement: ".section__third",
-		triggerHook: 0.5
-	})
-	.addIndicators({
-		colorTrigger: "white",
-		colorStart: "white",
-		colorEnd: "white",
-		indent: 5
-	})
-	.setTween(threeSlAnim())
-	.addTo(controller);
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -43,125 +18,110 @@ var scene = new ScrollMagic.Scene({
 
 
 	
-	/*
-	* threeSlAnim start
-	*/
 	
-	function threeSlAnim() {
-	const overlay = '.section-third .section__img-overlay';
-	const title = '.section-third__subtitle';
-	const text = '.section-third__text';
-	const link = '.section-third__link';
-	gsap.set([], {autoAlpha:0});
-	console.log(text);
-	
-	const obj = {
-	}
-	const tl = gsap.timeline(obj);
-	
-	gsap.set([title, text, link], {autoAlpha:0});
-	
-		
-	tl.fromTo(overlay, 1, {scaleX: 1}, {scaleX: 0, ease: ex})
-	tl.call(()=>{
-		hoverArrEl.forEach(el=> el.previous());
-		hoverArrEl[1].next();
-	}, null, '<')
-	tl.staggerFromTo(title, 1.2, {xPercent: -30, autoAlpha: 0}, {xPercent: 0, autoAlpha: 1, ease: p4}, 0.1, '<-0.2')
-	tl.fromTo(text, 1.2, {yPercent: 100, autoAlpha: 0}, {yPercent: 0, ease: ex, autoAlpha: 1}, '<')
-	tl.fromTo(link, 1.2, {yPercent: 100, autoAlpha: 0}, {yPercent: 0, ease: ex, autoAlpha: 1}, '<')
-	
-	
-	return tl;
-	};
-	
-	/*
-	* threeSlAnim end
-	*/
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
 let page = {};
-if( $body.hasClass('js_animation') ){
 
-	page = new Paginator({
-		container: 'section.section',
-		speed: 2600, // speed animation page transition
-
-	});
-	page.canGo = false;
-
-
-
-
-	PubSub.subscribe('gotoSlide', function(msg, data){
-
-		const changeSlide = function(){
-			page.slides.forEach(el => el.classList.add('slide--hidden'));
-			page.slides[data.to].classList.remove('slide--hidden');
-		}
-		switch (data.to) {
-			case 1:
-				$body.attr('data-active', 2);
-				pageTransitionLeft(changeSlide, secondSlAnim).play();
-				break;
-			case 2:
-				$body.attr('data-active', 3);
-				pageTransitionLeft(changeSlide, threeSlAnim).play();
-				break;
-			case 3:
-				setGalleryPos($galleryPicture.length)
-				$body.attr('data-active', 4);
-				pageTransitionLeft(changeSlide, fourSlAnim).play();
-				break;
-			case 4:
-				$body.attr('data-active', 5);
-				const callback = ()=> {
-					return {play: ()=> setGalleryPos(1)}
-				}
-				pageTransitionLeft(changeSlide, callback).play();
-				break;
-			case 5:
-				setGalleryPos($galleryPicture.length)
-				$body.attr('data-active', 6);
-				pageTransitionLeft(changeSlide, sixSlAnim).play();
-				break;
-				
-			default:
-				pageTransitionLeft(changeSlide).play();
-				break;
-		}
-
-	});
-
+		if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
+	
+		page = new Paginator({
+			container: 'section.section',
+			speed: 2600, // speed animation page transition
+	
+		});
+		page.canGo = false;
+	
+		mySubscriber =  PubSub.subscribe('gotoSlide', function (msg, data) {
+			const changeSlide = function(){
+				page.slides.forEach(el => el.classList.add('slide--hidden'));
+				page.slides[data.to].classList.remove('slide--hidden');
+			}
+			switch (data.to) {
+				case 1:
+					$body.attr('data-active', 2);
+					pageTransitionLeft(changeSlide, secondSlAnim).play();
+					break;
+				case 2:
+					$body.attr('data-active', 3);
+					pageTransitionLeft(changeSlide, threeSlAnim).play();
+					break;
+				case 3:
+					setGalleryPos($galleryPicture.length)
+					$body.attr('data-active', 4);
+					pageTransitionLeft(changeSlide, fourSlAnim).play();
+					break;
+				case 4:
+					$body.attr('data-active', 5);
+					const callback = ()=> {
+						return {play: ()=> setGalleryPos(1)}
+					}
+					pageTransitionLeft(changeSlide, callback).play();
+					break;
+				case 5:
+					setGalleryPos($galleryPicture.length)
+					$body.attr('data-active', 6);
+					pageTransitionLeft(changeSlide, sixSlAnim).play();
+					break;
+					
+				default:
+					pageTransitionLeft(changeSlide).play();
+					break;
+			}
+	
+		});
+	} else {
+		var controller = new ScrollMagic.Controller();
+	
+		[...$('section[data-home_sec]')].forEach(function (el, i) {
+			const sectionIndex = el.dataset.home_sec;
+			let animationFnc = null;
+	
+	
+	
+	
+			switch (+sectionIndex) {
+				case 2:
+	
+					animationFnc = secondSlAnim
+					break;
+				case 3:
+					animationFnc = threeSlAnim
+					break;
+				case 4:
+					animationFnc = fourSlAnim
+					break;
+				case 5:
+					break;
+				case 6:
+					animationFnc = sixSlAnim
+					break;
+	
+				default:
+					break;
+			}
+	
+			var scene = new ScrollMagic.Scene({
+					triggerElement: el,
+					triggerHook: 0.5,
+					toggle: {
+						reverse: false,
+					},
+					breakpoints: {
+						1000: false
+					},
+				})
+				// .addIndicators({
+				// 	colorTrigger: "red",
+				// 	colorStart: "red",
+				// 	colorEnd: "red",
+				// 	indent: 5
+				// })
+				.setTween(animationFnc({
+					paused: false
+				}))
+				.addTo(controller);
+		})
+	
+	}
 
 
 
@@ -170,13 +130,14 @@ if( $body.hasClass('js_animation') ){
 	* secondSlAnim start
 	*/
 
-	function secondSlAnim() {
+	function secondSlAnim(additionalSettings = {}) {
 		const overlay = '.section__img-overlay';
 		const content = '.section-second__title span';
 		const text = '.section-second__text';
 
 		const obj = {
-		paused: true,
+			paused: true,
+			...additionalSettings
 		}
 		const tl = gsap.timeline(obj);
 		gsap.set([content, text], {autoAlpha:0});
@@ -202,14 +163,14 @@ if( $body.hasClass('js_animation') ){
 	* threeSlAnim start
 	*/
 	
-	function threeSlAnim() {
+	function threeSlAnim(additionalSettings = {}) {
 	const overlay = '.section-third .section__img-overlay';
 	const title = '.section-third__subtitle';
 	const text = '.section-third__text';
 	const link = '.section-third__link';
-	gsap.set([], {autoAlpha:0});
 	const obj = {
-	paused: true,
+		paused: true,
+		...additionalSettings
 	}
 	const tl = gsap.timeline(obj);
 	
@@ -238,7 +199,7 @@ if( $body.hasClass('js_animation') ){
 	* fourSlAnim start
 	*/
 	
-	function fourSlAnim() {
+	function fourSlAnim(additionalSettings = {}) {
 		const overlayBox = '.section-four-content';
 		const content = '.js-data-four_stagger';
 		const desc = '.features-item__desc';
@@ -246,6 +207,7 @@ if( $body.hasClass('js_animation') ){
 		gsap.set([overlayBox, content, num], {autoAlpha: 0});
 		const obj = {
 			paused: true,
+			...additionalSettings
 		}
 		
 		const tl = gsap.timeline(obj);
@@ -289,7 +251,7 @@ if( $body.hasClass('js_animation') ){
 	/*
 	* sixSlAnim start
 	*/
-	function sixSlAnim() {
+	function sixSlAnim(additionalSettings = {}) {
 		const news = '.section__six .card';
 		const title = '.section__six .card .card__title';
 		const text = '.section__six .card .card__text';
@@ -308,8 +270,8 @@ if( $body.hasClass('js_animation') ){
 			paused: true,
 			onComplete: ()=>{
 				gsap.set([logoL, logoR, logo, overlay], {clearProps: 'all'});
-	
-		}
+			},
+			...additionalSettings
 		}
 		const tl = gsap.timeline(obj);
 			tl.fromTo([titleSec, btn1, btn2], 1, {y: 80, autoAlpha: 0}, {y:0, autoAlpha: 1, ease: ex})
@@ -324,7 +286,10 @@ if( $body.hasClass('js_animation') ){
 	* sixSlAnim end
 	*/
 
-}
+
+
+
+
 /*
  * page transition site end
  */
@@ -340,6 +305,7 @@ if( $body.hasClass('js_animation') ){
 	*/
 	
 	 const tl = (function mainScreen() {
+		 	spliterText('.main-overlay__text');
 		// DOM
 		const overlayL = '.anim-overlay__1';
 		const overlayR = '.anim-overlay__2';
@@ -394,7 +360,7 @@ if( $body.hasClass('js_animation') ){
 	/*
 	 * main slider start
 	 */
-	spliterText('.main-overlay__text');
+
 	class CustomSl {
 		constructor(settings) {
 
