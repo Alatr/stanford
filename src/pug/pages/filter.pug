@@ -1,0 +1,56 @@
+extends ../layout/main
+block variable
+	-
+		var title_page = ' Підбір по параметрам'
+		var id_page = 'filter-page'
+	
+block meta
+	title Підбір по параметрам
+	meta(name='description', content='')
+block head
+		link(rel='stylesheet', href="./assets/styles/main.min.css")
+block scripts
+	script(defer src='./assets/scripts/index.js')
+	script(defer src='./assets/scripts/filter.js')
+block footer
+	include ../includes/footer.pug
+block header
+block content
+	.filter-content
+		include ../includes/breadcrumbs.pug
+		.filter-block
+			.filter
+			.filter-result-block
+				.filter-result-block__header
+					p.res-text За вашими параметрами знайдено 142 квартири:
+					.filter-tab-nav
+						button(type="button" data-index="0").button--res.underline.js-filter-tab-nav-btn.filter-tab-nav-btn.filter-tab-nav-btn--current Плитка
+						button(type="button" data-index="1").button--res.underline.js-filter-tab-nav-btn.filter-tab-nav-btn Список
+				.filter-result-block__body
+					.js-filter-result-block-tab.filter-result-block-tab.card-result
+						each val in [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+							a(href="#").card-filter
+								.card-filter__img
+									+img('temp/card_img.png')
+								.card-filter__title Кімната 2А
+								ul.card-filter-list.card-filter__list
+									li.card-filter-list-item
+										span.card-filter-list-item__key Поверх
+										span.card-filter-list-item__val 1
+									li.card-filter-list-item
+										span.card-filter-list-item__key Кімнат
+										span.card-filter-list-item__val 2
+									li.card-filter-list-item
+										span.card-filter-list-item__key Загальна площа м
+											<sub> 2
+										span.card-filter-list-item__val 33
+									li.card-filter-list-item
+										span.card-filter-list-item__key Житлова площа м
+											<sub> 2
+										span.card-filter-list-item__val 345
+								.card-filter__btn.card-filter-btn
+									span.card-filter-btn__text Детальніше
+									+svg('arrow').card-filter-btn__icon
+					.filter-tab--active.js-filter-result-block-tab.filter-result-block-tab 123
+
+

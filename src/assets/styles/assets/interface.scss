@@ -86,3 +86,26 @@
 		transform: scale(1) translateY(-50%) translateX(8%);
 	}
 }
+
+
+.underline{
+	position: relative;
+	&::after{
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		height: 1px;
+		width: 100%;
+		background-color: #2F2536;
+		display: flex;
+		content: "";
+		transform: scaleX(0);
+		transition: transform cubic-bezier(0.2, 1.82, 0.14, 1.12) 0.3s;
+	}
+	&:hover{
+		&::after{
+			transform: scaleX(1);
+		}
+		
+	}
+}

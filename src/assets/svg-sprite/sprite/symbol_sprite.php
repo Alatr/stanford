@@ -4,6 +4,10 @@
 			<path fill="#CE8163" d="M0 .904L.685.17l3.641 3.464-.685.735z"></path><path d="M6.34 0l.728.693-3.427 3.675-.728-.693L6.34 0z" fill="#CE8163"></path>
 		</symbol>
 	
+		<symbol id="icon-arrow" viewBox="0 0 24 10">
+			<path d="M23 5l-3 3V2l3 3z" fill="#2F2536"></path><path d="M.5 5H23m0 0l-3 3V2l3 3z" stroke="#2F2536"></path>
+		</symbol>
+	
 		<symbol id="icon-arrow-link" viewBox="0 0 24 9">
 			<path d="M22.5 4.59l-3 3v-6l3 3z"></path><path d="M0 4.59h22.5m0 0l-3 3v-6l3 3z"></path>
 		</symbol>
