@@ -14,10 +14,10 @@
 	position: sticky;
 	top: 80px;
 	margin-right: 23px;
+	padding: 40px 35px 100px 45px;
 	width: 349px;
 	background: #FFFFFC;
 	box-shadow: 0px 4px 30px rgba(177, 177, 177, 0.25);
-	transform: matrix(-1, 0, 0, 1, 0, 0);
 	background-color: #ccc;
 	transition: all 0.3s;
 	@include to(1020px){
@@ -1076,5 +1076,70 @@ body.modal-active{
 }
 /*
 * breadcrumbs end
+*/
+/**********************************/
+
+
+
+/**********************************/
+/*
+* table sort start
+*/
+	.table-flat:not(#t){
+		th{
+			font-family: $default-font;
+			font-size: 14px;
+			color: #CE8163;
+			height: 66px;
+		}
+	}
+	
+	.jsgrid-grid-header:not(#t) {
+		background-color: transparent;
+	}
+	.jsgrid-cell:not(#t) {
+		border: none;
+		height: 66px;
+		border-top: #f3f3f3 1px solid;
+		text-align: center;
+	}
+	.jsgrid-header-row .jsgrid-header-sort {
+		background: rgba(154, 149, 158, 0.2);
+		;
+	}
+	.jsgrid-selected-row>.jsgrid-cell{
+		background: rgba(154, 149, 158, 0.2);
+		transition: all 0.3s;
+
+	}
+	.jsgrid-header-sort-asc:before {
+		border-width: 0 5px 5px 5px;
+		transform: translate(15px, 10px);
+		border-color: transparent transparent #CE8163 transparent;
+	}
+	
+	.jsgrid-header-sort-desc:before {
+		border-width: 5px 5px 0 5px;
+		transform: translate(15px, 10px);
+		border-color: #CE8163 transparent transparent transparent;
+	}
+/*
+* table sort end
+*/
+/**********************************/
+
+
+
+
+/**********************************/
+/*
+* range start
+*/
+.range-wrapper{
+	display: flex;
+	flex-direction: column;
+}
+/*
+* range end
 */
 /**********************************/
