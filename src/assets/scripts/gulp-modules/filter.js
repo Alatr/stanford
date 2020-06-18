@@ -96,74 +96,167 @@ a.prop("readOnly")?a.prop({checked:!1,readOnly:!1}):a.prop("checked")||a.prop({r
 	/*
 	* edit table start
 	*/
-	console.log(jsGrid);
+	// let dbFlat = [
+	// 	{
+	// 		total_square: 12,
+	// 		life_square: 14,
+	// 		room: 16,
+	// 		section: 1,
+	// 		floor: 49,
+	// 	},
+	// 	{
+	// 		total_square: 13,
+	// 		life_square: 514,
+	// 		room: 186,
+	// 		section: 2,
+	// 		floor: 35,
+	// 	},
+	// 	{
+	// 		total_square: 26,
+	// 		life_square: 10,
+	// 		room: 3,
+	// 		section: 3,
+	// 		floor: 11,
+	// 	},
+	// 	{
+	// 		total_square: 156,
+	// 		life_square: 266,
+	// 		room: 9,
+	// 		section: 4,
+	// 		floor: 14,
+	// 	},
+	// 	{
+	// 		total_square: 765,
+	// 		life_square: 754,
+	// 		room: 67,
+	// 		section: 2,
+	// 		floor: 21,
+	// 	},
+	// 	{
+	// 		total_square: 788,
+	// 		life_square: 884,
+	// 		room: 17,
+	// 		section: 2,
+	// 		floor: 8,
+	// 	},
+	// 	{
+	// 		total_square: 333,
+	// 		life_square: 234,
+	// 		room: 6,
+	// 		section: 4,
+	// 		floor: 3,
+	// 	},
+	// ]
 
-	$(".js-table-flat").jsGrid({
-		height: "500px",
-		width: "100%",
 
-		sorting: true,
-		paging: true,
 
-		data: [
+
+
+
+
+	// DOM elems wich need for filter
+	const elemsWichMakeFilter = {
+		ranges: $('.js-range-init'),
+		searchBtn: document.querySelector('.js-button_search'),
+		resetBtn: document.querySelector('.js-reset_button'),
+		numberFlats: document.querySelector(".js-number_flats"),
+		rows: document.querySelectorAll('.js-flat-item'), // все карточки с квартирами
+		checkbox: [
 			{
-				"room": 8,
-				"section": 61,
-				"floor": 6,
-				"total_square": 425,
-				"life_square": 25
+				labelKey: 'section',
+				DOMElem: $('.js-section'),
+				typeData: 'array'
 			},
 			{
-				"room": 2,
-				"section": 1,
-				"floor": 555,
-				"total_square": 45,
-				"life_square": 225
+				labelKey: 'ro',
+				DOMElem: $('.js-ro'),
+				typeData: 'array'
 			},
 		],
+	}
 
-		fields: [{
-			title: 'Кімнати',
-			name: "room",
-			type: "number",
-			width: '20%'
-		},
-		{
-			title: 'Секція',
-			name: "section",
-			type: "number",
-			width: '20%'
-		},
-		{
-			title: 'Поверх',
-			name: "floor",
-			type: "number",
-			width: '20%'
-		},
-		{
-			title: 'Загальна площа м<sub>2</sub>',
-			name: "total_square",
-			type: "number",
-			valueField: "Id",
-			width: '20%',
-			textField: "Name"
-		},
-		{
-			title: 'Житлолва площа м<sub>2</sub>',
-			name: "life_square",
-			type: "number",
-			valueField: "Id",
-			width: '20%',
-			textField: "Name"
-		},
-
-		]
+	// Записывает все квартиры в отдельный массив
+	let appartments = [];
+	elemsWichMakeFilter.rows.forEach(function (row) {
+		appartments.push(appartment(row))
 	});
-	
-	
+	// show total quantity
+	elemsWichMakeFilter.numberFlats.innerHTML = appartments.length;
 
 
-	//Static
+	// make DB all flats
+	function appartment(app) {
+		return {
+			flat: app,
+			life_square: parseInt(app.dataset.life_square),
+			total_square: parseInt(app.dataset.total_square),
+			room: parseInt(app.dataset.room),
+			section: parseInt(app.dataset.section),
+			floor: parseInt(app.dataset.floor),
+			//this.test = parseInt(app.dataset.test); // new param filter
+
+		}
+	}
+
+	// ref for update table latter
+	let tableStaticFlat = null;
+	// init table first time we init with all appartments
+	// then we will delete table and init again with new filtered data
+	function tableStaticFlatInit(tableDB = appartments) {
+		tableStaticFlat = $(".js-table-flat").jsGrid({
+			height: "500px",
+			width: "100%",
+
+			sorting: true,
+			paging: true,
+
+			data: tableDB,
+
+			fields: [{
+				title: 'Кімнати',
+				name: "room",
+				type: "number",
+				width: '20%'
+			},
+			{
+				title: 'Секція',
+				name: "section",
+				type: "number",
+				width: '20%'
+			},
+			{
+				title: 'Поверх',
+				name: "floor",
+				type: "number",
+				width: '20%'
+			},
+			{
+				title: 'Загальна площа м<sub>2</sub>',
+				name: "total_square",
+				type: "number",
+				valueField: "Id",
+				width: '20%',
+				textField: "Name"
+			},
+			{
+				title: 'Житлолва площа м<sub>2</sub>',
+				name: "life_square",
+				type: "number",
+				valueField: "Id",
+				width: '20%',
+				textField: "Name"
+			},
+
+			]
+		});
+	}
+	tableStaticFlatInit();
+
+	let validDBTable = []
+	function updateSortTable() {
+		tableStaticFlat.jsGrid("destroy");
+		tableStaticFlatInit(validDBTable);
+	}
 
 	/*
 	* edit table end
@@ -172,315 +265,182 @@ a.prop("readOnly")?a.prop({checked:!1,readOnly:!1}):a.prop("checked")||a.prop({r
 
 
 
-	// Общий Object в котором указаны все параметры фильтра по которым идёт выборка квартир  	
-	var filter = {
-		val_square: {
+
+
+	// current state filter
+	const filter = {
+		total_square: {
 			min: '',
 			max: ''
 		},
-		val_squareLiv: {
+		life_square: {
 			min: '',
 			max: ''
 		},
-		val_floor: {
+		room: {
 			min: '',
 			max: ''
 		},
-		rooms: [],
-		build: [],
+		floor: {
+			min: '',
+			max: ''
+		},
+		section: [],
+		//ro: [], // new param filter
 	};
 
-	// Ф-я которая записывает общие данные из slider(при инициализации) в глобальный Object
+
+	// set state filter range
 	function setFilter(ionRange, range) {
 		filter[range.id].min = Number(ionRange.from);
 		filter[range.id].max = Number(ionRange.to);
 	};
+	// set state filter checkbox
+	function setCheckboxFilter(input) {
+		const key = $(input).data().key;
+		const inx = elemsWichMakeFilter.checkbox.findIndex(el=> el.labelKey === key);
+		filter[key] = [];
 
-	// Ф-я которая устанавливает начальные значения из дата атрибутов в slider
-	function setValue(el, val) {
-		$('.js_' + el.id + '_min').val(val.from);
-		$('.js_' + el.id + '_max').val(val.to);
-	}
-
-	var ranges = document.querySelectorAll('.js-range-init');
-	var sliders = [];
-
-	//Init всех Sliders с классом .range-init
-	ranges.forEach(function (range) {
-		$(range).ionRangeSlider({
-			type: "double",
-			grid: true,
-			values_separator: '-',
-			min: range.value.split(';')[0],
-			max: range.value.split(';')[1],
-			from: range.value.split(';')[0],
-			to: range.value.split(';')[1],
-			hide_min_max: true,
-			hide_from_to: true,
-			grid: false,
-			onStart: function (ionRange) {
-				setFilter(ionRange, range);
-				//console.log(range, '-----');
-
-			},
-			onChange: function (ionRange) {
-				setFilter(ionRange, range);
-				setValue(range, ionRange);
+		[...elemsWichMakeFilter.checkbox[inx].DOMElem].forEach(function (checkbox) {
+			if (checkbox.checked) {
+				filter[key].push(+checkbox.value);
 			}
-		})
-		sliders.push($(range).data("ionRangeSlider"));
+		});
 
+	};
+
+
+	// handler for all chackbox
+	elemsWichMakeFilter.checkbox.forEach((el) => {
+		el.DOMElem.on('change', function () {
+			setCheckboxFilter(this);
+		});
+	});
+	
+	// get default val all checkbox in first load
+	elemsWichMakeFilter.checkbox.forEach((el)=>{
+		[...el.DOMElem].forEach((checkBox)=>{
+			setCheckboxFilter(checkBox);
+		});
 	});
 
 
 
-	//Отслежка выбора checbox и запись выбраных элементов в глобальный Object filter
-	// var checkboxesConainerRoom = document.querySelector('.js_checkboxes__rooms'); // wrap checkboxs
-	// var checkboxesRoom = document.querySelectorAll('.js_checkboxes__rooms .checkbox__room'); // label
-	// var checkboxesConainerBuild = document.querySelector('.js_checkboxes__build'); // wrap checkboxs
-	// var checkboxesBuild = document.querySelectorAll('.js_checkboxes__build .checkbox__room'); // label
-
-	// function addEventCheckbox(wrap, checkbox, arr){
-
-	// 	wrap.addEventListener('change', function () {
-	// 		console.log('11');
-	// 		arr = [];
-	// 		checkbox.forEach(function (checkbox) {
-	// 			if(checkbox.checked) {
-	// 				arr.push(parseInt(checkbox.value));
-	// 				console.log(arr);
-	// 			}
-	// 		})
-	// 	});
-	// }
-
-	// addEventCheckbox(checkboxesConainerRoom, checkboxesRoom, filter.rooms)
-	// addEventCheckbox(checkboxesConainerBuild, checkboxesBuild, filter.build)
-/* 	// var checkboxesConainer = document.querySelector('.js_checkboxes-wrap'); // wrap checkboxs
-	// var checkboxes = document.querySelectorAll('.js_checkboxes__rooms .checkbox__room'); // label
-
-	// checkboxesConainer.addEventListener('change', function () {
-	// 	filter.rooms = [];
-	// 	checkboxes.forEach(function (checkbox) {
-	// 		if (checkbox.checked) {
-	// 			filter.rooms.push(parseInt(checkbox.value));
-	// 		}
-	// 	})
-	// }); */
-	// var checkboxesConainerBuild = document.querySelector('.js_checkboxes__build'); // wrap checkboxs
-	// var checkboxesBuild = document.querySelectorAll('.checkbox__room'); // label
-
-	// checkboxesConainerBuild.addEventListener('change', function () {
-	// 	filter.build = [];
-	// 	checkboxesBuild.forEach(function (checkbox) {
-	// 		if (checkbox.checked) {
-	// 			filter.build.push(parseInt(checkbox.value));
-	// 		}
-	// 	})
-	// });
-	// Ф-я конструктор котрая создаёт отдельный Object на каждую квартиру, берёт данные из дата атрибута и записывает 
-	var rows = document.querySelectorAll('.js-result__item'); // все карточки с квартирами li 
-
-	function Appartment(app) {
-		this.selector = app;
-		this.val_entrance = parseInt(app.dataset.build);
-		this.val_square = parseInt(app.dataset.area);
-		this.val_squareLiv = parseInt(app.dataset.larea);
-		this.val_floor = parseInt(app.dataset.floor);
-		this.rooms = parseInt(app.dataset.rooms);
-		this.build = parseInt(app.dataset.build);
-	}
-	// Записывает все квартиры в отдельный массив
-	var appartments = [];
-	rows.forEach(function (row) {
-		appartments.push(new Appartment(row))
-	});
-
-	// выборка кнопок и установка значения общего к-ва квартир
-	var searchBtn = document.querySelector('.js-button_search');
-	var resetBtn = document.querySelector('.js-reset_button');
-
-	document.querySelector(".number_flats").innerHTML = appartments.length;
-	//document.querySelector(".count_filter").innerHTML = appartments.length;
 
 	// Обработчик на кнопку поиска
-	searchBtn.addEventListener('click', function () {
-		var totalAppartments = appartments.length;
-		var i = 0;
+	elemsWichMakeFilter.searchBtn.addEventListener('click', function () {
+		const totalAppartments = appartments.length;
+		let i = 0;
 		// Проход по массиву и сверка ключей и данных
+		validDBTable = [];
+		
 		appartments.forEach(function (appartment) {
-			appartment.selector.style.display = 'block';
-			console.log(appartment)
+			appartment.flat.style.display = 'block';
 			for (var key in filter) {
-				if (key === 'rooms' && filter[key].length > 0) {
+
+				if (Array.isArray(filter[key]) && filter[key].length > 0) {
+					console.log(filter[key], appartment);
+					
 					if (!filter[key].includes(appartment[key])) {
-						appartment.selector.style.display = 'none';
+						appartment.flat.style.display = 'none';
 						i++;
 						break;
 					}
 				}
-				// if(key === 'build' && filter[key].length > 0) {
-				// 	if(!filter[key].includes(appartment[key])) {
-				// 		appartment.selector.style.display = 'none';
-				// 		i++;
-				// 		break;
-				// 	}
-				// }
 				if (filter[key].min > appartment[key] || filter[key].max < appartment[key]) {
-					appartment.selector.style.display = 'none';
+					appartment.flat.style.display = 'none';
 					i++;
 					break;
 				}
 			}
-		});
-		document.querySelector(".number_flats").innerHTML = totalAppartments - i <= 0 ? 0 : totalAppartments - i;
-	});
-
-
-	// Обнуление данных методы плагина 
-	resetBtn.addEventListener('click', function (e) {
-		e.preventDefault();
-		sliders.forEach(function (slider) {
-			slider.update({
-				from: slider.options.min,
-				to: slider.options.max
-			});
-			setFilter({ from: slider.old_from, to: slider.old_to }, slider.input);
-			setValue(slider.input, { from: slider.old_from, to: slider.old_to });
-		});
-		checkboxes.forEach(function (checkbox) {
-			checkbox.checked = false;
-		});
-		// checkboxesBuild.forEach(function(checkbox) {
-		// 	checkbox.checked = false;
-		// });
-		filter.rooms = [];
-		filter.build = [];
-	});
-
-
-	// установка и обработка значений ввидённых с клавиатуру в поля инпутов минимальных и максимальных значений
-
-	var minInputs = document.querySelectorAll('.slider__currentMin');
-	var maxInputs = document.querySelectorAll('.slider__currentMax');
-
-	minInputs.forEach(function (input) {
-		input.addEventListener('keyup', function (e) {
-			var parent = $(this).parents()[2];
-			setMinSliderFromInput($(parent).find(".range-init")[0].id, e.target.value, sliders);
-			//console.log(filter);
-
-		});
-	});
-
-	maxInputs.forEach(function (input) {
-		input.addEventListener('keyup', function (e) {
-			var parent = $(this).parents()[2];
-			setMaxSliderFromInput($(parent).find(".range-init")[0].id, e.target.value, sliders);
-			console.log(filter);
-
-
-		});
-	});
-
-
-	function setMinSliderFromInput(id, val, arrSliders) {
-		arrSliders.forEach(function (item) {
-			if (item.input.id === id) {
-				if (item.options.min <= Number(val) && item.options.max >= Number(val)) {
-					item.update({ from: val, to: item.old_to });
-					setFilter(item.result, item.input)
-				} else {
-					item.update({ from: item.options.min, to: item.old_to });
-					setFilter(item.result, item.input)
-				}
+			if(appartment.flat.attributes.style.value === 'display: block;'){
+				validDBTable.push(appartment)
 			}
 		});
-	};
+		updateSortTable(validDBTable)
+		elemsWichMakeFilter.numberFlats.innerHTML = totalAppartments - i <= 0 ? 0 : totalAppartments - i;
 
-	function setMaxSliderFromInput(id, val, arrSliders) {
-		arrSliders.forEach(function (item) {
-			if (item.input.id === id) {
-				if (item.options.max >= Number(val) && item.options.min <= Number(val)) {
-					item.update({ from: item.old_from, to: val });
-					setFilter(item.result, item.input)
-				} else {
-					item.update({ from: item.old_from, to: item.options.max });
-					setFilter(item.result, item.input)
-				}
-			}
-		});
-	};
+	});
 
+	// handlers for manualy setting input val
 
-	// reset value if inputs have biggest num
-	$("body").on("focusout", ".input-filter-js", inputMaxReset);
+	function minMax(min, max, val) {
+		return Math.max(min, Math.min(val, max));
+	}
+	function setMinMax(inputInit, val, input) {
+		const inputData = inputInit.data("ionRangeSlider");
+		const { max, min, from, to } = inputData.options;
 
-	function inputMaxReset() {
-		var value = Number($(this).val()),
-			min = Number($(this)[0].min),
-			max = Number($(this)[0].max),
-			mainParentId = $(this).closest('.range-item').find('.range-init')[0],
-			parent = $(this).closest('.range-item'),
-			maxOld = parent.find(".range-init").data("ionRangeSlider").old_to,
-			minOld = parent.find(".range-init").data("ionRangeSlider").old_from,
-			thisRange = parent.find(".range-init").data("ionRangeSlider");
-
-		if ($(this).hasClass('slider__currentMax')) {
-			if (value > max) {
-				$(this).val(max);
-				thisRange.update({
-					to: max
-				});
-				setFilter(thisRange.result, mainParentId);
-
-			} else if (value < minOld) {
-				$(this).val(minOld);
-				thisRange.update({
-					to: minOld
-				});
-				setFilter(thisRange.result, mainParentId);
-			}
+		if (input.hasClass('js-current-min')) {
+			const from = minMax(min, to, val);
+			input.val(from)
+			inputData.update({ from });
 		}
-
-
-		if ($(this).hasClass('slider__currentMin')) {
-			if (value < thisRange.options.min) {
-				$(this).val(min)
-				thisRange.update({
-					from: thisRange.options.min
-				})
-				setFilter(thisRange.result, mainParentId);
-			} else if (value >= maxOld) {
-				$(this).val(maxOld)
-				thisRange.update({
-					from: maxOld
-				})
-				setFilter(thisRange.result, mainParentId);
-			}
-			else {
-				thisRange.update({
-					from: value
-				})
-				setFilter(thisRange.result, mainParentId);
-			}
+		if (input.hasClass('js-current-max')) {
+			const to = minMax(from, max, val);
+			input.val(to)
+			inputData.update({ to });
 		}
 	}
 
+	// установка и обработка значений ввидённых с клавиатуру в поля инпутов минимальных и максимальных значений
+	const body = $('body');
+
+	function addHandlerMinMaxInput(event) {
+		const inputInit = $(event.target).closest('.js-range-item').find('.js-range-init')[0];
+		const val = event.target.value;
+		setMinMax($(inputInit), val, $(event.target));
+	}
+
+	body.on('blur', '.js-current-min', addHandlerMinMaxInput);
+	body.on('blur', '.js-current-max', addHandlerMinMaxInput);
+
+
+	function setValue(el, val, setVal) {
+		$('.js_' + el.id + '_min').val(val[setVal[0]]);
+		$('.js_' + el.id + '_max').val(val[setVal[1]]);
+	}
+
+	// init range
+	
+	function initBoxRange({ range, onChange, onFinish }) {
+		const { max, min, from, to } = range.dataset
+		
+		$(range).ionRangeSlider({
+			type: "double",
+			values_separator: '-',
+			min,
+			max,
+			from,
+			to,
+			onChange: function (ionRange) {
+				onChange();
+				setValue(range, ionRange, ['from', 'to']);
+			},
+			onFinish: function (ionRange) {
+				onFinish(ionRange);
+			}
+		});
+		// after init set filter state
+		const dataRange = $(range).data("ionRangeSlider");
+		setFilter(dataRange.options, dataRange.input);
+	};
 
 
 
-
-
-
-
-
-
-
-
-
-
-
+	function initFilter() {
+		elemsWichMakeFilter.ranges.each((i, el) => {
+			initBoxRange({
+				range: el,
+				onChange: () => { },
+				onFinish: (ionRange) => {
+					
+					setFilter(ionRange, ionRange.input[0]);
+				},
+			});
+		});
+	}
+	initFilter();
 
 
 

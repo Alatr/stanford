@@ -3,6 +3,111 @@ block variable
 	-
 		var title_page = ' Підбір по параметрам'
 		var id_page = 'filter-page'
+		var db_range = [	
+			{
+				id: 'total_square',
+				label: 'Загальна площа',
+				min: 0,
+				max: 788,
+				from : 0,
+				to : 788,
+			},
+			{
+				id: 'life_square',
+				label: 'Житлова площа',
+				min: 0,
+				max: 884,
+				from : 0,
+				to : 884,
+			},
+			{
+				id: 'room',
+				label: 'Кімнати',
+				min: 0,
+				max: 186,
+				from : 0,
+				to : 186,
+			},
+
+			{
+				id: 'floor',
+				label: 'Поверх',
+				min: 0,
+				max: 49,
+				from : 0,
+				to : 49,
+			},
+		];
+		var db_filter = [	
+			{
+				label: 'Кімната 2А',
+				total_square: 12,
+				life_square: 14,
+				room: 16,
+				section: 1,
+				floor : 49,
+				//ro : 11,
+			},
+			{
+				label: 'Кімната 24А',
+				total_square: 13,
+				life_square: 514,
+				room: 186,
+				section: 2,
+				floor : 35,
+				//ro : 11,
+
+			},
+			{
+				label: 'Кімната 232А',
+				total_square: 26,
+				life_square: 10,
+				room: 3,
+				section: 3,
+				floor : 11,
+				//ro : 11,
+
+			},
+			{
+				label: 'Кімната 254А',
+				total_square: 156,
+				life_square: 266,
+				room: 9,
+				section: 4,
+				floor : 14,
+				//ro : 13,
+
+			},
+			{
+				label: 'Кімната 298А',
+				total_square: 765,
+				life_square: 754,
+				room: 67,
+				section: 2,
+				//ro : 12,
+
+				floor : 21,
+			},
+			{
+				label: 'Кімната 112А',
+				total_square: 788,
+				life_square: 884,
+				room: 17,
+				section: 2,
+				floor : 8,
+				//ro : 11,
+
+			},
+			{
+				label: 'Кімната 452А',
+				total_square: 333,
+				life_square: 234,
+				room: 6,
+				section: 4,
+				//	ro : 11,
+				floor : 3,
+			},
+		];
 	
 block meta
 	title Підбір по параметрам
@@ -21,60 +126,61 @@ block content
 		.filter-block
 			.filter
 				.checkbox-wrap
-					span.u-filter__title.u-room-list__title Количество комнат:
+					span.u-filter__title.u-room-list__title Секція:
 					.u-room-list-wrapper
-						each val,i in ['1','2','3','4','5+','Св']
+						each val,i in ['1','2','3','4']
 							.u-room-list-item.u-filter__checkbox
-								label.u-filter__checkbox__label(for="room_"+i)
-									input.invisible(id="room_"+i name="room[]" type="checkbox" value= i+1)
+								label.u-filter__checkbox__label(for="section"+i)
+									input.js-section.invisible(checked id="section_"+i data-key="section" name="section[]" type="checkbox" value= i+1)
 									svg.u-filter-icon(xmlns="http://www.w3.org/2000/svg" viewbox="0 -1 24.13 26.13")
 										path.u-filter-icon__circle(d="M13,25.07A12.07,12.07,0,1,1,25.07,13,12.09,12.09,0,0,1,13,25.07Z" transform="translate(-0.93 -0.93)")
 									span.u-filter__checkbox__text= val
 				ul.range-wrapper
-					each v in ['Стоимость:', 'Этаж:', 'Площадь:']
-						li.range-item
-							h4.range-item__label= v
-							input#val_price.js-range-init(type="hidden" data-from="1" data-min="1" data-to="30000000" data-max="30000000")
+					each v in db_range
+						li.range-item.js-range-item
+							h4.range-item__label=v.label
+							input.js-range-init(id= v.id type="hidden" data-from= v.from data-min= v.min data-to= v.to data-max= v.max)
 							.u-range-item-nav
-								input#price_min.js_val_price_min.slider__currentMin(name="price_min" type="number" min="1" value="1" max="30000000")
-								input#price_max.js_val_price_max.slider__currentMax(name="price_max" type="number" min="1" value="30000000" max="30000000")
-				button(type="button").js-button_search
-				button(type="button").js-reset_button
+								input.js-current-min(class= "js_"+v.id+"_min" id= v.id+"_min" name= v.id+"_min" type="number" min= v.min value= v.min max= v.max)
+								input.js-current-max(class= "js_"+v.id+"_max" id= v.id+"_max" name= v.id+"_max" type="number" min= v.min value= v.max max= v.max)
+				button(type="button").js-button_search поиск
+				button(type="button").js-reset_button сброс
+
 
 
 			.filter-result-block
 				.filter-result-block__header
 					p.res-text За вашими параметрами знайдено 
-						span.number_flats квартири:
+						span.number_flats.js-number_flats квартири:
 					.filter-tab-nav
 						button(type="button" data-index="0").button--res.underline.js-filter-tab-nav-btn.filter-tab-nav-btn.filter-tab-nav-btn--current Плитка
 						button(type="button" data-index="1").button--res.underline.js-filter-tab-nav-btn.filter-tab-nav-btn Список
 				.filter-result-block__body
-					.js-filter-result-block-tab.filter-result-block-tab.card-result
-						each val in [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
-							a(href="#").card-filter
+					.filter-tab--active.js-filter-result-block-tab.filter-result-block-tab.card-result
+						each val, i in db_filter
+							a(href="#" data-ro= val.ro data-total_square= val.total_square data-life_square= val.life_square data-room= val.room data-floor= val.floor data-section= val.section).js-flat-item.card-filter
 								.card-filter__img
-									+img('temp/card_img.png')
-								.card-filter__title Кімната 2А
+									+img('temp/'+i+'.jpg')
+								h5.card-filter__title= val.label
 								ul.card-filter-list.card-filter__list
 									li.card-filter-list-item
 										span.card-filter-list-item__key Поверх
-										span.card-filter-list-item__val 1
+										span.card-filter-list-item__val= val.floor
 									li.card-filter-list-item
 										span.card-filter-list-item__key Кімнат
-										span.card-filter-list-item__val 2
+										span.card-filter-list-item__val= val.room
 									li.card-filter-list-item
 										span.card-filter-list-item__key Загальна площа м
 											<sub> 2
-										span.card-filter-list-item__val 33
+										span.card-filter-list-item__val= val.total_square
 									li.card-filter-list-item
 										span.card-filter-list-item__key Житлова площа м
 											<sub> 2
-										span.card-filter-list-item__val 345
+										span.card-filter-list-item__val= val.life_square
 								.card-filter__btn.card-filter-btn
 									span.card-filter-btn__text Детальніше
 									+svg('arrow').card-filter-btn__icon
-					.filter-tab--active.js-filter-result-block-tab.filter-result-block-tab
+					.js-filter-result-block-tab.filter-result-block-tab
 						.js-table-flat.table-flat
 
 
