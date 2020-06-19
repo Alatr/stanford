@@ -51,18 +51,27 @@
 		transform: translate(-50%,-50%) rotate(-90deg);
 	}
 }
+.desktop-nav:hover {
+	.lang{
+
+		pointer-events: auto;
+	}
+
+}
 .lang{
 	height: 42px;
 	width: 192px;
+	pointer-events: none;
 	&-list{
 		display: flex;
 		width: 64px;
 		height: 100%;
 		overflow: hidden;
 		transition: width 0.4s cubic-bezier(0.45, 0.2, 0.36, 1), opacity 0.25s;
-		
 		background-color: #CE8163;
+		z-index: -1;
 		&:hover{
+			z-index: 1;
 			width: 100%;
 			transition: width 0.45s cubic-bezier(0.45, 0.2, 0.36, 1), opacity 0.3s;
 			a{

@@ -841,6 +841,9 @@ body.modal-active{
 	line-height: 1.1em;
 	color: #34293D;
 	font-family: $default-font2;
+	white-space: nowrap;
+	transform: translateY(-3px);
+
 }
 
 .breadcrumbs{
@@ -848,12 +851,16 @@ body.modal-active{
 	padding: 0 0 0 45px;
 	display: flex;
 	align-items: center;
+	@include to(1020px){
+		padding: 0 0 0 0px;
+
+	}
 }
 
 .breadcrumbs-item{
+		margin: 0 13px;
 	&__link{
 		position: relative;
-		margin: 0 13px;
 		font-size: 12px;
 		line-height: 1em;
 		display: flex;
@@ -876,14 +883,18 @@ body.modal-active{
 	color: #CE8163;
 }
 .breadcrumbs-item__current{
-	margin: 0 13px;
 	font-size: 12px;
 	color: #CE8163;
 }
 .breadcrumbs-list{
 	display: flex;
 	align-items: center;
-	transform: translateY(3px);
+	flex-wrap: wrap;
+	margin-left: -13px;
+	margin-right: -13px;
+	li:first-child{
+		margin-left: 13px;
+	}
 }
 /*
 * breadcrumbs end

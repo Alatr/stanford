@@ -60,23 +60,15 @@ a.prop("readOnly")?a.prop({checked:!1,readOnly:!1}):a.prop("checked")||a.prop({r
 
 
 	const heightFilter = $(".filter").outerHeight(true);
-	$('.js-filter-scroll-wrap').css('height', $(".filter").height());
-
 	$(window).scroll(() => {
 		if ($(window).scrollTop() > 30) {
 			$body.addClass('header--small');
 			$('.filter').css('height', heightFilter + 83);
-			$('.js-filter-scroll-wrap').css('height', $(".filter").height());
-			
 		} else {
-			
 			$body.removeClass('header--small');
 			$('.filter').css('height', heightFilter);
-			$('.js-filter-scroll-wrap').css('height', $(".filter").height() - 50);
 		}
 	});
-
-	
 
 
 	const tabFilterBtn = $('.js-filter-tab-nav-btn');
@@ -372,13 +364,12 @@ a.prop("readOnly")?a.prop({checked:!1,readOnly:!1}):a.prop("checked")||a.prop({r
 	});
 
 
-
 	// Обнуление данных методы плагина 
-		elemsWichMakeFilter.resetBtn.addEventListener('click', function (e) {
+	elemsWichMakeFilter.resetBtn.addEventListener('click', function (e) {
 		const ch = $('.js-checkbox-project');
 		ch.prop('checked', false);
 
-		elemsWichMakeFilter.checkbox.forEach((el)=>{
+		elemsWichMakeFilter.checkbox.forEach((el) => {
 			el.DOMElem.prop('checked', false);
 		})
 
@@ -389,15 +380,15 @@ a.prop("readOnly")?a.prop({checked:!1,readOnly:!1}):a.prop("checked")||a.prop({r
 				from: range.options.min,
 				to: range.options.max
 			});
-			
+
 			setValue(range.input, range.options, ['from', 'to']);
 		});
-			appartments.forEach(function (appartment) {
-				appartment.flat.style.display = 'block';
-				validDBTable = [];
-				validDBTable.push(appartment);
-			});
-				elemsWichMakeFilter.numberFlats.innerHTML = appartments.length;
+		appartments.forEach(function (appartment) {
+			appartment.flat.style.display = 'block';
+			validDBTable = [];
+			validDBTable.push(appartment);
+		});
+		elemsWichMakeFilter.numberFlats.innerHTML = appartments.length;
 
 	});
 
@@ -436,8 +427,6 @@ a.prop("readOnly")?a.prop({checked:!1,readOnly:!1}):a.prop("checked")||a.prop({r
 
 
 	function setValue(el, val, setVal) {
-		console.log(val);
-		
 		$('.js_' + el.id + '_min').val(val[setVal[0]]);
 		$('.js_' + el.id + '_max').val(val[setVal[1]]);
 	}
@@ -454,9 +443,6 @@ a.prop("readOnly")?a.prop({checked:!1,readOnly:!1}):a.prop("checked")||a.prop({r
 			max,
 			from,
 			to,
-			hide_min_max: true,
-			hide_from_to: true,
-			grid: false,
 			onChange: function (ionRange) {
 				onChange();
 				setValue(range, ionRange, ['from', 'to']);
