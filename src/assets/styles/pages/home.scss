@@ -1581,16 +1581,55 @@ ul.dots{
 */
 
 .footer-logo{
+	padding-right: 45px;
 	margin-left: auto;
-	width: 70px;
+	width: auto;
+	display: flex;
+	align-items: center;
 	height: 28px;
+	text-decoration: none;
 	@include from(1021px){
 		display: none;
 	}
 	@include from(1021px){
 		display: none;
+	}
+	@include to(1020px){
+		padding-right: 0;
+	}
+	@include to(650px){
+		flex-direction: column;
+		align-items: flex-start;
+		height: auto;
+		.footer-logo__text{
+			margin-right: 0;
+		}
+		
 	}
 	@include to(475px) {
+		transform: translate(0, 10px);
 		order: 2;
+	}
+	&__text{
+		margin-right: 25px;
+		font-weight: 500;
+		font-size: 10px;
+		text-transform: uppercase;
+		white-space: nowrap;
+		color: #C2BFC4;
+	}
+	img{
+		width: 70px;
+	}
+}
+
+
+#filter-page {
+	.section-footer:not(#Y) {
+		position: relative;
+		max-width: none;
+	}
+	.footer-logo{
+		display: flex;
 	}
 }

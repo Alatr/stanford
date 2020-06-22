@@ -2,7 +2,8 @@
 /*
 * filter start
 */
-.filter-content{
+.filter-content,
+.floor-plan-content {
 	padding: 120px 45px 0 65px;
 	@include to(1020px){
 		padding: 120px 20px 0;
@@ -11,12 +12,7 @@
 		padding: 98px 20px 0;
 	}
 }
-#filter-page{
-			.section-footer:not(#Y) {
-					position: relative;
-				}
 
-}
 
 .filter{
 	position: sticky;
@@ -34,14 +30,25 @@
 		min-width: 360px;
 	}
 	@include to(1020px){
-		display: none;
+		position: relative;
+		top: 0;
+		margin-right: 0;
+	}
+	@include to(425px){
+		padding: 40px 30px 127px 30px;
+		width: 100%;
+		min-width: auto;
 	}
 }
 
 .filter-scroll-wrap{
 	overflow-y: scroll;
 	overflow-x: hidden;
+	@include to(425px){
+		overflow-y: auto;
+		overflow-x: hidden;
 
+	}
 }
 
 .filter-result-block{
@@ -52,6 +59,10 @@
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
+		@include to(576px){
+			margin: 15px 0;
+			flex-direction: column;
+		}
 	}
 }
 
@@ -82,13 +93,14 @@
 }
 
 
-
+.filter-result-block-tab-table{
+	width: 100%;
+}
 .filter-result-block-tab{
 	position: absolute;
 	top: 0;
 	left: 0;
 	padding-left: 5px;
-	width: 100%;
 	height: 100%;
 	pointer-events: none;
 	visibility: hidden;
@@ -115,13 +127,32 @@
 }
 
 .card-filter{
-	border: 1px solid red;
+	position: relative;
+	background: #FFFFFC;
+	box-shadow: 0px 4px 30px rgba(177, 177, 177, 0.25);
 	padding: 10px 15px 15px 15px;
 	margin: 0 10px 18px;
 	width: calc(14.28% - 20px);
 	display: flex;
 	flex-direction: column;
 	text-decoration: none;
+	transition: all 0.3s;
+	&:hover{
+		transform: scale(1.03);
+		.card-filter-btn__icon{
+			transform: translateX(10px);
+		}
+	}
+	@include to(768px){
+		padding: 10px 20px 65px 20px;
+		&:hover{
+			transform: scale(1);
+			.card-filter-btn__icon{
+				transform: translateX(0);
+			}
+		}
+
+	}
 	@include to(1920px){
 		width: calc(20% - 20px);
 	}
@@ -148,7 +179,7 @@
 	}
 	@include to(460px){
 		width: calc(70% - 20px);
-		margin: 0 auto 18px;
+		margin: 0 auto 45px;
 	}
 	@include to(425px){
 		width: calc(80% - 20px);
@@ -183,6 +214,44 @@
 	}
 	&__btn{
 		justify-content: space-between;
+			svg:not(#h) {
+				fill: #2F2536;
+				transition: all 0.3s;
+
+				stroke: #2F2536;
+				path {
+					stroke: #2F2536;
+					fill: #2F2536;
+				}
+				.arr-fl{
+					stroke: transparent;
+
+				}
+			}
+		@include to(768px){
+			position: absolute;
+			left: 0;
+			bottom: 0;
+			width: 100%;
+			height: 50px;
+			padding: 0 20px;
+			background-color: #CE8163;
+			justify-content: flex-start;
+			span{
+				margin-right: 25px;
+				color: #FFF0E0;
+			}
+			svg:not(#h) {
+				fill: #FFF0E0;
+				stroke: #FFF0E0;
+				transition: all 0.3s;
+				path{
+					
+					fill: #FFF0E0 ;
+					stroke: #FFF0E0;
+				}
+			}
+		}
 	}
 }
 .card-filter-btn{
@@ -212,6 +281,10 @@
 	&__val{
 		padding-left: 10px;
 		color: #2F2536;
+		min-width: 35px;
+		display: flex;
+		text-align: left;
+		transform: translateY(2px);
 	}
 	&__val,
 	&__key {
@@ -247,12 +320,23 @@
 .filter-block{
 	display: flex;
 	align-items: flex-start;
+	@include to(1020px){
+		flex-direction: column;
+		align-items: center;
+	}
 }
 
 .filter {
 	height: calc(100vh - 185px);
-	
-	border: 1px solid red
+	background: #FFFFFC;
+	box-shadow: 0px 4px 30px rgba(177, 177, 177, 0.25);
+	@include to(1020px){
+		margin-bottom: 40px;
+	}
+	@include to(425px){
+		height: calc(100% + 185px);
+
+	}
 }
 /*
 * filter end
@@ -1117,6 +1201,10 @@ body.modal-active{
 			height: 66px;
 		}
 	}
+	tr td:hover{
+		cursor: pointer;
+		user-select: none;
+	}
 	
 	.jsgrid-grid-header:not(#t) {
 		background-color: transparent;
@@ -1136,16 +1224,31 @@ body.modal-active{
 		transition: all 0.3s;
 
 	}
+	th{
+		position: relative;
+	}
 	.jsgrid-header-sort-asc:before {
 		border-width: 0 5px 5px 5px;
 		transform: translate(15px, 10px);
 		border-color: transparent transparent #CE8163 transparent;
+		@include to(1200px){
+			position: absolute;
+			left: 50%;
+			bottom: 5px;
+			transform: translate(-50%,-50%);
+		}
 	}
 	
 	.jsgrid-header-sort-desc:before {
 		border-width: 5px 5px 0 5px;
 		transform: translate(15px, 10px);
 		border-color: #CE8163 transparent transparent transparent;
+					@include to(1200px){
+						position: absolute;
+						left: 50%;
+						bottom: 5px;
+						transform: translate(-50%,-50%);
+					}
 	}
 /*
 * table sort end
@@ -1163,6 +1266,9 @@ body.modal-active{
 	margin-right: 30px;
 	display: flex;
 	flex-direction: column;
+	@include to(425px){
+		margin-right: 0;
+	}
 }
 
 .u-room-list__title{
@@ -1225,11 +1331,20 @@ body.modal-active{
 
 .filter-nav-btn{
 	position: absolute;
-	left: 40px;
+	left: 45px;
 	bottom: 31px;
-	width: calc(320px - 76px);
 	display: flex;
 	flex-direction: column;
+	width: calc(320px - 80px);
+	@include to(1150px){
+		width: calc(360px - 80px);
+
+	}
+	@include to(425px){
+		left: 30px;
+		width: calc(100% - 60px);
+
+	}
 }
 
 
@@ -1289,6 +1404,49 @@ body.modal-active{
 */
 /**********************************/
 
+
+
+
+/**********************************/
+/*
+* hover card start
+*/
+.facad-hover-card {
+	position: absolute;
+	top: 9px;
+	left: 0;
+	z-index: 5;
+	width: 160px;
+	height: 130px;
+	visibility: hidden;
+	display: none;
+	padding: 10px 5px;
+	margin: 10px;
+	background: #F2F2F2;
+	border-radius: 25px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.facad-hover-card img {
+	height: 100%;
+	object-fit: contain;
+}
+
+.build-hover-card--visible:not(#L) {
+	visibility: visible;
+	display: flex;
+	-webkit-flex-direction: column;
+	-moz-flex-direction: column;
+	-ms-flex-direction: column;
+	-o-flex-direction: column;
+	flex-direction: column;
+}
+/*
+* hover card end
+*/
+/**********************************/
 
 
 

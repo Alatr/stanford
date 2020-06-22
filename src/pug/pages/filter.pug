@@ -3,6 +3,7 @@ block variable
 	-
 		var title_page = ' Підбір по параметрам'
 		var id_page = 'filter-page'
+		var breadcrumbsSubitem = false
 		var db_range = [	
 			{
 				id: 'total_square',
@@ -47,6 +48,8 @@ block variable
 				room: 16,
 				section: 1,
 				floor : 49,
+				href: '#',
+				image: './assets/images/temp/0.jpg',
 				//ro : 11,
 			},
 			{
@@ -56,6 +59,8 @@ block variable
 				room: 186,
 				section: 2,
 				floor : 35,
+				href: '/',
+				image: './assets/images/temp/0.jpg',
 				//ro : 11,
 
 			},
@@ -66,6 +71,8 @@ block variable
 				room: 3,
 				section: 3,
 				floor : 11,
+				href: '/',
+				image: './assets/images/temp/0.jpg',
 				//ro : 11,
 
 			},
@@ -76,6 +83,8 @@ block variable
 				room: 9,
 				section: 4,
 				floor : 14,
+				href: '/',
+				image: './assets/images/temp/0.jpg',
 				//ro : 13,
 
 			},
@@ -85,6 +94,8 @@ block variable
 				life_square: 754,
 				room: 67,
 				section: 2,
+				href: '/',
+				image: './assets/images/temp/0.jpg',
 				//ro : 12,
 
 				floor : 21,
@@ -96,6 +107,8 @@ block variable
 				room: 17,
 				section: 2,
 				floor : 8,
+				href: '/',
+				image: './assets/images/temp/0.jpg',
 				//ro : 11,
 
 			},
@@ -105,6 +118,8 @@ block variable
 				life_square: 234,
 				room: 6,
 				section: 4,
+				href: '/',
+				image: './assets/images/temp/0.jpg',
 				//	ro : 11,
 				floor : 3,
 			},
@@ -154,7 +169,7 @@ block content
 						span Підібрати
 						+svg('arrow--white').arrow--white
 					button(type="button").js-reset_button.filter-reset_button
-						span Скинути параметри
+						span.underline_2 Скинути параметри
 						+svg('trash')
 
 
@@ -169,7 +184,7 @@ block content
 				.filter-result-block__body
 					.filter-tab--active.js-filter-result-block-tab.filter-result-block-tab.card-result
 						each val, i in db_filter
-							a(href="#" data-ro= val.ro data-total_square= val.total_square data-life_square= val.life_square data-room= val.room data-floor= val.floor data-section= val.section).js-flat-item.card-filter
+							a(href="#" data-href= val.href data-image= val.image data-total_square= val.total_square data-life_square= val.life_square data-room= val.room data-floor= val.floor data-section= val.section).js-flat-item.card-filter
 								.card-filter__img
 									+img('temp/'+i+'.jpg')
 								h5.card-filter__title= val.label
@@ -191,7 +206,10 @@ block content
 								.card-filter__btn.card-filter-btn
 									span.card-filter-btn__text Детальніше
 									+svg('arrow').card-filter-btn__icon
-					.js-filter-result-block-tab.filter-result-block-tab
+					.js-filter-result-block-tab.filter-result-block-tab.filter-result-block-tab-table
 						.js-table-flat.table-flat
+
+	.js-facad-hover-card.facad-hover-card
+		img.hover-card-image-js(src="/" title="foto" alt="foto")
 
 

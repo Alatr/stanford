@@ -1,0 +1,48 @@
+extends ../layout/main
+block variable
+	-
+		var title_page = 'План поверху'
+		var id_page = 'floor-plan-page'
+		var breadcrumbsBtn = 'filter'
+		var breadcrumbsSubitem = [
+			{
+				label: 'Вибір за секції',
+				link: pagesLink[0].section
+			}
+		]
+	
+block meta
+	title= title_page
+	meta(name='description', content='')
+block head
+		link(rel='stylesheet', href="./assets/styles/main.min.css")
+block scripts
+	script(defer src='./assets/scripts/index.js')
+	script(defer src='./assets/scripts/floor-plan.js')
+block content
+	.floor-plan-content
+		include ../includes/breadcrumbs.pug
+		.filter-plan-block
+			.filter-plan-block__l
+				.section-title
+					.section-title__num 4
+					.section-title__text секція
+				.section-plan
+					.section-plan__img
+						include ../includes/mini-plan-section.svg
+					.section-plan__text вул. Предславинська
+				.section-compass
+					+img('compass.svg').section-compass__img
+			.filter-plan-block__c
+				include ../includes/plan-floor.svg
+
+			.filter-plan-block__r
+block footer
+	include ../includes/footer.pug
+
+					
+					
+
+
+block header
+

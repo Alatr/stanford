@@ -5,7 +5,7 @@
 		</symbol>
 	
 		<symbol id="icon-arrow" viewBox="0 0 24 10">
-			<path class="arr-fl" d="M23 5l-3 3V2l3 3z" fill="#2F2536"></path><path class="arr-st" d="M.5 5H23m0 0l-3 3V2l3 3z" stroke="#2F2536"></path>
+			<path class="arr-fl" d="M23 5l-3 3V2l3 3z"></path><path class="arr-st" d="M.5 5H23m0 0l-3 3V2l3 3z"></path>
 		</symbol>
 	
 		<symbol id="icon-arrow--white" viewBox="0 0 24 10">
@@ -30,6 +30,10 @@
 	
 		<symbol id="icon-facebook" viewBox="0 0 12 13">
 			<path d="M9.847.787H1.69C.758.787 0 1.546 0 2.477v8.157c0 .932.758 1.69 1.69 1.69h3.402V8.245H3.74V6.218h1.352V4.843A2.03 2.03 0 0 1 7.12 2.815h2.05v2.028H7.12v1.375h2.05l-.337 2.027H7.12v4.079h2.727c.931 0 1.69-.758 1.69-1.69V2.477c0-.931-.759-1.69-1.69-1.69z"></path>
+		</symbol>
+	
+		<symbol id="icon-filter" viewBox="0 0 21 16">
+			<path stroke="#CE8163" d="M0 1.376h20.628M0 7.891h20.628M0 14.406h20.628"></path><path d="M5.852 1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zM16.535 7.825a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zM9.53 14.294a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" fill="#CE8163"></path>
 		</symbol>
 	
 		<symbol id="icon-insta" viewBox="0 0 12 13">

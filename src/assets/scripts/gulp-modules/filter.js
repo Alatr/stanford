@@ -59,22 +59,25 @@ a.prop("readOnly")?a.prop({checked:!1,readOnly:!1}):a.prop("checked")||a.prop({r
 	const $body = $('body');
 
 
-	const heightFilter = $(".filter").outerHeight(true);
-	$('.js-filter-scroll-wrap').css('height', $(".filter").height());
-
-	$(window).scroll(() => {
-		if ($(window).scrollTop() > 30) {
-			$body.addClass('header--small');
-			$('.filter').css('height', heightFilter + 83);
-			$('.js-filter-scroll-wrap').css('height', $(".filter").height());
-			
-		} else {
-			
-			$body.removeClass('header--small');
-			$('.filter').css('height', heightFilter);
-			$('.js-filter-scroll-wrap').css('height', $(".filter").height() - 50);
-		}
-	});
+	console.log(screen.width);
+	if (screen.width > 1020) {
+		const heightFilter = $(".filter").outerHeight(true);
+		$('.js-filter-scroll-wrap').css('height', $(".filter").height());
+		
+		$(window).scroll(() => {
+			if ($(window).scrollTop() > 30) {
+				$body.addClass('header--small');
+				$('.filter').css('height', heightFilter + 83);
+				$('.js-filter-scroll-wrap').css('height', $(".filter").height());
+				
+			} else {
+				
+				$body.removeClass('header--small');
+				$('.filter').css('height', heightFilter);
+				$('.js-filter-scroll-wrap').css('height', $(".filter").height() - 50);
+			}
+		});
+	}
 
 	
 
@@ -201,6 +204,8 @@ a.prop("readOnly")?a.prop({checked:!1,readOnly:!1}):a.prop("checked")||a.prop({r
 			room: parseInt(app.dataset.room),
 			section: parseInt(app.dataset.section),
 			floor: parseInt(app.dataset.floor),
+			image: app.dataset.image,
+			href: app.dataset.href,
 			//this.test = parseInt(app.dataset.test); // new param filter
 
 		}
@@ -211,48 +216,63 @@ a.prop("readOnly")?a.prop({checked:!1,readOnly:!1}):a.prop("checked")||a.prop({r
 	// init table first time we init with all appartments
 	// then we will delete table and init again with new filtered data
 	function tableStaticFlatInit(tableDB = appartments) {
+		function createCastomCell(item, value){
+			return $(`<td data-href='${value.href}' data-image='${value.image}'>`).addClass("js-hover-class").append(value.room);
+		}
+		
 		tableStaticFlat = $(".js-table-flat").jsGrid({
-			height: "500px",
+			height: "auto",
 			width: "100%",
 
 			sorting: true,
 			paging: true,
-
+			cellRenderer  : function(val, item){
+				return new Date(value).toDateString();
+			},
 			data: tableDB,
-
+			pageSize: 9999,
 			fields: [{
 				title: 'Кімнати',
 				name: "room",
 				type: "number",
-				width: '20%'
+				width: '20%',
+				cellRenderer: createCastomCell
 			},
 			{
 				title: 'Секція',
 				name: "section",
 				type: "number",
-				width: '20%'
+				width: '20%',
+				cellRenderer: createCastomCell
+
 			},
 			{
 				title: 'Поверх',
 				name: "floor",
 				type: "number",
-				width: '20%'
+				width: '20%',
+				cellRenderer: createCastomCell
+
 			},
 			{
-				title: 'Загальна площа м<sub>2</sub>',
+				title: 'Загальна пл. м<sub>2</sub>',
 				name: "total_square",
 				type: "number",
 				valueField: "Id",
 				width: '20%',
-				textField: "Name"
+				textField: "Name",
+				cellRenderer: createCastomCell
+
 			},
 			{
-				title: 'Житлолва площа м<sub>2</sub>',
+				title: 'Житлолва пл. м<sub>2</sub>',
 				name: "life_square",
 				type: "number",
 				valueField: "Id",
 				width: '20%',
-				textField: "Name"
+				textField: "Name",
+				cellRenderer: createCastomCell
+
 			},
 
 			]
@@ -486,6 +506,127 @@ a.prop("readOnly")?a.prop({checked:!1,readOnly:!1}):a.prop("checked")||a.prop({r
 	}
 	initFilter();
 
+
+
+
+
+
+
+	/**********************************/
+	/*
+	* hover card start
+	*/
+
+
+	const hoverCardFacad = $('.js-facad-hover-card');
+	const hoverCardBuild = $('.js-hover-bild-plan-card');
+
+	if ($(window).width() > 768) {
+		var currentMousePos = {
+			padding: 20,
+			x: -1,
+			y: -1,
+			disToTopCursor: 0,
+			disToTopCard: 0,
+			disToRight: 0,
+			disToRightCard: 0
+		};
+		$(document).mousemove(function (event) {
+			currentMousePos.x = event.pageX;
+			currentMousePos.y = event.pageY - currentMousePos.padding;
+
+			currentMousePos.disToTop = event.pageY - $(window).scrollTop();
+			currentMousePos.disToTopCard = (currentMousePos.disToTop) - hoverCardFacad.outerHeight(true) - currentMousePos.padding;
+
+			currentMousePos.disToRight = event.pageX - $(window).scrollLeft();
+			currentMousePos.disToRightCard = $(window).width() - ((currentMousePos.disToRight) + hoverCardFacad.outerWidth(true) + currentMousePos.padding);
+
+		});
+
+
+		function hoverCardShow(card, hoverItem) {
+			$("body").delegate(hoverItem, "mouseover", function () {
+				for (const key in this.dataset) {
+					if (this.dataset.hasOwnProperty(key)) {
+						const element = this.dataset[key];
+						let currentClassElement = `.hover-card-${key}-js`;
+
+						switch (key) {
+							case 'image':
+								console.log(card.find(currentClassElement), card, element);
+								
+								card.find(currentClassElement).attr('src', element)
+								break;
+							case 'key':
+								card.find(currentClassElement).text(element)
+								break;
+							case 'house':
+								card.find(currentClassElement).text(element)
+								break;
+							case 'stock':
+								card.find(currentClassElement).text(element)
+								break;
+							case 'floor':
+								card.find(currentClassElement).text(element)
+								break;
+							default:
+								card.find(currentClassElement).html(element)
+						}
+					}
+				}
+				card.addClass('build-hover-card--visible');
+			});
+
+			$("body").delegate(hoverItem, "mouseout", function () {
+				card.removeClass('build-hover-card--visible');
+			});
+
+			$("body").delegate(hoverItem, "mousemove", function (e) {
+				const height = card.height();
+				const width = card.width();
+
+				const divInfoTopPos = currentMousePos.y - height - currentMousePos.padding;
+				const divInfoLeftPos = currentMousePos.x + currentMousePos.padding;;
+
+				if (currentMousePos.disToRightCard <= 0 && currentMousePos.disToTopCard <= 0) {
+					card.css({
+						top: divInfoTopPos + height + (currentMousePos.padding * 2.5),
+						left: divInfoLeftPos - width - (currentMousePos.padding * 2.5),
+					});
+				} else if (currentMousePos.disToTopCard <= 0) {
+					card.css({
+						top: divInfoTopPos + height + (currentMousePos.padding * 2.5),
+						left: divInfoLeftPos
+					});
+				} else if (currentMousePos.disToRightCard <= 0) {
+					card.css({
+						top: divInfoTopPos,
+						left: divInfoLeftPos - width - (currentMousePos.padding * 2.5),
+					});
+				} else {
+					card.css({
+						top: divInfoTopPos,
+						left: divInfoLeftPos
+					});
+				}
+			});
+		}
+
+		hoverCardShow(hoverCardFacad, ".js-hover-class");
+		hoverCardShow(hoverCardBuild, ".js-link-house");
+	}
+
+
+
+	// table link
+	$('body').on("click", 'td[data-href]', function () {
+		document.location = $(this).data('href');
+	});
+
+	/*
+	* hover card end
+	*/
+	/**********************************/
 
 
 })(jQuery);

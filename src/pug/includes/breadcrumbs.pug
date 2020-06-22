@@ -1,8 +1,16 @@
 .breadcrumbs
 	ul.breadcrumbs-list
 		li
-			h1.main-title Підбір по параметрам
+			h1.main-title= title_page
 		li.breadcrumbs-item
-			a(href="/").breadcrumbs-item__link Головна
+			a(href="/").breadcrumbs-item__link.underline_2 Головна
+		if breadcrumbsSubitem
+			each v in breadcrumbsSubitem
+				li.breadcrumbs-item
+					a(href= v.link).breadcrumbs-item__link.underline_2= v.label
+
+		
 		li.breadcrumbs-item
 			span.breadcrumbs-item__current.breadcrumbs-item__link--color= title_page
+	if breadcrumbsBtn == 'filter'
+		include ./btn-filter.pug

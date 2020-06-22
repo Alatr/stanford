@@ -1,15 +1,8 @@
 extends ../layout/main
 block variable
 	-
-		var catSlaider = [	
-			{ 
-				img: './assets/images/home/cat-1.png',
-				title: 'VODA UA у пластиковій пляшці',
-				type: 'негазована 1,5л',
-				price: '₴ 12.00',
-				link: "#"
-			},
-		];
+		var title_page = ' Підбір по параметрам'
+		var id_page = 'filter-page'
 	
 block meta
 	title Підбір по параметрам
@@ -20,6 +13,8 @@ block scripts
 	script(defer src='./assets/scripts/index.js')
 	script(defer src='./assets/scripts/.js')
 block content
+	.-content
+		include ../includes/breadcrumbs.pug
 block footer
 	include ../includes/footer.pug
 
