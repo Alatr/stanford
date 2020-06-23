@@ -86,7 +86,7 @@
                                         C198.7,345.7,199.2,344.9,199.8,344.9z"></path>
                                 </g>
                             <!--</a>-->
-                           <a href="/floor/?dom=1&amp;floor=5&amp;section=105">
+                           <a class="active" href="/floor/?dom=1&amp;floor=5&amp;section=105">
                                 <polygon class="st1" points="63.4,10.2 63.4,52.9 181.8,52.9 181.8,11.2 181.8,10.2   "></polygon>
                                 <g>
                                     <polygon class="st2" points="117,30.7 117.1,31.2 118,30.8 118.1,30.8 118.1,35.3 118.7,35.3 118.7,30.1 118.1,30.1        "></polygon>

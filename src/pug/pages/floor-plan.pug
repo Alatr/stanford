@@ -37,6 +37,44 @@ block content
 				include ../includes/plan-floor.svg
 
 			.filter-plan-block__r
+				.floor-list
+					.current-floor-wrap
+						.tip-floor-list-wrap
+							span.arrow-rect
+							.tip-floor-list__title Поверх:
+							ul.tip-floor-list.js-tip-floor-list
+								li.tip-floor-list__item
+									a(href="#") 1
+								each v in [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]
+									li.tip-floor-list__item
+										a.active(href="#")= v
+						.current-floor.current-section
+							span.current-floor__num 4
+							span.current-floor__text секція
+						.current-floor
+							span.current-floor__num 10
+							span.current-floor__text поверх
+						.current-floor-nav
+							a(href="#")
+								+svg('arrow-small-up')
+							a(href="#")
+								+svg('arrow-small-down')
+				ul.floor-info
+					li.floor-info-item
+						span.floor-info-item__key Квартира №
+						span.floor-info-item__val 136
+					li.floor-info-item
+						span.floor-info-item__key Загальна площа м
+							span.sup 2
+						span.floor-info-item__val.mt_1 41,7
+					li.floor-info-item
+						span.floor-info-item__key Кімнат
+						span.floor-info-item__val 2
+					li.floor-info-item
+						span.floor-info-item__key Житлова площа м
+							span.sup 2
+						span.floor-info-item__val.mt_1 44,2
+
 block footer
 	include ../includes/footer.pug
 

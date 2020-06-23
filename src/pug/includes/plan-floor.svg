@@ -1,26 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="floor--svg__floor" viewBox="0 0 858 352" width="100%" height="100%">
-<image href="/src/assets/images/temp/floor.png" y="0" x="0"></image>
-<g transform="translate(0, 10)">
-<a href="/wp-content/themes/perfect-hall/flat?section=105&amp;floor=5-13&amp;flat=k3-1.3">
-<path d="m8.879 10.918l125.78-.74 2.22 312.97-130.22-1.48"></path>
-</a>
-<a href="/wp-content/themes/perfect-hall/flat?section=105&amp;floor=5-13&amp;flat=k1-1.3">
-<path d="m144.28 11.657l-.74 128.74h106.54l-.74-9.618h46.612v-119.12"></path>
-</a>
-<a href="/wp-content/themes/perfect-hall/flat?section=105&amp;floor=5-13&amp;flat=k2-2.3">
-<path d="m303.35 10.918l.74 122.08 36.994 1.48.74 8.139 182.75-.74v-8.879h28.12l-.74-122.08"></path>
-</a>
-<a href="/wp-content/themes/perfect-hall/flat?section=105&amp;floor=5-13&amp;flat=k1-2.3">
-<path d="m561.57 13.14l-.74 119.12 45.13.74v8.139h108.02v-128.74"></path>
-</a>
-<a href="/wp-content/themes/perfect-hall/flat?section=105&amp;floor=5-13&amp;flat=k3-2.3">
-<path d="m722.12 10.918h125.04l2.22 311.49h-126.52"></path>
-</a>
-<a href="/wp-content/themes/perfect-hall/flat?section=105&amp;floor=5-13&amp;flat=k2-3.3">
-<path d="m515.69 186.27l1.48 138.36 197.55-.74-1.48-138.36z"></path>
-</a>
-<a href="/wp-content/themes/perfect-hall/flat?section=105&amp;floor=5-13&amp;flat=k2-1.3">
-<path d="m143.54 187.75l196.81-.74-1.48 136.88-194.59-1.48z"></path>
-</a>
-</g>
+
+<svg width="100%" height="100%" version="1.1" viewBox="0 0 97.014 163.34" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<g transform="translate(-50.523 -88.332)" >
+		<image x="50.523" y="88.332" width="97.014" height="163.34" preserveAspectRatio="none" xlink:href="/src/assets/images/temp/floor.png"/>
+		<a href="#" xlink:href="#" class="floor-flat-link" data-number="333" data-number="333" data-number="333" data-number="333">
+			<path d="m83.664 90.237v39.289h20.58v20.312h41.961v-59.868h-62.541z" />
+		</a>
+	</g>
 </svg>
