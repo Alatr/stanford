@@ -32,6 +32,10 @@
 			<circle cx="23" cy="23" r="22.5" fill="#372B3F" stroke="#CE8163"></circle><path stroke="#FFF0E0" d="M16.782 16.783l13.436 13.435M30.217 16.782L16.782 30.217"></path>
 		</symbol>
 	
+		<symbol id="icon-close_2" viewBox="0 0 47 47">
+			<path fill="#CE8163" d="M0 47V0h47v47z"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M23.071 23.978l8.163 8.164.908-.908-8.164-8.163 8.164-8.164-.907-.907-8.164 8.164L14.907 14l-.907.907 8.164 8.164L14 31.235l.907.907 8.164-8.164z" fill="#FFF0E0"></path>
+		</symbol>
+	
 		<symbol id="icon-data" viewBox="0 0 9 10">
 			<path d="M3 4.5H2v1h1v-1zm2 0H4v1h1v-1zm2 0H6v1h1v-1zM8 1h-.5V0h-1v1h-4V0h-1v1H1a.995.995 0 0 0-.995 1L0 9a1 1 0 0 0 1 1h7c.55 0 1-.45 1-1V2c0-.55-.45-1-1-1zm0 8H1V3.5h7V9z" fill="#8E8478"></path>
 		</symbol>

@@ -20,6 +20,28 @@ block scripts
 	script(defer src='./assets/scripts/index.js')
 	script(defer src='./assets/scripts/floor-plan.js')
 block content
+	.mobile-popup-flat-info-overlay.js-mobile-popup-flat-info
+		.mobile-popup-flat-info
+			button(type="button").arrow-close.js-mobile-popup-flat-info-close
+				+svg('close_2')
+			ul.popup-floor-info.js-floor-info
+				li.floor-info-item
+					span.floor-info-item__key Квартира №
+					span.floor-info-item__val.js-flat-num 136
+				li.floor-info-item
+					span.floor-info-item__key Загальна площа м
+						span.sup 2
+					span.floor-info-item__val.mt_1.js-flat-total_square 41,7
+				li.floor-info-item
+					span.floor-info-item__key Кімнат
+					span.floor-info-item__val.js-flat-room 2
+				li.floor-info-item
+					span.floor-info-item__key Житлова площа м
+						span.sup 2
+					span.floor-info-item__val.mt_1.js-flat-life_square 44,2
+			a(href="#").js-mobile-popup-flat-info__link.mobile-popup-flat-info-link
+				span дивитись кваритру
+				+svg('arrow--white').arrow--white
 	.floor-plan-content
 		include ../includes/breadcrumbs.pug
 		.filter-plan-block
@@ -37,17 +59,19 @@ block content
 				include ../includes/plan-floor.svg
 
 			.filter-plan-block__r
-				.floor-list
+				.floor-list.js-floor-list
 					.current-floor-wrap
 						.tip-floor-list-wrap
 							span.arrow-rect
+							button(type="button").arrow-close.js-arrow-close
+								+svg('close_2')
 							.tip-floor-list__title Поверх:
 							ul.tip-floor-list.js-tip-floor-list
 								li.tip-floor-list__item
-									a(href="#") 1
+									a.active(href="#") 1
 								each v in [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]
 									li.tip-floor-list__item
-										a.active(href="#")= v
+										a(href="#")= v
 						.current-floor.current-section
 							span.current-floor__num 4
 							span.current-floor__text секція
@@ -59,21 +83,22 @@ block content
 								+svg('arrow-small-up')
 							a(href="#")
 								+svg('arrow-small-down')
-				ul.floor-info
+				ul.floor-info.js-floor-info
 					li.floor-info-item
 						span.floor-info-item__key Квартира №
-						span.floor-info-item__val 136
+						span.floor-info-item__val.js-flat-num 136
 					li.floor-info-item
 						span.floor-info-item__key Загальна площа м
 							span.sup 2
-						span.floor-info-item__val.mt_1 41,7
+						span.floor-info-item__val.mt_1.js-flat-total_square 41,7
 					li.floor-info-item
 						span.floor-info-item__key Кімнат
-						span.floor-info-item__val 2
+						span.floor-info-item__val.js-flat-room 2
 					li.floor-info-item
 						span.floor-info-item__key Житлова площа м
 							span.sup 2
-						span.floor-info-item__val.mt_1 44,2
+						span.floor-info-item__val.mt_1.js-flat-life_square 44,2
+
 
 block footer
 	include ../includes/footer.pug
