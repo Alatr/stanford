@@ -58,8 +58,6 @@ a.prop("readOnly")?a.prop({checked:!1,readOnly:!1}):a.prop("checked")||a.prop({r
 (function ($) {
 	const $body = $('body');
 
-
-	console.log(screen.width);
 	if (screen.width > 1020) {
 		const heightFilter = $(".filter").outerHeight(true);
 		$('.js-filter-scroll-wrap').css('height', $(".filter").height());
@@ -97,7 +95,6 @@ a.prop("readOnly")?a.prop({checked:!1,readOnly:!1}):a.prop("checked")||a.prop({r
 		tabFilterContent.removeClass(activeClassTab);
 		$(tabFilterContent[inx]).addClass(activeClassTab);
 
-		console.log(tabFilterContent);
 
 	});
 

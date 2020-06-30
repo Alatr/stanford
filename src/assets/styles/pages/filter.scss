@@ -2,13 +2,25 @@
 /*
 * filter start
 */
+.gen-content,
 .filter-content,
 .floor-plan-content {
 	padding: 120px 45px 0 65px;
 	@include to(1020px){
 		padding: 120px 20px 0;
 	}
+
 	@include to(576px){
+		padding: 98px 20px 0;
+	}
+}
+.filter-content{
+	
+	@include to(768px){
+		padding: 120px 80px 0;
+	}
+	
+	@include to(630px){
 		padding: 98px 20px 0;
 	}
 }
@@ -25,6 +37,10 @@
 	box-shadow: 0px 4px 30px rgba(177, 177, 177, 0.25);
 	background-color: #ccc;
 	transition: all 0.3s;
+	@include from(1441px){
+		width: 460px;
+		min-width: 460px;
+	}
 	@include to(1150px){
 		width: 360px;
 		min-width: 360px;
@@ -33,6 +49,11 @@
 		position: relative;
 		top: 0;
 		margin-right: 0;
+		width: 460px;
+		min-width: auto;
+	}
+	@include to(768px){
+		width: 100%;
 	}
 	@include to(425px){
 		padding: 40px 30px 127px 30px;
@@ -61,7 +82,7 @@
 		justify-content: space-between;
 		@include to(576px){
 			margin: 15px 0;
-			flex-direction: column;
+			
 		}
 	}
 }
@@ -75,6 +96,9 @@
 .filter-tab-nav{
 	display: flex;
 	align-items: center;
+	@include to(576px){
+		display: none;
+	}
 	&-btn--current:not(#h){
 		opacity: 1;
 		color: #2F2536;
@@ -154,7 +178,7 @@
 
 	}
 	@include to(1920px){
-		width: calc(20% - 20px);
+		width: calc(25% - 20px);
 	}
 	@include to(1700px){
 		width: calc(25% - 20px);
@@ -173,6 +197,9 @@
 	}
 	@include to(992px){
 		width: calc(33.33% - 20px);
+	}
+	@include to(768px){
+		width: calc(50% - 20px);
 	}
 	@include to(680px){
 		width: calc(50% - 20px);
@@ -199,7 +226,7 @@
 	}
 	&__list{
 		margin-top: auto;
-		margin-bottom: 10px;
+		margin-bottom: 20px;
 	}
 	&__img{
 		display: flex;
@@ -236,7 +263,7 @@
 			height: 50px;
 			padding: 0 20px;
 			background-color: #CE8163;
-			justify-content: flex-start;
+			justify-content: center;
 			span{
 				margin-right: 25px;
 				color: #FFF0E0;
@@ -275,8 +302,14 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	@include from(1441px){
+		margin-bottom: 0;
+	}
 	&__key{
 		color: #9A959E;
+		span.sup{
+			margin-left: -0.5px;
+		}
 	}
 	&__val{
 		padding-left: 10px;
@@ -299,7 +332,9 @@
 
 
 
-#filter-page{
+#filter-page,
+#flat-page ,
+#floor-plan-page {
 	.desktop-header{
 		background-color: #fff;
 		transition: all 0.3s;
@@ -331,8 +366,10 @@
 	background: #FFFFFC;
 	box-shadow: 0px 4px 30px rgba(177, 177, 177, 0.25);
 	@include to(1020px){
+		height: auto;
 		margin-bottom: 40px;
 	}
+	
 	@include to(425px){
 		height: calc(100% + 185px);
 
@@ -1212,7 +1249,7 @@ body.modal-active{
 	.jsgrid-cell:not(#t) {
 		border: none;
 		height: 66px;
-		border-top: #f3f3f3 1px solid;
+		border-top: #EBEAE9 1px solid;
 		text-align: center;
 	}
 	.jsgrid-header-row .jsgrid-header-sort {
@@ -1302,6 +1339,12 @@ body.modal-active{
 }
 .range-item{
 	margin-bottom: 5px;
+	@include from(1441px){
+		margin-bottom: 45px;
+	}
+	@include to(768px){
+		margin-bottom: 30px;
+	}
 }
 
 .irs--flat .irs-handle:not(#j){
@@ -1339,6 +1382,10 @@ body.modal-active{
 	@include to(1150px){
 		width: calc(360px - 80px);
 
+	}
+	@include to(768px){
+
+		width: calc(100% - 80px);
 	}
 	@include to(425px){
 		left: 30px;
@@ -1416,14 +1463,13 @@ body.modal-active{
 	top: 9px;
 	left: 0;
 	z-index: 5;
-	width: 160px;
-	height: 130px;
+	width: 400px;
+	height: 300px;
 	visibility: hidden;
 	display: none;
 	padding: 10px 5px;
 	margin: 10px;
 	background: #F2F2F2;
-	border-radius: 25px;
 	display: flex;
 	align-items: center;
 	justify-content: center;

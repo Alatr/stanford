@@ -6,14 +6,20 @@ include ../includes/mixins.pug
 			filter: './filter.html',
 			floorPlan: './floor-plan.html',
 			section: './section.html',
+			flat: './flat.html',
+			gen: './gen.html',
+			feature: './feature.html',
 		}
 	];
 block variable
 doctype html
 html(lang="uk")
 	head
-		meta(charset='utf-8')
+		meta(charset='utf-8') 
+
 		meta(name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0")
+		meta(name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0")
+
 		//- Edge и ряд мобильных браузеров слишком умны. Отключим это.
 		meta(name='format-detection', content='telephone=no')
 		meta(name='format-detection', content='date=no')
@@ -33,7 +39,7 @@ html(lang="uk")
 		block meta
 		block head
 
-	body(data-active="0" id= id_page)
+	body(data-active="0" class= class_page id= id_page)
 		// transition effect start
 		span.transition-effect__1.transition-effect
 		span.transition-effect__2.transition-effect

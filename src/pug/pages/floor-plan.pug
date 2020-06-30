@@ -7,7 +7,7 @@ block variable
 		var breadcrumbsSubitem = [
 			{
 				label: 'Вибір за секції',
-				link: pagesLink[0].section
+				link: pagesLink[0].gen
 			}
 		]
 	
@@ -39,7 +39,7 @@ block content
 					span.floor-info-item__key Житлова площа м
 						span.sup 2
 					span.floor-info-item__val.mt_1.js-flat-life_square 44,2
-			a(href="#").js-mobile-popup-flat-info__link.mobile-popup-flat-info-link
+			a(href= pagesLink[0].floorPlan).js-mobile-popup-flat-info__link.mobile-popup-flat-info-link
 				span дивитись кваритру
 				+svg('arrow--white').arrow--white
 	.floor-plan-content
@@ -68,10 +68,10 @@ block content
 							.tip-floor-list__title Поверх:
 							ul.tip-floor-list.js-tip-floor-list
 								li.tip-floor-list__item
-									a.active(href="#") 1
+									a.active(href= pagesLink[0].floorPlan) 1
 								each v in [2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]
 									li.tip-floor-list__item
-										a(href="#")= v
+										a(href= pagesLink[0].floorPlan)= v
 						.current-floor.current-section
 							span.current-floor__num 4
 							span.current-floor__text секція
@@ -79,9 +79,9 @@ block content
 							span.current-floor__num 10
 							span.current-floor__text поверх
 						.current-floor-nav
-							a(href="#")
+							a(href= pagesLink[0].floorPlan)
 								+svg('arrow-small-up')
-							a(href="#")
+							a(href= pagesLink[0].floorPlan)
 								+svg('arrow-small-down')
 				ul.floor-info.js-floor-info
 					li.floor-info-item
@@ -98,7 +98,9 @@ block content
 						span.floor-info-item__key Житлова площа м
 							span.sup 2
 						span.floor-info-item__val.mt_1.js-flat-life_square 44,2
-
+		a(href="#").see-more-floor.js-see-more-floor
+			span.see-more-floor__text дивитись квартиру
+			+svg('arrow').see-more-floor__icon
 
 block footer
 	include ../includes/footer.pug

@@ -21,6 +21,13 @@
 @import './pages/home';
 @import './pages/filter';
 @import './pages/floor-plan';
+@import './pages/flat';
+@import './pages/gen';
+@import './pages/feature';
+
+
+
+
 @import './assets/ui';
 
 
@@ -171,7 +178,13 @@
 	&__logo{
 		width: 155px;
 		height: 27px;
-		margin-right: 17%;
+		margin-right: 80px;
+		@include from(1441px){
+			width: 223px;
+			height: 37px;
+			margin-right: 17%;
+
+		}
 		@include to(1024px){
 			margin-right: 10%;
 		}
@@ -180,7 +193,8 @@
 			height: 22px;
 		}
 		@include to(475px) {
-			order: 1;
+			order: 3;
+			margin: -15px 0 10px 0;
 		}
 	}
 	&__link{
@@ -193,15 +207,27 @@
 	align-items: center;
 	text-decoration: none;
 	@include to(475px){
-		margin-top: -4px;
-		margin-bottom: 10px;
+		margin-top: -7px;
+		margin-bottom: 0;
 		min-width: 300px;
-		order: 3;
+		order: 1;
+	}
+	@include to(455px){
+		min-width: 255px;
+
+	}
+	@include to(400px){
+		min-width: auto;
+
 	}
 	&__icon{
 		margin-right: 10px;
 		width: 7px;
 		height: 10px;
+		@include from(1441px){
+			width: 10px;
+			height: 15px;
+		}
 	}
 	&__text{
 		font-weight: 500;
@@ -209,6 +235,9 @@
 		text-transform: uppercase;
 		color: #C2BFC4;
 		white-space: nowrap;
+		@include from(1441px){
+			font-size: min(0.95vw, 14px);
+		}
 			@include to(375px) {
 				.footer-link__text {
 					font-size: 8px;
@@ -837,13 +866,18 @@ body.modal-active{
 * breadcrumbs start
 */
 .main-title{
-	margin: 0 7px 0 0;
-	font-size: 22px;
+	margin: 0 27px 0 0;
+	font-size: min(1.45vw, 28px);
 	line-height: 1.1em;
 	color: #34293D;
 	font-family: $default-font2;
 	white-space: nowrap;
 	transform: translateY(-3px);
+	@include to(1440px){
+		font-size: 22px;
+		margin: 0 7px 0 0;
+
+	}
 
 }
 
@@ -862,11 +896,15 @@ body.modal-active{
 		margin: 0 13px;
 	&__link{
 		position: relative;
-		font-size: 12px;
+		font-size: min(0.95vw, 18px);
 		line-height: 1em;
 		display: flex;
 		color: #9A959E;
 		text-decoration: none;
+		@include to(1440px){
+			font-size: 12px;
+
+		}
 		&::after{
 			position: absolute;
 			top: 50%;
@@ -884,8 +922,12 @@ body.modal-active{
 	color: #CE8163;
 }
 .breadcrumbs-item__current{
-	font-size: 12px;
+	font-size: min(0.95vw, 18px);
 	color: #CE8163;
+	@include to(1440px){
+		font-size: 12px;
+
+	}
 }
 .breadcrumbs-list{
 	display: flex;

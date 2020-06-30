@@ -145,7 +145,7 @@ block content
 					.checkbox-wrap
 						span.u-filter__title.u-checkbox-list__title Секція:
 						.u-checkbox-list-wrapper
-							each val,i in ['1','2','3','4']
+							each val,i in ['104','105','106','107']
 								.u-checkbox-list-item.u-filter__checkbox
 									input.js-section.invisible( id="section"+i data-key="section" name="section[]" type="checkbox" value= i+1)
 									label.u-filter__checkbox__label(for="section"+i)
@@ -177,14 +177,15 @@ block content
 			.filter-result-block
 				.filter-result-block__header
 					p.res-text За вашими параметрами знайдено 
-						span.number_flats.js-number_flats квартири:
+						span.number_flats.js-number_flats 
+						|  квартир
 					.filter-tab-nav
 						button(type="button" data-index="0").button--res.underline.js-filter-tab-nav-btn.filter-tab-nav-btn.filter-tab-nav-btn--current Плитка
 						button(type="button" data-index="1").button--res.underline.js-filter-tab-nav-btn.filter-tab-nav-btn Список
 				.filter-result-block__body
 					.filter-tab--active.js-filter-result-block-tab.filter-result-block-tab.card-result
 						each val, i in db_filter
-							a(href="#" data-href= val.href data-image= val.image data-total_square= val.total_square data-life_square= val.life_square data-room= val.room data-floor= val.floor data-section= val.section).js-flat-item.card-filter
+							a(href= pagesLink[0].flat data-href= val.href data-image= val.image data-total_square= val.total_square data-life_square= val.life_square data-room= val.room data-floor= val.floor data-section= val.section).js-flat-item.card-filter
 								.card-filter__img
 									+img('temp/'+i+'.jpg')
 								h5.card-filter__title= val.label
@@ -197,11 +198,11 @@ block content
 										span.card-filter-list-item__val= val.room
 									li.card-filter-list-item
 										span.card-filter-list-item__key Загальна площа м
-											<sub> 2
+											span.sup 2
 										span.card-filter-list-item__val= val.total_square
 									li.card-filter-list-item
 										span.card-filter-list-item__key Житлова площа м
-											<sub> 2
+											span.sup 2
 										span.card-filter-list-item__val= val.life_square
 								.card-filter__btn.card-filter-btn
 									span.card-filter-btn__text Детальніше

@@ -11,6 +11,9 @@
 		line-height: 2em;
 		color: #2F2536;
 		display: block;
+			@include from(1441px) {
+				font-size: 18px;
+			}
 	}
 }
 

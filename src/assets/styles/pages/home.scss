@@ -1617,6 +1617,9 @@ ul.dots{
 		text-transform: uppercase;
 		white-space: nowrap;
 		color: #C2BFC4;
+		@include from(1440px){
+			font-size: min(0.95vw, 14px);
+		}
 	}
 	img{
 		width: 70px;
@@ -1624,7 +1627,10 @@ ul.dots{
 }
 
 
-#filter-page, #floor-plan-page {
+#gen-page,
+#filter-page,
+#floor-plan-page,
+#flat-page {
 	.section-footer:not(#Y) {
 		position: relative;
 		max-width: none;
