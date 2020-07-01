@@ -11,15 +11,20 @@
 		
 	// });
 
-	function animNum(elem, num){
+	function animNum(elem, num, int = null){
 		var decimal_places = 1;
 		var decimal_factor = decimal_places === 0 ? 1 : Math.pow(10, decimal_places);
-
+		
 		elem.animateNumber({
 			number: num,
 			numberStep: function (now, tween) {
 				// var floored_number = Math.floor(now) / decimal_factor,
-				var floored_number = now.toFixed(2).toString().replace('.', ',');
+				if (int === null) {
+					var floored_number = now.toFixed(2).toString().replace('.', ',');
+				} else {
+					var floored_number = now.toFixed();
+				}
+
 				var	target = $(tween.elem);
 
 				target.text(floored_number);
@@ -55,7 +60,8 @@
 						break;
 					case 'room':
 						//									card.find(currentClassElement).text(element);
-						animNum(card.find(currentClassElement), element)
+						
+						animNum(card.find(currentClassElement), element, 'int')
 
 						break;
 					default:

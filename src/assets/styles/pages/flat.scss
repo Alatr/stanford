@@ -153,7 +153,7 @@
 &__text{
 	margin: 0 10px;
 	font-weight: 500;
-	font-size: 16px;
+	font-size: min(0.85vw, 14px);
 	display: flex;
 	align-items: center;
 	text-transform: uppercase;
@@ -222,7 +222,7 @@
 	margin: 0 10px 0 0;
 	text-transform: uppercase;
 	font-family: $default-font2;
-	font-size: 20px;
+	font-size: min(1.05vw, 20px);
 	letter-spacing: 0.1em;
 	color: #2F2536;
 	transition: all 0.3s;
@@ -243,6 +243,12 @@
 				}
 }
 }
+.page-link-filter span{
+	line-height: 1.2em;
+	&::before {
+		transform: scaleX(1);
+	}
+}
 .flat-download-btn {
 	margin-bottom: 15px;
 	display: flex;
@@ -257,8 +263,25 @@
 	margin: 0 20px;
 letter-spacing: 0.04em;
 text-transform: uppercase;
-font-size: 16px;
+font-size: min(0.85vw, 16px);
 color: #2F2536;
+line-height: 1.2em;
+transition: all 0.3s;
+&::before{
+	transform: scaleX(1);
+}
+&:hover{
+			color: $mc3;
+			@include to(768px){
+				color: #2F2536;
+
+			}
+			&::before{
+				transition: all 0.3s;
+				background-color: $mc3;
+			}
+			
+		}
 @include to(1441px){
 	font-size: 14px;
 }
@@ -300,7 +323,7 @@ color: #2F2536;
 		}
 	}
 	.floor-plan-content {
-		margin-left: 74px;
+		transform: translateX(66px);
 		
 	}
 	.breadcrumbs{
@@ -311,7 +334,7 @@ color: #2F2536;
 	}
 	.breadcrumbs,
 	.filter-plan-block {
-		margin-left: -74px;
+		margin-left: -65px;
 		@include to(1020px){
 			margin-left: 0;
 
@@ -319,7 +342,7 @@ color: #2F2536;
 	}
 			@include to(1020px){
 				.floor-plan-content{
-					margin-left: 0;
+					transform: translateX(65px);
 				}
 	
 			}
@@ -368,11 +391,21 @@ color: #2F2536;
 		}
 	}
 	@include to(520px){
-		.flat-back-btn{
+		.flat-back__btn {
 		display: none;	
 		}
 	}
 	
+}
+
+.flat-back__btn-nav{
+	justify-content: center;
+	.flat-back-btn__text {
+		font-size: 14px;
+	}
+	@include from(425px){
+		display: none;
+	}
 }
 		.filter-plan-block-infomob{
 			display: flex;

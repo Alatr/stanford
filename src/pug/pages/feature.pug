@@ -73,11 +73,12 @@ block content
 					.feature-item-wrap
 						.feature-item__title= val.title
 						.feature-item__text= val.text
-		.feature-banner
-			.feature-banner__title Яку саме квартиру Ви шукаєте?
-			a(href="#").feature-banner-btn
-				span.feature-banner-btn__text.underline_2 обрати квартиру
-				+svg('arrow').feature-banner-btn__icon
+		.feature-banner-wrap
+			.feature-banner
+				.feature-banner__title Яку саме квартиру Ви шукаєте?
+				a(href="#").feature-banner-btn
+					span.feature-banner-btn__text.underline_2 обрати квартиру
+					+svg('arrow').feature-banner-btn__icon
 block footer
 	include ../includes/footer.pug
 

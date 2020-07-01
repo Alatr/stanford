@@ -226,12 +226,25 @@
 			height: 60px;
 			background-color: $mc;
 			transform-origin: left;
+			// @include from(1441px){
+			// 	padding-left: min(vw(69), 69px);
+			// 	width: min(vw(290), 290px);
+			// 	height: min(vw(86), 86px);
+
+			// }
 			svg{
 				
 				width: 115px;
 				min-width: 115px;
 				height: 40px;
 				min-height: 40px;
+				// @include from(1441px){
+				// 	width: min(vw(167), 167px);
+				// 	min-width: min(vw(167), 167px);
+				// 	height: min(vw(56), 56px);
+				// 	min-height: min(vw(56), 56px);
+					
+				// 				}
 			}
 		}
 	}
@@ -251,7 +264,7 @@
 	}
 	&__text{
 		font-family: $default-font2;
-		font-size: 18px;
+		font-size: min(0.95vw, 18px);
 		@include to(576px){
 			font-size: 12px;
 			line-height: 0.8em;
@@ -1621,8 +1634,10 @@ ul.dots{
 			font-size: min(0.95vw, 14px);
 		}
 	}
-	img{
-		width: 70px;
+	.footer-logo__svg {
+		    width: 97px;
+				height: 37px;
+				transform: scale(0.7);
 	}
 }
 

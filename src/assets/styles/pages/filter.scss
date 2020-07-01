@@ -120,6 +120,13 @@
 .filter-result-block-tab-table{
 	width: 100%;
 }
+
+.filter-go-up{
+	margin-top: 5px;
+	@include from(577px){
+		display: none;
+	}
+}
 .filter-result-block-tab{
 	position: absolute;
 	top: 0;
@@ -1379,6 +1386,10 @@ body.modal-active{
 	display: flex;
 	flex-direction: column;
 	width: calc(320px - 80px);
+	@include from(1441px){
+		width: calc(460px - 80px);
+
+	}
 	@include to(1150px){
 		width: calc(360px - 80px);
 

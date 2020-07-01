@@ -34,7 +34,7 @@ block content
 				.section-title
 					.section-title__num 10
 					.section-title__text поверх
-			a(href="#" download).flat-back-btn
+			a(href="#" ).flat-back-btn.flat-back__btn
 				+svg('arrow').flat-back-btn__icon
 				.flat-back-btn__text.underline_2 назад на план поверху
 		.filter-plan-block
@@ -68,7 +68,7 @@ block content
 							span.flat-info-main-prop-item__val.list-prop-item__list 115.78 м
 								span.sup 2
 						li.flat-info-main-prop-item.list-prop-item
-							span.flat-info-main-prop-item__key.list-prop-item__key Житлова площа::
+							span.flat-info-main-prop-item__key.list-prop-item__key Житлова площа:
 							span.flat-info-main-prop-item__val.list-prop-item__list 15.78 м
 								span.sup 2
 					ul.flat-info-prop.list-prop.custom-scroll
@@ -77,12 +77,15 @@ block content
 								span.flat-info-prop-item__key.list-prop-item__key Передпокій:
 								span.flat-info-prop-item__val.list-prop-item__list 15.78 м
 									span.sup 2
-				button(type="button").flat-call-btn
+				button(type="button").flat-call-btn.js-call-popup
 					.flat-call-btn__text дізнатись ціну
 					+svg('arrow').flat-call-btn__icon
 				a(href="#" download).flat-download-btn
 					+svg('pdf').flat-download-btn__icon
 					.flat-download-btn__text.underline_2 заванатижи pdf
+				a(href="#" ).flat-back-btn.flat-back__btn-nav
+					+svg('arrow').flat-back-btn__icon
+					.flat-back-btn__text.underline_2 назад на план поверху
 				
 block footer
 	include ../includes/footer.pug
