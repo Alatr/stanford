@@ -13,6 +13,10 @@
 	align-items: center;
 	height: 100vh;
 	background-color: $wc;
+	@include from(1441px){
+		padding-top: 0;
+		justify-content: center;
+	}
 	@include to(1020px){
 		display: none;
 	}
@@ -249,7 +253,12 @@
 		}
 	}
 }
-
+.section-third-content-wrap{
+	@include from(1441px){
+		margin: 0 auto;
+		max-width: 430px;
+	}
+}
 .phone-link{
 	display: flex;
 	align-items: center;
@@ -264,7 +273,11 @@
 	}
 	&__text{
 		font-family: $default-font2;
-		font-size: min(0.95vw, 18px);
+		font-size: 18px;
+		@include from(1441px){
+			font-size: min(vw(28), 28px);
+
+		}
 		@include to(576px){
 			font-size: 12px;
 			line-height: 0.8em;
@@ -478,6 +491,7 @@ span.overlay__2{
 	z-index: 2;
 }
 
+
 .main-overlay{
 	position: absolute;
 	bottom: 0;
@@ -546,9 +560,11 @@ span.overlay__2{
 		right: 0;
 		fill: #3B2E43;
 		transform: translate(40%,-50%);
-		@include from(1339px){
-			width: 420px;
-			height: 420px;
+		@include from(1441px){
+			width: 260px;
+			height: 260px;
+			top: 130px;
+			transform: translate(20%, 0);
 
 		}
 	}
@@ -588,6 +604,10 @@ ul.dots{
 	font-size: 14px;
 	pointer-events: none;
 	user-select: none;
+	@include to(1440px){
+		height: 30px;
+		
+	}
 	@include to(576px){
 		height: 34px;
 		font-size: 12px;
@@ -633,14 +653,14 @@ ul.dots{
 }
 
 .section-second-left{
-	padding: 0 10% 0 6.6%;
+	padding: 0 17% 0 6.6%;
 	@include to(992px){
 		padding: 0 20px;
 	}
 	@include to(576px){
 		margin: 0 auto;
 		max-width: 80%;
-		padding: 80px 20px 30px;
+		padding: 80px 20px 60px;
 	}
 }
 .section-third-left{
@@ -649,7 +669,7 @@ ul.dots{
 		padding: 0 20px 0 50px;
 	}
 	@include to(576px){
-		padding: 30px 20px;
+		padding: 45px 20px;
 	}
 }
 .section-left{
@@ -707,7 +727,11 @@ ul.dots{
 		min-height: 520px;
 	}
 }
-
+.section-second-content-wrap{
+	@include from(1441px){
+		max-width: 423px;
+	}
+}
 .section-second{
 	@include to(1020px){
 		margin-bottom: -6px;
@@ -722,7 +746,7 @@ ul.dots{
 	&__title{
 		margin-bottom: 20px;
 		font-family: $default-font2;
-		font-size: 3.4vw;
+		font-size: min(vw(60), 60px);
 		line-height: 1.3em;
 		color: #343434;
 		display: flex;
@@ -747,6 +771,10 @@ ul.dots{
 			height: 138px;
 			transform: translate(70%, -40%);
 			transform-origin: 100% 0;
+			@include from(1441px){
+				width: min(vw(170), 170px);
+				height: min(vw(170), 170px);
+			}
 			@include to(768px){
 				width: 82px;
 				height: 82px;
@@ -755,11 +783,12 @@ ul.dots{
 		}
 	}
 	&__text{
-		font-size: 1.11vw;
-		line-height: 1.6em;
+		font-size: min(vw(18), 18px);
+		line-height: 1.8em;
 		color: #706A75;
 		@include to(1280px){
 			font-size: 14px;
+			line-height: 1.6em;
 		}
 		@include to(668px) {
 			font-size: 13px;
@@ -788,7 +817,7 @@ ul.dots{
 		margin-bottom: 16%;
 		padding-bottom: 27px;
 		font-family: $default-font2;
-		font-size: 1.7vw;
+		font-size: min(vw(28), 28px);
 		line-height: 1.55em;
 		color: #343434;
 		border-bottom: 1px solid #CE8163;
@@ -805,7 +834,7 @@ ul.dots{
 	}
 	&__text{
 		margin-bottom: 29%;
-		font-size: 1.1vw;
+		font-size: min(vw(18), 18px);
 		line-height: 1.8em;
 		color: #706A75;
 		@include to(1280px){
@@ -857,6 +886,7 @@ ul.dots{
 	pointer-events: none;
 	@include to(576px){
 		transform: translatex(30%);
+		max-width: 200px;
 	}
 	@include to(420px){
 		transform: translatex(0%);
@@ -877,13 +907,15 @@ ul.dots{
 		}
 	&__text{
 		margin-right: 20px;
-		font-family: $default-font2;
 		display: flex;
 		font-size: 16px;
 		line-height: 1.6em;
 		letter-spacing: 0.1em;
 		color: #CE8163;
 		text-transform: uppercase;
+		@include from(1441px) {
+			font-size: min(vw(20), 20px)
+		}
 	}
 	&__icon{
 		height: 8px;
@@ -957,6 +989,10 @@ ul.dots{
 		background-color: #2F2536;
 		transform-origin: bottom;
 		transform: translateY(70px);
+		@include from(1441px){
+			max-width: 950px;
+			height: auto;
+		}
 		@include to(1280px){
 			padding: 40px 42px 44px 60px;
 		}
@@ -996,11 +1032,14 @@ ul.dots{
 	font-size: 14px;
 	line-height: 1.6em;
 	color: #9A959E;
+	@include from(1441px) {
+		font-size: min(vw(18), 18px)
+	}
 }
 .content-block-1{
 	margin-bottom: 46px;
 	@include to(1280px){
-		margin-bottom: 20px;
+		margin-bottom: 30px;
 	}
 	@include to(1020px){
 		max-width: 430px;
@@ -1017,6 +1056,9 @@ ul.dots{
 		font-size: 40px;
 		line-height: 1.6em;
 		color: #FFF0E0;
+		@include from(1441px){
+			font-size: min(vw(60), 60px)
+		}
 		@include to(1280px){
 			margin-bottom: 0;
 		}
@@ -1030,6 +1072,7 @@ ul.dots{
 	}
 	&__text{
 		line-height: 1.8em;
+		padding-right: min(vw(160), 160px);
 	}
 }
 .content-block-2{
@@ -1044,6 +1087,10 @@ ul.dots{
 	&-wrap{
 		max-width: 310px;
 		width: 100%;
+		@include from(1441px){
+			max-width: 470px;
+
+		}
 		@include to(1020px){
 			max-width: 430px;
 		}	
@@ -1054,6 +1101,9 @@ ul.dots{
 		font-size: 28px;
 		line-height: 1.6em;
 		color: #FFF0E0;
+		@include from(1441px) {
+			font-size: min(vw(42), 42px)
+		}
 		@include to(576px){
 			font-size: 20px;
 		}
@@ -1082,6 +1132,9 @@ ul.dots{
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	@include from(1441px){
+		justify-content: flex-start;
+	}
 	@include to(1020px){
 		margin-top: auto;
 		justify-content: flex-start;
@@ -1094,6 +1147,12 @@ ul.dots{
 		width: 100%;
 		display: flex;
 		flex-direction: column;
+		
+		@include from(1441px){
+			max-width: 185px;
+			margin-right: 60px;
+
+		}
 		@include to(1020px){
 			margin-right: 20px;
 		}
@@ -1104,6 +1163,9 @@ ul.dots{
 			font-size: 50px;
 			line-height: 1.3em;
 			color: #CE8163;
+			@include from(1441px) {
+				font-size: min(vw(60), 60px)
+			}
 			@include to(576px){
 				font-size: 38px;
 			}
@@ -1114,6 +1176,10 @@ ul.dots{
 			line-height: 1.7em;
 			text-transform: uppercase;
 			color: #FFF0E0;
+			@include from(1441px) {
+				padding-right: 18%;
+				font-size: min(vw(14), 14px)
+			}
 			@include to(576px){
 				font-size: 9px;
 			}
@@ -1138,10 +1204,7 @@ ul.dots{
 
 	}
 }
-.content-section-height:not(#K){
-	
 
-}
 
 /*
 	* Six section start
@@ -1165,15 +1228,16 @@ ul.dots{
 		left: 50%;
 		transform: translate(-50%, 0%);
 	}
-	@include from(1439px){
-		width: 400px;
-		height: 400px;
-		right: auto;
-		top: 0;
-		bottom: auto;
-		z-index: 0;
-		left: 50%;
-		transform: translate(-50%, 0%);
+	@include from(1441px){
+		width: min(vw(335), 335px);
+		height: min(vw(335), 335px);
+		bottom: 40%;
+		// right: auto;
+		// top: 0;
+		// bottom: auto;
+		// z-index: 0;
+		// left: 50%;
+		// transform: translate(-50%, 0%);
 	}
 	@include to(576px){
 		display: none;
@@ -1211,6 +1275,9 @@ ul.dots{
 
 	.section-title{
 		margin-bottom: 30px;
+		@include from(1441px){
+			margin-bottom: 52px;
+		}
 
 	}
 }
@@ -1218,6 +1285,10 @@ ul.dots{
 	display: flex;
 	margin: 0 -20px 0;
 	position: relative;
+	@include from(1441px){
+		margin: 0 -40px 0;
+
+	}
 	&::after{
 		position: absolute;
 		right: 0;
@@ -1237,6 +1308,13 @@ ul.dots{
 	text-decoration: none;
 	flex-shrink: 0;
 	overflow: hidden;
+	@include from(1441px){
+		margin: 0 40px;
+		width: min(vw(430), 430px);
+		&:nth-child(n+4){
+			display: none;
+		}
+	}
 	@include to(1200px){
 		width: 260px;
 	}
@@ -1307,11 +1385,19 @@ ul.dots{
 		align-items: center;
 		background-color: rgba(255, 240, 224,.8);
 		transition: opacity 0.25s ease-in;
+		@include from(1441px){
+			width: 143px;
+			height: 56px;
+		}
 	}
 	.card-img-wrap{
 		position: relative;
 		margin-bottom: 10px;
 		height: 172px;
+		@include from(1441px){
+			margin-bottom: 36px;
+			height: min(vw(250), 250px);
+		}
 		@include to(1024px){
 			height: 150px;
 		}
@@ -1321,6 +1407,7 @@ ul.dots{
 		.card__img{
 			height: 100%;
 			object-fit: cover;
+			pointer-events: none;
 		}
 	}
 	&__title{
@@ -1332,6 +1419,10 @@ ul.dots{
 		font-size: 22px;
 		line-height: 1.5em;
 		color: #343434;
+		@include from(1441px){
+			margin-bottom: 22px;
+			font-size: min(vw(28), 28px);
+		}
 		@include to(1020px){
 			padding-left: 0;
 		}
@@ -1347,6 +1438,9 @@ ul.dots{
     display: -webkit-box;
     -webkit-line-clamp: 3;
 		-webkit-box-orient: vertical;
+		@include from(1441px){
+			font-size: min(vw(18), 18px);
+		}
 		@include to(1020px){
 			padding-left: 0;
 		}
@@ -1370,11 +1464,19 @@ ul.dots{
 		margin-right: 6px;
 		width: 10px;
 		height: 10px;
+		@include from(1441px){
+			width: 16px;
+			height: 16px;
+
+		}
 	}
 	&__text{
 		font-size: 10px;
 		line-height: 1em;
 		color: #34293D;
+		@include from(1441px){
+			font-size: 14px;
+		}
 	}
 }
 .news-nav-link-wrap{
@@ -1423,10 +1525,17 @@ ul.dots{
 			font-size: 10px;
 			font-weight: 500;
 			color: #9A959E;
+			@include from(1441px){
+				font-size: min(vw(14), 14px);
+			}
 		}
 		svg{
 			stroke: #9A959E;
 			transform: rotate(-90deg);
+			@include from(1441px){
+				width: 35px;
+				height: 12px;
+			}
 		}
 	}
 }
@@ -1546,6 +1655,10 @@ ul.dots{
 	bottom: 30%;
 	display: flex;
 	flex-direction: column;
+	@include from(1441px){
+		bottom: 200px;
+		
+	}
 	@include to(1020px){
 		right: auto;
 		bottom: 0px;
@@ -1637,6 +1750,7 @@ ul.dots{
 	.footer-logo__svg {
 		    width: 97px;
 				height: 37px;
+				transform-origin: left;
 				transform: scale(0.7);
 	}
 }

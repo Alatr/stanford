@@ -1,0 +1,24 @@
+extends ../layout/main
+block variable
+	-
+		var title_page = 'Документи'
+		var id_page = 'documents-page'
+		var class_page = 'dark'
+		var breadcrumbsSubitem = false
+	
+block meta
+	title= title_page
+	meta(name='description', content='')
+block head
+		link(rel='stylesheet', href="./assets/styles/main.min.css")
+block scripts
+	script(defer src='./assets/scripts/index.js')
+	script(defer src='./assets/scripts/documents.js')
+block content
+	.documents-content
+		include ../includes/breadcrumbs.pug
+block footer
+	include ../includes/footer.pug
+
+block header
+

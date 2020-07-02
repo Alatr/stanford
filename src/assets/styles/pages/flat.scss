@@ -323,7 +323,7 @@ transition: all 0.3s;
 		}
 	}
 	.floor-plan-content {
-		transform: translateX(66px);
+		margin-left: 66px;
 		
 	}
 	.breadcrumbs{
@@ -334,7 +334,7 @@ transition: all 0.3s;
 	}
 	.breadcrumbs,
 	.filter-plan-block {
-		margin-left: -65px;
+		margin-left: -66px;
 		@include to(1020px){
 			margin-left: 0;
 
@@ -342,7 +342,7 @@ transition: all 0.3s;
 	}
 			@include to(1020px){
 				.floor-plan-content{
-					transform: translateX(65px);
+					margin-left: 0;
 				}
 	
 			}

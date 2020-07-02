@@ -1,36 +1,6 @@
 extends ../layout/main
 block variable
-	-
-		var catSlaider = [	
-			{ 
-				img: './assets/images/home/cat-1.png',
-				title: 'VODA UA у пластиковій пляшці',
-				type: 'негазована 1,5л',
-				price: '₴ 12.00',
-				link: "#"
-			},
-			{ 
-				img: './assets/images/home/cat-2.png',
-				title: 'VODA UA у скляній пляшці',
-				type: 'газована 0,5л',
-				price: '₴ 16.00',
-				link: "#"
-			},
-			{ 
-				img: './assets/images/home/cat-3.png',
-				title: 'VODA UA у скляній пляшці',
-				type: 'негазована 0,5л',
-				price: '₴ 16.00',
-				link: "#"
-			},
-			{ 
-				img: './assets/images/home/cat-1.png',
-				title: 'тест',
-				type: 'тест',
-				price: 'тест',
-				link: "#"
-			},
-		];
+
 	
 block meta
 	title Home
@@ -39,6 +9,7 @@ block head
 		link(rel='stylesheet', href="./assets/styles/main.min.css")
 block scripts
 	script(defer src='./assets/scripts/index.js')
+	script(defer src='./assets/scripts/home.js')
 block content
 
 

@@ -1,0 +1,24 @@
+extends ../layout/main
+block variable
+	-
+		var title_page = 'Контакти'
+		var id_page = 'contact-page'
+		var class_page = 'dark'
+		var breadcrumbsSubitem = false
+	
+block meta
+	title= title_page
+	meta(name='description', content='')
+block head
+		link(rel='stylesheet', href="./assets/styles/main.min.css")
+block scripts
+	script(defer src='./assets/scripts/index.js')
+	script(defer src='./assets/scripts/contact.js')
+block content
+	.contact-content
+		include ../includes/breadcrumbs.pug
+block footer
+	include ../includes/footer.pug
+
+block header
+

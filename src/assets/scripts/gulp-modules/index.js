@@ -236,9 +236,9 @@ Array.from(document.querySelectorAll('.js-grid__item-img')).forEach((el) => {
 	function checkWidthAnimation() {
 
 		if (window.screen.width > 1020) {
-		//	$body.addClass('js_animation');
+			$body.addClass('js_animation');
 		} else {
-		//	$body.removeClass('js_animation');
+			$body.removeClass('js_animation');
 		}
 	}
 	$window.resize(checkWidthAnimation)
