@@ -260,7 +260,9 @@
 
 
 
-body[data-active="1"], body[data-active="2"]{
+body[data-active="1"],
+body[data-active="2"],
+body[data-active="4"] {
 	.desktop-header-phone__text{
 		color: $wc;
 		transition: all 0.3s;
@@ -307,7 +309,7 @@ body[data-active="3"]{
 		width: 114px;
 		height: 45px;
 		@include to(576px){
-			width: 74px;
+			width: 80px;
 			height: 30px;
 
 		}
@@ -341,6 +343,9 @@ body[data-active="3"]{
 		height: 30px;
 		background-color: #9A959E;
 		transform: translateY(-50%);
+		@include to(576px){
+			height: 25px;
+		}
 	}
 }
 .call-link{
@@ -363,9 +368,7 @@ body[data-active="3"]{
 			height: 0.8px;
 			width: 100%;
 			background-color: #9A959E;
-			@include to(576px){
-				bottom: 3px;
-			}
+		
 		}
 	}
 }
@@ -396,6 +399,11 @@ body[data-active="3"]{
 			width: 15px;
 			height: 10px;
 			transition: all 0.3s;
+			@include to(576px){
+				width: 11px;
+				height: 8px;
+
+			}
 		}
 	}
 	&__item.active{
@@ -630,6 +638,7 @@ body[data-active="3"]{
 
 .main-form-block__data-time{
 	margin-bottom: 20px;
+	overflow: hidden;
 	display: none;
 }
 

@@ -565,12 +565,12 @@ Array.from(document.querySelectorAll('.js-grid__item-img')).forEach((el) => {
 			blocked = false;
 		}
 
-		$body.on('click', '.js-call-popup', function () {
-			openModal();
-		});
-		$body.on('click', ".modal-overlay,.js-close-btn", function () {
-			closeModal();
-		});
+		// $body.on('click', '.js-call-popup', function () {
+		// 	openModal();
+		// });
+		// $body.on('click', ".modal-overlay,.js-close-btn", function () {
+		// 	closeModal();
+		// });
 
 		$modal.initBlur(0.5);
 	/*

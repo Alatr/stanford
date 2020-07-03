@@ -213,6 +213,8 @@
 		box-shadow: none;
 	}
 }
+.gen-content,
+.floor-plan-content {
 .section-title{
 	margin-bottom: 12px;
 	display: flex;
@@ -243,7 +245,7 @@
 		}
 	}
 }
-
+}
 .section-plan{
 	margin-bottom: 24px;
 	display: flex;
