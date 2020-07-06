@@ -1309,6 +1309,14 @@ ul.dots{
 		pointer-events: none;
 	}
 }
+.section__six .card {
+
+	@include from(1441px){
+		&:nth-child(n+4){
+			display: none;
+		}
+	}
+}
 .card{
 	margin: 0 20px;
 	display: flex;
@@ -1320,9 +1328,6 @@ ul.dots{
 	@include from(1441px){
 		margin: 0 40px;
 		width: min(vw(430), 430px);
-		&:nth-child(n+4){
-			display: none;
-		}
 	}
 	@include to(1200px){
 		width: 260px;

@@ -10,5 +10,6 @@
 @@include('../libs/blur/blur.js')
 @@include('../libs/ui/ui.js')
 @@include('../libs/scroll_magic/scroll_magic.js')
+@@include('../libs/sweet_alert/swal.js')
 @@include('../libs/magnific-popup/dist/magnific-popup.js')
 @@include('../libs/ion.rangeSlider/js/ion.rangeSlider.min.js')

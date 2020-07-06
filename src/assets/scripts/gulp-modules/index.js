@@ -400,8 +400,15 @@ Array.from(document.querySelectorAll('.js-grid__item-img')).forEach((el) => {
 									$(e).find('button.js-main-form__button').text('Отправка...') // замена текста в кнопке при отправке
 									$('body').css('cursor', 'wait')
 								},
-								error: function () {
-									$(e).find('button.js-main-form__button').text('Ошибка отправки!'); // замена текста в кнопке при отправке в случае
+								error: function (data) {
+										swal({
+											type: "error",
+											title: "Ошибка!",
+											text: `Что-то пошло не так статус ${data.status}`,
+											buttonsStyling: !1,
+											confirmButtonClass: "btn btn-success"
+										});
+									//$(e).find('button.js-main-form__button').text('Ошибка отправки!'); // замена текста в кнопке при отправке в случае
 								}
 							})
 							.done(function (msg) {
@@ -414,6 +421,14 @@ Array.from(document.querySelectorAll('.js-grid__item-img')).forEach((el) => {
 								$('body').css('cursor', 'default');
 								//location.replace('/message/');
 								$(e).find('button.js-main-form__button').text('Отправить');
+								swal({
+									type: "error",
+									title: "Успех!",
+									text: "Заявка успешно отправлена",
+									buttonsStyling: !1,
+									confirmButtonClass: "btn btn-success"
+								});
+							
 							});
 					});
 				}
@@ -490,6 +505,7 @@ Array.from(document.querySelectorAll('.js-grid__item-img')).forEach((el) => {
 
 	let $modal = $(".js-modal"),
 		$overlay = $(".js-modal-overlay"),
+		$img = $(".popup-call__bg-overlay"),
 		blocked = false,
 		unblockTimeout = null;
 					
@@ -501,78 +517,100 @@ Array.from(document.querySelectorAll('.js-grid__item-img')).forEach((el) => {
 
 		function openModal() {
 			if (!blocked) {
-				block(400);
 
 				$body.addClass('modal-active');
 				
-				TweenMax.to($overlay, 0.3, {
-					autoAlpha: 1
-				});
-				let customEase = gsap.parseEase("Elastic.easeOut(0.4, 0.3)");
+				// TweenMax.to($overlay, 0.3, {
+				// 	autoAlpha: 1
+				// });
+				// let customEase = gsap.parseEase("Elastic.easeOut(0.4, 0.3)");
 
-				TweenMax.fromTo($modal, 0.5, {
-					x: (-$(window).width() - $modal.width()) / 2 - 50,
-					scale: 0.9,
-					autoAlpha: 1
+				// TweenMax.fromTo($modal, 0.5, {
+				// 	x: (-$(window).width() - $modal.width()) / 2 - 50,
+				// 	scale: 0.9,
+				// 	autoAlpha: 1
+				// }, {
+				// 	delay: 0.1,
+				// 	rotationY: 0,
+				// 	scale: 1,
+				// 	opacity: 1,
+				// 	x: 0,
+				// 	z: 0,
+				// 	ease: customEase,
+				// 	force3D: false
+				// });
+				// $.startUpdatingBlur(800);
+
+
+
+				isOpen = true;
+
+				const obj = {
+					paused: true,
+				}
+
+				const tl = gsap.timeline(obj);
+				tl.fromTo($modal, 1, {
+					xPercent: -150,
+					skewX: -25,
+					autoAlpha: 0,
 				}, {
-					delay: 0.1,
-					rotationY: 0,
-					scale: 1,
-					opacity: 1,
-					x: 0,
-					z: 0,
-					ease: customEase,
-					force3D: false
-				});
-				$.startUpdatingBlur(800);
+					xPercent: 0,
+					skewX: 0,
+					autoAlpha: 1,
+					ease: exO,
+				})
+				tl.fromTo($img, 1, {scale: 1.3}, {scale: 1}, '<')
+				return tl;
 			}
 		}
 
 		function closeModal() {
-			if (!blocked) {
 				$body.removeClass('modal-active');
 
-				block(400);
-				TweenMax.to($overlay, 0.3, {
-					delay: 0.3,
-					autoAlpha: 0
-				});
-				TweenMax.to($modal, 0.3, {
-					x: ($(window).width() + $modal.width()) / 2 + 100,
-					scale: 0.9,
-					ease: Quad.easeInOut,
-					force3D: false,
-					onComplete: function () {
-						TweenMax.set($modal, {
-							autoAlpha: 0
-						});
-					}
-				});
-				$.startUpdatingBlur(400);
-			}
+				// block(400);
+				// TweenMax.to($overlay, 0.3, {
+				// 	delay: 0.3,
+				// 	autoAlpha: 0
+				// });
+				// TweenMax.to($modal, 0.3, {
+				// 	x: ($(window).width() + $modal.width()) / 2 + 100,
+				// 	scale: 0.9,
+				// 	ease: Quad.easeInOut,
+				// 	force3D: false,
+				// 	onComplete: function () {
+				// 		TweenMax.set($modal, {
+				// 			autoAlpha: 0
+				// 		});
+				// 	}
+				// });
+				// $.startUpdatingBlur(400);
+				isOpen = false;
+				const obj = {paused: true}
+
+				const tl = gsap.timeline(obj);
+				tl.fromTo($modal, 1.3, {
+					xPercent: 0,
+					skewX: 0,
+				}, {
+					xPercent: -150,
+					skewX: 2,
+					ease: ex,
+				})
+			tl.fromTo($img, 1, { scale: 1 }, { scale: 1.3, ease: ex,}, '<0.1')
+				return tl;
 		}
 
-		function block(t) {
-			blocked = true;
-			if (unblockTimeout != null) {
-				clearTimeout(unblockTimeout);
-				unblockTimeout = null;
-			}
-			unblockTimeout = setTimeout(unblock, t);
-		}
 
-		function unblock() {
-			blocked = false;
-		}
 
-		// $body.on('click', '.js-call-popup', function () {
-		// 	openModal();
-		// });
-		// $body.on('click', ".modal-overlay,.js-close-btn", function () {
-		// 	closeModal();
-		// });
+		$body.on('click', '.js-call-popup', function () {
+			openModal().play().timeScale(0.9);
+		});
+		$body.on('click', ".modal-overlay,.js-close-btn", function () {
+			closeModal().play().timeScale(0.9);
+		});
 
-		$modal.initBlur(0.5);
+		//$modal.initBlur(0.5);
 	/*
 		* popup open end
 	*/
@@ -581,6 +619,12 @@ Array.from(document.querySelectorAll('.js-grid__item-img')).forEach((el) => {
 	/*
 	* menu start
 	*/
+
+
+	
+	
+	
+	
 spliterText('.js-menu__title-text', 'latter');
 
 let menuIsOpen = false,

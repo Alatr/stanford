@@ -1,0 +1,143 @@
+
+#news-page {
+	.section-footer:not(#Y) {
+		position: relative;
+		max-width: none;
+	}
+	
+	.footer-logo {
+		display: flex;
+	}
+}
+
+
+#news-page .breadcrumbs {
+	margin: 0 0 18px 0;
+}
+
+.news-content {
+	transition: all 0.4s;
+	margin-left: 66px;
+	padding: 120px 45px 0 0px;
+	box-shadow: 11px 1px 30px rgba(177, 177, 177, 0.37);
+	
+	@include to(1020px) {
+		margin-left: 0px;
+		padding: 120px 20px 0;
+	}
+	
+	@include to(576px) {
+		padding: 80px 20px 0;
+	}
+}
+.news-block-wrap {
+	padding: 29px 0px 50px 45px;
+	@include to(1020px){
+		padding: 29px 0px 50px 0px;
+	}
+	@include to(768px){
+		padding: 29px 80px 50px 80px;
+
+	}
+	@include to(668px){
+		padding: 29px 40px 50px 40px;
+
+	}
+	@include to(576px){
+		padding: 29px 0px 50px 0px;
+
+	}
+	.news-block {
+
+		display: flex;
+		flex-wrap: wrap;
+		margin-left: -40px;
+		margin-right: -40px;
+		@include to(1440px){
+			margin-left: -20px;
+			margin-right: -20px;
+		}
+		@include to(470px){
+			justify-content: center;
+		}
+
+	}
+
+	.card{
+		min-width: auto;
+		margin-bottom: 40px;
+		width: calc(33.33% - 80px);
+		@include to(1440px){
+			width: calc(33.33% - 40px);
+
+		}
+		@include to(768px){
+			width: calc(50% - 40px);
+			
+		}
+		@include to(470px){
+			width: calc(75% - 40px);
+
+		}
+		@include to(425px){
+			width: calc(100% - 40px);
+
+		}
+	}
+}
+
+
+
+
+
+
+
+
+/**********************************/
+/*
+* news end
+*/
+.doc-btn{
+	display: flex;
+	align-items: center;
+	text-decoration: none;
+	.filosof-btn__text{
+		text-decoration: none;
+
+	}
+	span::before{
+		transform: scale(1);
+		background-color: $mc3;
+	}
+	@include to(576px){
+		display: none;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**********************************/
+/*
+* news start
+*/

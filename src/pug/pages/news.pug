@@ -1,0 +1,106 @@
+extends ../layout/main
+block variable
+	-
+		var title_page = 'Новини';
+		var id_page = 'news-page';
+		var breadcrumbsBtn = 'doc';
+		var breadcrumbsSubitem = false;
+	
+block meta
+	title= title_page
+	meta(name='description', content='')
+block head
+		link(rel='stylesheet', href="./assets/styles/main.min.css")
+block scripts
+	script(defer src='./assets/scripts/index.js')
+block content
+	.news-content
+		include ../includes/breadcrumbs.pug
+		.news-block-wrap
+			.news-block
+			
+				// start
+				a(href=pagesLink[0].news_single).card
+					.card-img-wrap
+						.hover-overlay
+							include ../../assets/images/logo_hover.svg
+						+img('lorem/1.jpg').card__img
+						.card-data-wrap.card-data
+							+svg('data').card-data__icon
+							time.card-data__text(pubdate datetime="2012-12-23") 25.03.2019
+					h4.card__title.text-shadow.underline Відділ продажу вже відкрито
+					p.card__text Раді повідомити, що відділ продажу ЖК Stanford вже відкрито!Раді повідомити, що відділ продажу...
+					
+					.card__btn.section-link
+						span.section-link__text читати
+						+svg('arrow-link').section-link__icon
+				// end
+				// start
+				a(href=pagesLink[0].news_single).card
+					.card-img-wrap
+						.hover-overlay
+							include ../../assets/images/logo_hover.svg
+						+img('home/2.jpg').card__img
+						.card-data-wrap.card-data
+							+svg('data').card-data__icon
+							time.card-data__text(pubdate datetime="2012-12-23") 25.03.2019
+					h4.card__title Відділ продажу
+					p.card__text відділ продажу...
+					
+					.card__btn.section-link
+						span.section-link__text читати
+						+svg('arrow-link').section-link__icon
+				// end
+				// start
+				a(href=pagesLink[0].news_single).card
+					.card-img-wrap
+						.hover-overlay
+							include ../../assets/images/logo_hover.svg
+						+img('home/1.jpg').card__img
+						.card-data-wrap.card-data
+							+svg('data').card-data__icon
+							time.card-data__text(pubdate datetime="2012-12-23") 25.03.2019
+					h4.card__title Відділ продажу вже відкрито
+					p.card__text вже відкрито!Раді повідомити, що відділ продажу...
+					
+					.card__btn.section-link
+						span.section-link__text читати
+						+svg('arrow-link').section-link__icon
+				// end
+				// start
+				a(href=pagesLink[0].news_single).card
+					.card-img-wrap
+						.hover-overlay
+							include ../../assets/images/logo_hover.svg
+						+img('home/1.jpg').card__img
+						.card-data-wrap.card-data
+							+svg('data').card-data__icon
+							time.card-data__text(pubdate datetime="2012-12-23") 25.03.2019
+					h4.card__title Відділ продажу вже відкрито
+					p.card__text вже відкрито!Раді повідомити, що відділ продажу...
+					
+					.card__btn.section-link
+						span.section-link__text читати
+						+svg('arrow-link').section-link__icon
+				// end
+				// start
+				a(href=pagesLink[0].news_single).card
+					.card-img-wrap
+						.hover-overlay
+							include ../../assets/images/logo_hover.svg
+						+img('home/1.jpg').card__img
+						.card-data-wrap.card-data
+							+svg('data').card-data__icon
+							time.card-data__text(pubdate datetime="2012-12-23") 25.03.2019
+					h4.card__title Відділ продажу вже відкрито
+					p.card__text вже відкрито!Раді повідомити, що відділ продажу...
+					
+					.card__btn.section-link
+						span.section-link__text читати
+						+svg('arrow-link').section-link__icon
+				// end
+block footer
+	include ../includes/footer.pug
+
+block header
+

@@ -27,6 +27,8 @@
 @import './pages/developer';
 @import './pages/documents';
 @import './pages/contact';
+@import './pages/news';
+@import './pages/news-single';
 
 
 
@@ -450,37 +452,41 @@ body[data-active="3"]{
 	* popup start
 */
 .popup-call{
-	padding: 121px 4.1% 75px;
+	padding: min(vw(130), 130px) 4.1% 75px;
+	padding: 0 4.1% 0px;
 	
 	display: flex;
 	flex-direction: column;
-	justify-content: space-between;
-	max-width: 555px;
+	justify-content: center;
+	max-width: 830px;
 	width: calc(100% - 30px);
-	max-height: 750px;
-	height: calc(100% - 60px);
+	// max-height: 750px;
+	height: 100vh;
 	background: rgba(0, 0, 0, 0.9);
 	top: 0;
 	left: 0;
-	bottom: 0;
-	right: 0;
-	position: absolute;
+	position: fixed;
 	z-index: 40;
 	margin: auto;
 	pointer-events: auto;
-	visibility: hidden;
+	//visibility: hidden;
+	@include to(1440px){
+		max-width: 555px;
+		
+	}
 
 	@include to(1280px){
-		padding: 25px 4.1% 75px;
-		max-width: 485px;
-		height: calc(100vh - 80px);
+		// padding: 25px 4.1% 75px;
+		// max-width: 485px;
+		// height: calc(100vh - 80px);
 	}
 	@include to(576px){
-		max-height: none;
-		justify-content: space-around;
+		width: 100vw;
+		// max-height: none;
+		// justify-content: space-around;
 	}
 	@include to(475px) {
-		height: calc(100vh - 30px);
+		//height: calc(100vh - 30px);
 	}
 	&__bg-overlay{
 		position: absolute;
@@ -505,28 +511,40 @@ body[data-active="3"]{
 		}
 	}
 	&__title{
-		max-width: 262px;
+		width: 72%;
 		font-family: $default-font2;
-		font-size: 30px;
-		line-height: 1.5em;
+		font-size: min(vw(42), 42px);
+		line-height: lh(54, 42);
 		color: #9A959E;
 		@include to(1440px){
+			max-width: 262px;
+			font-size: 30px;
 			max-width: none;
 		}
 		@include to(1280px){
-			font-size: 25px;
-			max-width: 90%;
+			// font-size: 25px;
+			// max-width: 90%;
 		}
 		@include to(475px){
 			font-size: 20px;
-			max-width: 90%;
+			max-width: 100%;
+			padding-right: 20%;
+		}
+		@include to(375px){
+			padding-right: 10%;
 		}
 	}
 }
 
 .popup-close{
-	width: 45px;
-	height: 45px;
+	width: 67px;
+	height: 67px;
+	@include to(1440px){
+		width: 45px;
+		height: 45px;
+
+
+	}
 	@include to(576px){
 		width: 30px;
 		height: 30px;
@@ -540,27 +558,39 @@ body[data-active="3"]{
 .main-form{
 	display: flex;
 	flex-direction: column;
+	width: 71%;
+	@include to(425px){
+		width: 100%;
+	}
 }
 
 
 .main-form-block{
 	position: relative;
 	margin-bottom: 40px;
-	max-width: 329px;
+	width: 100%;
 	display: flex;
 	flex-direction: column;
 	input{
+		width: 100%;
 		padding-left: 25px;
-		height: 42px;
+		height: 60px;
 		background-color: transparent;
 		border: none;
 		font-size: 20px;
 		line-height: 1em;
-		color: $wc;
+		color: #FFF0E0;
 		border-bottom: 1px solid #706A75;
 		transition: all 0.3s;
+		@include to(1440px){
+			height: 42px;
+
+		}
 		@include to(1280px){
 			font-size: 18px;
+		}
+		@include to(768px){
+			font-size: 16px;
 		}
 	}
 	.main-form-content{
@@ -577,20 +607,33 @@ body[data-active="3"]{
 		left: 0;
 		top: 50%;
 		width: 100%;
-		font-size: 20px;
-		font-weight: 500;
+		font-size: min(vw(27), 27px);
+		font-weight: 400;
 		line-height: 1em;
-		color: $wc;
+		color: #FFF0E0;
 		transform: scale(1) translate(25px, -50%);
 		pointer-events: none;
 		transition: transform 0.3s ease-in;
+		@include to(1440px){
+			font-size: 20px;
+
+		}
 		@include to(1280px) {
 			font-size: 18px;
+		}
+		@include to(768px) {
+			font-size: 16px;
 		}
 
 		@include to(576px) {
 			font-size: 14px;
 		}
+	}
+}
+.main-form-block--margin-bottom{
+	margin-bottom: 70px;
+	@include to(1440px){
+		margin-bottom: 30px;
 	}
 }
 .popup-call__submit-btn{
@@ -603,8 +646,14 @@ body[data-active="3"]{
 	span.section-link__text{
 		font-family: $default-font2;
 		letter-spacing: 0.1em;
-		font-size: 16px;
+		font-size: min(vw(20), 20px);
 		color: #FFF0E0;
+		@include to(1440px){
+			font-size: 16px;
+		}
+		@include to(576px){
+			font-size: 14px;
+		}
 	}
 	svg{
 		fill: #CE8163;
@@ -613,10 +662,9 @@ body[data-active="3"]{
 }
 
 .popup-call__title-wrap{
-	margin-bottom: 70px;
+	margin-bottom: min(vw(80), 80px);
 	display: flex;
 	align-items: flex-start;
-	justify-content: space-between;
 	@include to(1280px){
 		margin-bottom: 40px;
 	}
@@ -626,12 +674,18 @@ body[data-active="3"]{
 	.popup-call-notice{
 		margin: 16px 16px 0 0;
 		font-weight: 500;
-		font-size: 10px;
+		font-size: min(vw(14), 14px);
 		line-height: 1em;
 		text-transform: uppercase;
 		color: #FFF0E0;
 		@include to(1440px){
-			display: none;
+			font-size: 10px;
+			white-space: nowrap;
+		}
+		@include to(475px){
+			position: absolute;
+			top: 20px;
+			left: 4.1%;
 		}
 	}
 }
@@ -983,7 +1037,7 @@ body.modal-active{
 	}
 }
 .breadcrumbs-item__current--color{
-	color: #CE8163;
+	color: rgb(206, 129, 99);
 }
 .breadcrumbs-item__current{
 	font-size: min(0.95vw, 18px);
@@ -1007,3 +1061,25 @@ body.modal-active{
 * breadcrumbs end
 */
 /**********************************/
+
+
+.swal2-confirm.btn.btn-success{
+	padding: 10px 25px;
+	background-color: $mc3;
+	border: none;
+	border-radius: 3px;
+	color: #FFF0E0;
+	transition: all 0.3s;
+	&:hover{
+		background-color: darken($color: $mc3, $amount: 5)
+
+	}
+}
+
+
+.swal2-icon.swal2-success .swal2-success-ring:not(#h) {
+	border: .25em solid rgba(206, 129, 99, .3);
+}
+.swal2-icon.swal2-success [class^=swal2-success-line]:not(#j){
+	background-color: $mc3;
+}
