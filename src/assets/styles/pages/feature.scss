@@ -30,17 +30,23 @@
 	align-items: center;
 	justify-content: center;
 	@include from(1441px){
-		display: none;
+		//display: none;
 	}
 	@include to(768px){
 		display: none;
 	}
 	&__text{
-		font-size: 12px;
+		font-size: min(vw(16), 16px);
 		letter-spacing: 0.04em;
 		text-decoration-line: underline;
 		text-transform: uppercase;
 		color: #CE8163;
+		@include to(1440px){
+			font-size: 14px;
+		}
+		@include to(1280px){
+			font-size: 12px;
+		}
 	}
 }
 

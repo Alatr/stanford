@@ -214,7 +214,7 @@ a.prop("readOnly")?a.prop({checked:!1,readOnly:!1}):a.prop("checked")||a.prop({r
 	// then we will delete table and init again with new filtered data
 	function tableStaticFlatInit(tableDB = appartments) {
 		function createCastomCell(item, value){
-			return $(`<td data-href='${value.href}' data-image='${value.image}'>`).addClass("js-hover-class").append(value.room);
+			return $(`<td data-href='${value.href}' data-image='${value.image}'>`).addClass("js-hover-class").append(value[this.name]);
 		}
 		
 		tableStaticFlat = $(".js-table-flat").jsGrid({

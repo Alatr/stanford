@@ -5,12 +5,6 @@
 
 
 
-// console.log($('.js-news-single-block__r').innerHeight());
-// console.log($('.js-news-single-block__r').outerHeight());
-// console.log(getComputedStyle($('.js-news-single-block__r')[0]).height);
-
-console.log($('.news-single-block').height());
-
 (function ($) {
 	$('.js-news-single-slider').slick({
 		infinite: true,
@@ -19,6 +13,24 @@ console.log($('.news-single-block').height());
 		fade: true,
 		adaptiveHeight: false,
 		dots: false,
-		arrows: false
+		arrows: false,
+		 responsive: [{
+		 		breakpoint: 476,
+		 		settings: {
+		 			dots: true
+		 		}
+		 	}
+		 ]
 	});
+
+$('.js-single-news-arrow__prev').click(function () {
+	$('.js-news-single-slider').slick('slickPrev');
+})
+
+$('.js-single-news-arrow__next').click(function () {
+	$('.js-news-single-slider').slick('slickNext');
+});
+
+
+	// .js-single-news-arrow__next
 })(jQuery);
