@@ -16,6 +16,78 @@ block scripts
 block content
 	.news-content
 		include ../includes/breadcrumbs.pug
+		.news-filter
+			+SelectBox('year', 'year', [
+				{
+					name: '2020',
+					value: '2020'
+				},
+				{
+					name: '2019',
+					value: '2019'
+				},
+			])
+			+SelectBox('month', 'month', [
+				{
+					value: '0',
+					name: 'січень',
+				},
+
+				{
+					value: '1',
+					name: 'лютий',
+				},
+
+				{
+					value: '2',
+					name: 'березень',
+				},
+
+				{
+					value: '3',
+					name: 'квітень',
+				},
+
+				{
+					value: '4',
+					name: 'травень',
+				},
+
+				{
+					value: '5',
+					name: 'червень',
+				},
+
+				{
+					value: '6',
+					name: 'липень',
+				},
+
+				{
+					value: '7',
+					name: 'серпень',
+				},
+
+				{
+					value: '8',
+					name: 'вересень',
+				},
+
+				{
+					value: '9',
+					name: 'жовтень',
+				},
+
+				{
+					value: '10',
+					name: 'листопад',
+				},
+
+				{
+					value: '11',
+					name: 'грудень',
+				}
+			])
 		.news-block-wrap
 			.news-block
 			

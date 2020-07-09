@@ -36,6 +36,10 @@
 			<circle cx="23" cy="23" r="22.5" fill="#372B3F" stroke="#CE8163"></circle><path stroke="#FFF0E0" d="M16.782 16.783l13.436 13.435M30.217 16.782L16.782 30.217"></path>
 		</symbol>
 	
+		<symbol id="icon-close-stage" viewBox="0 0 60 60">
+			<path fill="#CE8163" d="M0 60V0h60v60z"></path><path stroke="#FFF0E0" stroke-width="1.566" d="M20.404 19.553l21.035 21.035M41.439 19.554L20.404 40.589"></path>
+		</symbol>
+	
 		<symbol id="icon-close_2" viewBox="0 0 47 47">
 			<path fill="#CE8163" d="M0 47V0h47v47z"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M23.071 23.978l8.163 8.164.908-.908-8.164-8.163 8.164-8.164-.907-.907-8.164 8.164L14.907 14l-.907.907 8.164 8.164L14 31.235l.907.907 8.164-8.164z" fill="#FFF0E0"></path>
 		</symbol>
@@ -102,6 +106,10 @@
 	
 		<symbol id="icon-plus" viewBox="0 0 26 26">
 			<path stroke="#CE8163" stroke-width="1.296" d="M12.96.873v24.626M25.273 13.186H.647"></path>
+		</symbol>
+	
+		<symbol id="icon-select-arr" viewBox="0 0 7 9">
+			<path d="M3.181 8L1 5.818H5.363L3.181 8z" fill="#CE8163"></path><path d="M3.181 0v8m0 0L1 5.818h4.363L3.181 8z" stroke="#CE8163" stroke-width=".727"></path>
 		</symbol>
 	
 		<symbol id="icon-sign" viewBox="0 0 150 151">

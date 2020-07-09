@@ -141,3 +141,213 @@
 /*
 * news start
 */
+
+
+
+
+/*
+* select start
+*/
+.u-select-box {
+	position: relative;
+	display: block;
+	width: 100%;
+	margin: 0 auto;
+	font-family: "monster", sans-serif;
+	font-size: 18px;
+	color: #1D2228;
+}
+
+.u-select-box__current {
+	position: relative;
+	box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.1);
+	cursor: pointer;
+	outline: none;
+}
+
+.u-select-box__current:focus .u-select-box__input-text {
+	border-radius: 23px 23px 0 0;
+}
+
+.u-select-box__current:focus+.u-select-box__list {
+	opacity: 1;
+	animation-name: none;
+}
+
+.u-select-box__current:focus+.u-select-box__list .u-select-box__option {
+	cursor: pointer;
+}
+
+.u-select-box__current:focus .u-select-box__icon {
+	transform: translateY(-50%) rotate(180deg);
+}
+
+.u-select-box__icon {
+	position: absolute;
+	top: 50%;
+	right: 15px;
+	transform: translateY(-50%);
+	width: 20px;
+	transition: 0.2s ease;
+	fill: none;
+}
+
+.u-select-box__value {
+	display: flex;
+}
+
+.u-select-box__input {
+	display: none;
+}
+
+.u-select-box__input:checked+.u-select-box__input-text {
+	display: block;
+}
+
+.u-select-box__input-text {
+	transition: all 0.3s;
+	border-radius: 23px 23px 23px 23px;
+	display: none;
+	width: 100%;
+	margin: 0;
+	padding: 15px;
+	background-color: #fff;
+}
+
+.u-select-box__list {
+	position: absolute;
+	z-index: 5;
+	width: 100%;
+	padding: 0;
+	list-style: none;
+	opacity: 0;
+	border-radius: 0 0 23px 23px;
+	overflow: hidden;
+	animation-name: HideList;
+	animation-duration: 0.5s;
+	animation-delay: 0.5s;
+	animation-fill-mode: forwards;
+	animation-timing-function: step-start;
+	box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.1);
+}
+
+.u-select-box__option {
+	display: block;
+	padding: 15px;
+	background-color: #fff;
+	transition: all 0.3s;
+}
+
+.u-select-box__option:hover,
+.u-select-box__option:focus {
+	color: #546c84;
+	background-color: #fbfbfb;
+}
+
+@keyframes HideList {
+	from {
+		transform: scaleY(1);
+	}
+
+	to {
+		transform: scaleY(0);
+	}
+}
+
+/*
+* select end
+*/
+
+
+
+
+
+.u-select-box__list {
+	border-radius: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.news-filter {
+	display: flex;
+	align-items: center;
+}
+
+
+
+
+
+
+
+
+
+
+.u-select-box__icon{
+	width: 12px;
+	height: 20px;
+}
+
+
+.u-select-box{
+	margin: 0;
+	width: 145px;
+	margin-right: 75px;
+	border: 1px solid red;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
