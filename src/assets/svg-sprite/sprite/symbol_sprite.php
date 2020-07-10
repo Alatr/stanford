@@ -109,7 +109,7 @@
 		</symbol>
 	
 		<symbol id="icon-select-arr" viewBox="0 0 7 9">
-			<path d="M3.181 8L1 5.818H5.363L3.181 8z" fill="#CE8163"></path><path d="M3.181 0v8m0 0L1 5.818h4.363L3.181 8z" stroke="#CE8163" stroke-width=".727"></path>
+			<path d="M3.181 8L1 5.818H5.363L3.181 8z"></path><path d="M3.181 0v8m0 0L1 5.818h4.363L3.181 8z"></path>
 		</symbol>
 	
 		<symbol id="icon-sign" viewBox="0 0 150 151">

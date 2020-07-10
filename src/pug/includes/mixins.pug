@@ -30,9 +30,9 @@ mixin SelectBox(name, id, options)
 			each option, index in options
 				.u-select-box__value
 					if(index == 0)
-						input.u-select-box__input(class='js_'+1+'checkbox js_select_checkbox' type="radio" id=id+index value=option.value name=id checked)
+						input.u-select-box__input(class='js_'+id+'checkbox js_select_checkbox' type="radio" id=id+index value=option.value name=id checked data-key= id )
 					else
-						input.u-select-box__input(class='js_'+id+'checkbox js_select_checkbox' type="radio" id=id+index value=option.value name=id)
+						input.u-select-box__input(class='js_'+id+'checkbox js_select_checkbox' type="radio" id=id+index value=option.value name=id data-key= id )
 					p.u-select-box__input-text #{option.name}
 				+svg('select-arr').u-select-box__icon
 		ul.u-select-box__list

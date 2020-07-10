@@ -1,0 +1,134 @@
+
+#philosophy-page {
+	.section-footer:not(#Y) {
+		position: relative;
+		max-width: none;
+	}
+	
+	.footer-logo {
+		display: flex;
+	}
+}
+
+
+#philosophy-page .breadcrumbs {
+	margin: 0 0 0px 0;
+	@include to(1020px){
+		margin: 0 0 20px 0;
+
+	}
+}
+.philosophy-content-sign{
+	position: absolute;
+	width: 250px;
+	height: 250px;
+	top: 0;
+	right: 0;
+	z-index: -1;
+}
+.philosophy-content {
+	overflow: hidden;
+	position: relative;
+	transition: all 0.4s;
+	margin-left: 66px;
+	padding: 120px 45px 0 0px;
+	//box-shadow: 11px 1px 30px rgba(177, 177, 177, 0.37);
+	
+	@include to(1020px) {
+		margin-left: 0px;
+		padding: 120px 20px 0;
+	}
+	
+	@include to(576px) {
+		padding: 80px 20px 0;
+	}
+}
+
+.philosophy-block {
+	position: relative;
+	min-height: calc(100vh - 240px);
+	display: flex;
+	z-index: 2;
+	justify-content: center;
+	@include to(1020px){
+		flex-direction: column;
+		align-items: center;
+		justify-content: flex-start;
+	}
+}
+
+.philosophy-block{
+	margin: 0 auto;
+	display: flex;
+	align-items: center;
+	width: min(vw(1420), 1420px);
+	.philosophy-block__l,
+	.philosophy-block__r {
+
+		width: 50%;
+	}
+	&__l{
+		position: relative;
+		padding: 0 min(vw(75), 75px) min(vw(90), 90px);
+		box-shadow: 0px 4px 30px rgba(177, 177, 177, 0.25);
+	}
+	&__r{
+		padding-left: min(vw(111), 111px);
+	}
+}
+
+
+.philosophy{
+	&__title{
+		padding-top: min(vw(112), 112px);
+
+		margin-bottom: 21px;
+		font-size: min(vw(28), 28px);
+		line-height: lh(40, 28);
+		font-family: $default-font2;
+
+		color: #2F2536;
+	}
+	&__text{
+		margin-bottom: 20px; 
+		font-size: min(vw(18), 18px);
+		line-height: lh(32,18);
+
+		color: #9A959E;
+	}
+	&__cnt{
+		position: absolute;
+		transform: translate(-50%,-50%);
+		right: min(vw(50), 50px);
+		font-size: min(vw(60), 60px);
+		font-weight: bold;
+		line-height: lh(32, 60);
+		color: #CE8163;
+		transform: translateY(-50%);
+		font-family: $default-font2;
+	}
+	&__img{
+		position: relative;
+		overflow: hidden;
+		height: min(vw(485), 485px);
+		img{
+			height: 100%;
+			object-fit: cover;
+		}
+	}
+}
+
+
+.philosophy-img-overlay{
+	position: absolute;
+	width: 45%;
+	height: calc(100% + 1px);
+	background-color: #fffffc;
+	z-index: 5;
+	&__l{
+		left: -1px;
+	}
+	&__r{
+		right: -1px;
+	}
+}

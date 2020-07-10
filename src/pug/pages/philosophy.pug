@@ -1,0 +1,36 @@
+extends ../layout/main
+block variable
+	-
+		var title_page = 'Філософія Stanford'
+		var id_page = 'philosophy-page'
+		var breadcrumbsBtn = 'philosophy'
+		var breadcrumbsSubitem = false
+	
+block meta
+	title= title_page
+	meta(name='description', content='')
+block head
+		link(rel='stylesheet', href="./assets/styles/main.min.css")
+block scripts
+	script(defer src='./assets/scripts/index.js')
+	script(defer src='./assets/scripts/philosophy.js')
+block content
+	.philosophy-content
+		include ../includes/breadcrumbs.pug
+		.philosophy-block
+			+img('filo/sign.svg').philosophy-content-sign
+			.philosophy-block__l
+				span.philosophy__cnt 01
+				h3.philosophy__title Архітектура нового світу
+				p.philosophy__text Stanford - це сучасний будинок, який має амбіції стати легендою, функціональною класикою, новою архітектурною домінантою Печерська на одній хвилі з раціональним підходом до організації житлового простору.
+				p.philosophy__text Архітекторів надихнули образи інтелектуальної Америки - квінтесенція свободи і розвитку, стриманості і елегантності. Це відображення особливого способу життя за зразком світових проектів, що поєднують функціональність з естетикою класицизму.
+			.philosophy-block__r
+				.philosophy__img
+					.philosophy-img-overlay__l.philosophy-img-overlay
+					.philosophy-img-overlay__r.philosophy-img-overlay
+					+img('filo/1.jpg')
+block footer
+	include ../includes/footer.pug
+
+block header
+

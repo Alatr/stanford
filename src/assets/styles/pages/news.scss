@@ -160,14 +160,20 @@
 
 .u-select-box__current {
 	position: relative;
-	box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.1);
 	cursor: pointer;
 	outline: none;
 }
 
 .u-select-box__current:focus .u-select-box__input-text {
-	border-radius: 23px 23px 0 0;
+		background-color: #9A959E;
+		color: #fff0e0;
 }
+.u-select-box__current:focus .u-select-box__icon {
+		fill: #fff0e0;
+		stroke: #fff0e0;
+}
+
+
 
 .u-select-box__current:focus+.u-select-box__list {
 	opacity: 1;
@@ -206,12 +212,13 @@
 
 .u-select-box__input-text {
 	transition: all 0.3s;
-	border-radius: 23px 23px 23px 23px;
+	border-radius: 0;
 	display: none;
 	width: 100%;
 	margin: 0;
 	padding: 15px;
-	background-color: #fff;
+	font-family: $default-font2;
+	color: $mc3;
 }
 
 .u-select-box__list {
@@ -228,20 +235,22 @@
 	animation-delay: 0.5s;
 	animation-fill-mode: forwards;
 	animation-timing-function: step-start;
-	box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.1);
+	background: #FFFFFC;
 }
 
 .u-select-box__option {
 	display: block;
-	padding: 15px;
+	padding: 10px 15px;
 	background-color: #fff;
 	transition: all 0.3s;
+	color: #9A959E;
+	
 }
 
 .u-select-box__option:hover,
 .u-select-box__option:focus {
-	color: #546c84;
-	background-color: #fbfbfb;
+	color: $mc3;
+	background-color: #fffffc;
 }
 
 @keyframes HideList {
@@ -289,6 +298,13 @@
 .news-filter {
 	display: flex;
 	align-items: center;
+	padding-left: 45px;
+	@include to(1020px){
+		padding-left: 0px;
+	}
+	@include to(576px){
+		justify-content: space-between;
+	}
 }
 
 
@@ -301,8 +317,10 @@
 
 
 .u-select-box__icon{
-	width: 12px;
-	height: 20px;
+	width: 8px;
+	height: 16px;
+	fill: $mc3;
+	stroke: $mc3;
 }
 
 
@@ -310,7 +328,10 @@
 	margin: 0;
 	width: 145px;
 	margin-right: 75px;
-	border: 1px solid red;
+	@include to(576px){
+		width: 40%;
+		margin-right: 0;
+	}
 }
 
 
