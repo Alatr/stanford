@@ -42,5 +42,7 @@
     "webpack": "^4.11.1",
     "webpack-cli": "^3.0.2"
   },
-  "dependencies": {}
+  "dependencies": {
+    "bezier-easing": "^2.1.0"
+  }
 }

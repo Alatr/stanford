@@ -16,6 +16,10 @@
 			<path d="M22.5 5l-3 3V2l3 3z" fill="#FFF8EF"></path><path d="M0 5h22.5m0 0l-3 3V2l3 3z" stroke="#FFF8EF"></path>
 		</symbol>
 	
+		<symbol id="icon-arrow-fil" viewBox="0 0 10 70">
+			<path d="M5.317 68.56L2 65.241h6.635l-3.318 3.317z" fill="#CE8163"></path><path d="M5.317 0v68.56m0 0L2 65.241h6.635l-3.318 3.317z" stroke="#CE8163" stroke-width="1.106"></path>
+		</symbol>
+	
 		<symbol id="icon-arrow-link" viewBox="0 0 24 9">
 			<path d="M22.5 4.59l-3 3v-6l3 3z"></path><path d="M0 4.59h22.5m0 0l-3 3v-6l3 3z"></path>
 		</symbol>

@@ -14,3 +14,4 @@
 @@include('../libs/sweet_alert/swal.js')
 @@include('../libs/magnific-popup/dist/magnific-popup.js')
 @@include('../libs/ion.rangeSlider/js/ion.rangeSlider.min.js')
+@@include('../../../../node_modules/bezier-easing/dist/bezier-easing.min.js')

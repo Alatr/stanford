@@ -267,15 +267,15 @@
 
 
 
-body[data-active="1"],
-body[data-active="2"],
-body[data-active="4"] {
+body:not(#philosophy-page)[data-active="1"],
+body:not(#philosophy-page)[data-active="2"],
+body:not(#philosophy-page)[data-active="4"] {
 	.desktop-header-phone__text{
 		color: $wc;
 		transition: all 0.3s;
 	}
 }
-body[data-active="3"]{
+body:not(#philosophy-page)[data-active="3"]{
 	.nav-menu-button__icon{
 		line{
 			stroke: $wc 

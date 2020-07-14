@@ -115,6 +115,9 @@ Array.from(document.querySelectorAll('.js-grid__item-img')).forEach((el) => {
 			this.scrollEvents();
 			this.setStyle();
 		}
+		set changeActiveSlide(value) {
+			this.activeSlide = value
+		}
 		
 		setStyle() {
 			var self = this;
@@ -129,6 +132,7 @@ Array.from(document.querySelectorAll('.js-grid__item-img')).forEach((el) => {
 
 			$(window).on('wheel', function(e) {
 				if(!self.canGo) return;
+				
 				
 				e = e.originalEvent;
 				var direction = e.deltaY > 0 ? 1 : -1;

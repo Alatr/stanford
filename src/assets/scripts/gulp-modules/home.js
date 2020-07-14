@@ -22,15 +22,25 @@
 let page = {};
 
 		if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
-	
-		page = new Paginator({
-			container: 'section.section',
-			speed: 2600, // speed animation page transition
-	
-		});
+			page = new Paginator({
+				container: 'section.section',
+				speed: 2600, // speed animation page transition
+				
+			});
+
+			$('.news-nav-link__goup').on('click', function(){
+				const changeSlide = function () {
+					page.slides.forEach(el => el.classList.add('slide--hidden'));
+					page.slides[0].classList.remove('slide--hidden');
+					page.changeActiveSlide = 0;
+				}
+				$body.attr('data-active', 2);
+				pageTransitionLeft(changeSlide, secondSlAnim).play();
+			});
+
 		page.canGo = false;
 	
-		mySubscriber =  PubSub.subscribe('gotoSlide', function (msg, data) {
+		PubSub.subscribe('gotoSlide', function (msg, data) {
 			const changeSlide = function(){
 				page.slides.forEach(el => el.classList.add('slide--hidden'));
 				page.slides[data.to].classList.remove('slide--hidden');

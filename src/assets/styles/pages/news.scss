@@ -156,6 +156,43 @@
 	font-family: "monster", sans-serif;
 	font-size: 18px;
 	color: #1D2228;
+	@include from(769px) {
+		&:hover {
+			.u-select-box__input-text {
+				background-color: #9A959E;
+				color: #fff0e0;
+			}
+			.u-select-box__icon {
+				fill: #fff0e0;
+				stroke: #fff0e0;
+			}
+			.u-select-box__current {
+				border-color: transparent;
+			}
+
+			.u-select-box__current+.u-select-box__list {
+				opacity: 1;
+				// padding-top: 20px;
+				// margin-top: -15px;
+				z-index: 2;
+				// position: relative;
+				// background-color: var(--white);
+				// We have to set "animation-name: none;" to make the list visible (read below how it works)
+				animation-name: none;
+				transition: .5s;
+
+				.u-select-box__option {
+					cursor: pointer;
+				}
+			}
+
+			.u-select-box__icon {
+				transform: translateY(-50%) rotate(180deg);
+				// fill: var(--red);
+				opacity: 1;
+			}
+		}
+	}
 }
 
 .u-select-box__current {
@@ -236,6 +273,7 @@
 	animation-fill-mode: forwards;
 	animation-timing-function: step-start;
 	background: #FFFFFC;
+	
 }
 
 .u-select-box__option {
