@@ -67,22 +67,41 @@ block content
 
 		.philosophy-block-wrap
 			each v, i in data
-				.philosophy-block(data-filo_sec= i)
-					+img('filo/sign.svg').philosophy-content-sign
-					.philosophy-content-nav
-						+svg('arrow-fil').philosophy-content-nav__arrow
-						span.philosophy-content-nav__text= v.num_nav
+				if i == 6
+					.philosophy-block(data-filo_sec= i)
+						+img('filo/sign.svg').philosophy-content-sign
+						button(type="button").philosophy-content-nav.philosophy-content-nav-btn.js-philosophy-content-nav-btn
+							+svg('arrow-fil').philosophy-content-nav__arrow
+							span.philosophy-content-nav__text= v.num_nav
 
-					.philosophy-block__l
-						span.philosophy__cnt= v.num
-						h3.philosophy__title= v.title
-						each vv in v.text
-							p.philosophy__text= vv
-					.philosophy-block__r
-						.philosophy__img
-							.philosophy-img-overlay__l.philosophy-img-overlay
-							.philosophy-img-overlay__r.philosophy-img-overlay
-							+img('filo/'+i+'.jpg')
+						.philosophy-block__l
+							span.philosophy__cnt= v.num
+							h3.philosophy__title= v.title
+							each vv in v.text
+								p.philosophy__text= vv
+						.philosophy-block__r
+							.philosophy__img
+								.philosophy-img-overlay__l.philosophy-img-overlay
+								.philosophy-img-overlay__r.philosophy-img-overlay
+								+img('filo/'+i+'.jpg')
+				else
+					.philosophy-block(data-filo_sec= i)
+						+img('filo/sign.svg').philosophy-content-sign
+						.philosophy-content-nav
+							+svg('arrow-fil').js-philosophy-content-nav__arrow.philosophy-content-nav__arrow
+							span.js-philosophy-content-nav__text.philosophy-content-nav__text= v.num_nav
+
+						.philosophy-block__l
+							span.philosophy__cnt= v.num
+							h3.philosophy__title= v.title
+							each vv in v.text
+								p.philosophy__text= vv
+						.philosophy-block__r
+							.philosophy__img
+								.philosophy-img-overlay__l.philosophy-img-overlay
+								.philosophy-img-overlay__r.philosophy-img-overlay
+								+img('filo/'+i+'.jpg')
+
 							
 block footer
 	include ../includes/footer.pug

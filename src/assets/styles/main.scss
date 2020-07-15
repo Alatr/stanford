@@ -221,7 +221,7 @@
 	align-items: center;
 	text-decoration: none;
 	@include to(475px){
-		margin-top: -7px;
+		margin-top: 0px;
 		margin-bottom: 0;
 		min-width: 300px;
 		order: 1;
@@ -245,12 +245,15 @@
 	}
 	&__text{
 		font-weight: 500;
-		font-size: 10px;
+		font-size: 11px;
 		text-transform: uppercase;
 		color: #C2BFC4;
 		white-space: nowrap;
 		@include from(1441px){
 			font-size: min(0.95vw, 14px);
+		}
+		@include to(576px){
+			font-size: 8px;
 		}
 			@include to(375px) {
 				.footer-link__text {
@@ -424,6 +427,7 @@ body:not(#philosophy-page)[data-active="3"]{
 			text-transform: uppercase;
 			color: #FFF0E0;
 			@include to(576px){
+				font-size: 10px;
 				line-height: 1.1em;
 			}
 		}
@@ -769,16 +773,19 @@ body.modal-active{
 		padding: 15px 0 15px 15px;
 	}
 	.main-overlay__icon-logo{
-		width: 390px;
-		height: 390px;
+	
 		fill: #3E3247;
 		transform: translate(40%, -25%);
 		@include from(1441px){
 			top: auto;
 			bottom: 160px;
-			width: 282px;
-			height: 282px;
+			width: 262px;
+			height: 262px;
 			transform: translate(-52px, 0%);
+		}
+		@include to(576px){
+			transform: translate(40%, 15%);
+
 		}
 
 	}
@@ -836,6 +843,9 @@ body.modal-active{
 			margin-bottom: min(vw(70), 70px);
 			font-size: min(vw(60), 60px);
 		}
+		@include to(576px){
+			font-size: 38px;
+		}
 		.menu__title-wrap {
 			position: relative;
 			.gsap_latter {
@@ -854,6 +864,11 @@ body.modal-active{
 			height: 45px;
 			transform: translate(70%, 0);
 			transform-origin: 100% 20%;
+			fill: #706A75;
+			@include from(1441px){
+				width: 65px;
+				height: 65px;
+			}
 		}
 	}
 	.icon--circ_logo{
@@ -869,7 +884,9 @@ body.modal-active{
 		padding-right: 30px;
 	}
 	@include to(576px){
-		display: none;
+		.footer-link{
+			margin-right: 10px;
+		}
 	}
 }
 
@@ -884,6 +901,9 @@ body.modal-active{
 		max-width: 66px;
 		margin: 0 45px;
 
+	}
+	@include to(576px){
+		display: none;
 	}
 }
 .menu__footer-link-social{
@@ -945,6 +965,10 @@ body.modal-active{
 		margin-bottom: 15px;
 	}
 }
+.philosophy-content-nav-btn{
+	border: none;
+	background-color: transparent;
+}
 .submenu-item{
 	display: flex;
 	flex-direction: column;
@@ -955,6 +979,7 @@ body.modal-active{
 		line-height: 1.9em;
 		color: #9A959E;
 		text-decoration: none;
+		letter-spacing: 0.02em;
 		@include from(1441px){
 			font-size: min(vw(18), 18px);
 		}
@@ -1038,6 +1063,10 @@ body.modal-active{
 			display: flex;
 			content: "";
 			transform: translateY(-50%);
+			@include from(1441px){
+				width: 1px;
+				height: 12px;
+			}
 		}
 	}
 }

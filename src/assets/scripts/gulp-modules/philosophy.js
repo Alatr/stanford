@@ -3,16 +3,23 @@
 	console.clear();
 	
 	
+	
+	
+	
+	
+	
+	
 	const $slideBlock = $('.philosophy-block')
 	
 	
 	/*
 	* threeSlAnim start
 	*/
-	
+	console.log($slideBlock.length - 1);
 	function nav_filo(next) {
-		const arrow_nav = '.philosophy-content-nav__arrow';
-		const arrow_num = '.philosophy-content-nav__text';
+
+		const arrow_nav = '.js-philosophy-content-nav__arrow';
+		const arrow_num = '.js-philosophy-content-nav__text';
 		const obj = {
 			paused: true,
 			repeat: -1,
@@ -194,6 +201,20 @@ let page = {};
 			speed: 2600, // speed animation page transition
 			
 		});
+
+		// .js-philosophy-content-nav-btn
+
+	$('.js-philosophy-content-nav-btn').on('click', function () {
+		const changeSlide = function () {
+			page.slides.forEach(el => el.classList.add('slide--hidden'));
+			page.slides[0].classList.remove('slide--hidden');
+			page.changeActiveSlide = 0;
+		}
+		$body.attr('data-active', 1);
+		// pageTransitionLeft(changeSlide, secondSlAnim).play();
+					filo_transition(6, changeSlide, filo__1(0)).play().timeScale(0.9)
+
+	});
 
 		filo__1(0).play().timeScale(0.9)
 		page.canGo = true;

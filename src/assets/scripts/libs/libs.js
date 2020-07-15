@@ -10,6 +10,7 @@
 @@include('../libs/blur/blur.js')
 @@include('../libs/ui/ui.js')
 @@include('../libs/slick/slick.js')
+@@include('../libs/norm_wheel/norm_wheel.js')
 @@include('../libs/scroll_magic/scroll_magic.js')
 @@include('../libs/sweet_alert/swal.js')
 @@include('../libs/magnific-popup/dist/magnific-popup.js')

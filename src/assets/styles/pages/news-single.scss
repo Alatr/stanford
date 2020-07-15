@@ -160,7 +160,7 @@
 
 		}
 		p{
-			padding-right: min(vw(65), 65px);
+			padding-right: min(vw(85), 85px);
 			margin-bottom: min(vw(30), 30px);
 			font-size: min(vw(18), 18px);
 			line-height: lh(32, 18);
@@ -196,6 +196,11 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		@include from(476px){
+			width: 100%;
+			bottom: 20px;
+			margin: 0 auto;
+		}
 		li{
 			margin: 0 8px;
 		}
@@ -235,7 +240,10 @@
 
 
 
-
+.news-single-text-block.custom-scroll::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+	background-color: #9A959E;
+}
 
 
 

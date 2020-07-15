@@ -22,6 +22,9 @@
 #gallery-page .breadcrumbs {
 	margin: 0 0 18px 0;
 	padding-right: 45px;
+	@include to(576px){
+		padding: 0 20px;
+	}
 }
 
 .gallery-content {
@@ -35,7 +38,7 @@
 	}
 	
 	@include to(576px) {
-		padding: 80px 20px 0;
+		padding: 80px 0px 0;
 	box-shadow: 11px 1px 30px rgba(177, 177, 177, 0.37);
 
 	}

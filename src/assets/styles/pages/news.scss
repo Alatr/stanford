@@ -153,11 +153,18 @@
 	display: block;
 	width: 100%;
 	margin: 0 auto;
-	font-family: "monster", sans-serif;
-	font-size: 18px;
+	font-family: $default-font2;
+	font-size: min(vw(28), 28px);
+	@include to(1440px){
+		font-size: 22px;
+	}
+	@include to(666px){
+		font-size: 20px;
+	}
 	color: #1D2228;
 	@include from(769px) {
 		&:hover {
+			box-shadow: 0px 4px 30px rgba(177, 177, 177, 0.25);
 			.u-select-box__input-text {
 				background-color: #9A959E;
 				color: #fff0e0;
@@ -258,6 +265,7 @@
 	color: $mc3;
 }
 
+
 .u-select-box__list {
 	position: absolute;
 	z-index: 5;
@@ -282,7 +290,8 @@
 	background-color: #fff;
 	transition: all 0.3s;
 	color: #9A959E;
-	
+	font-size: 18px;
+	font-family: $default-font;
 }
 
 .u-select-box__option:hover,
@@ -310,6 +319,7 @@
 
 
 .u-select-box__list {
+	padding: 10px 0;
 	border-radius: 0;
 }
 
@@ -343,6 +353,9 @@
 	@include to(576px){
 		justify-content: space-between;
 	}
+	div.u-select-box:first-child {
+		width: 100px;
+	}
 }
 
 
@@ -364,7 +377,7 @@
 
 .u-select-box{
 	margin: 0;
-	width: 145px;
+	width: 155px;
 	margin-right: 75px;
 	@include to(576px){
 		width: 40%;

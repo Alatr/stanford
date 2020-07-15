@@ -8,7 +8,7 @@
 		slidesToScroll: 1,
 		fade: true,
 		adaptiveHeight: false,
-		dots: false,
+		dots: true,
 		arrows: false,
 		 responsive: [{
 		 		breakpoint: 476,

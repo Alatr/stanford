@@ -102,11 +102,16 @@
 		display: none;
 		flex-direction: column;
 		overflow-y: scroll;
+		padding: 15px 0;
+		li.mark-item.active-map-item {
+			opacity: 1;
+		}
 		li{
-			padding: 15px 50px;
+			padding: 11px 50px;
 			position: relative;
 			display: flex;
 			align-items: center;
+			opacity: 0.75;
 			@include to(576px){
 				padding-left: 0;
 			}

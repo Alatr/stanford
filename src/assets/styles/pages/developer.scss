@@ -148,6 +148,9 @@
 	@include to(768px){
 		margin-bottom: 52px;
 	}
+	@include to(576px){
+		margin-bottom: 35px;
+	}
 }
 /*
 * developer end

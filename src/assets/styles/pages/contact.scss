@@ -280,6 +280,9 @@ a.contact-info-block-text{
 	text-transform: uppercase;
 	text-decoration: none;
 	color: #CE8163;
+	@include to(1440px){
+		font-size: 12px;
+	}
 	&::before{
 		transform: scaleX(1);
 		background-color: #CE8163;

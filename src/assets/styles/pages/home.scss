@@ -267,6 +267,14 @@
 		margin-right: 15px;
 		width: 25px;
 		height: 25px;
+		@include from(1441px){
+			width: 40px;
+			height: 40px;
+			svg{
+				width: 100%;
+				height: 100%;
+			}
+		}
 		@include to(576px){
 			display: none;
 		}
@@ -310,7 +318,12 @@
 
 
 
-
+.arr_logo_svg{
+	@include from(1441px){
+		width: 20px;
+		height: 100px;
+	}
+}
 
 
 
@@ -566,7 +579,10 @@ span.overlay__2{
 			height: 260px;
 			top: 130px;
 			transform: translate(20%, 0);
-
+		}
+		@include to(576px){
+			width: 160px;
+			height: 160px;
 		}
 	}
 	&__log_arr{
@@ -870,6 +886,9 @@ ul.dots{
 }
 .section-third:not(#F){
 	padding-left: 0;
+	.section-link__text{
+		font-family: $default-font2;
+	}
 }
 .section-third-content-wrap{
 	position: relative;
@@ -913,8 +932,10 @@ ul.dots{
 		line-height: 1.6em;
 		letter-spacing: 0.1em;
 		color: #CE8163;
+		font-family: $default-font2;
 		text-transform: uppercase;
 		@include from(1441px) {
+			letter-spacing: 0.0em;
 			font-size: min(vw(20), 20px)
 		}
 	}
@@ -1014,6 +1035,9 @@ ul.dots{
 		}
 		.main-overlay__icon-logo{
 			z-index: -1;
+			@include to(1440px){
+				display: none;
+			}
 			@include to(1020px){
 				top: 24px;
 				width: 260px;
@@ -1251,8 +1275,11 @@ ul.dots{
 		width: 100%;
 		display: flex;
 		flex-direction: column;
-		justify-content: flex-end;
+		justify-content: center;
 		padding: 11% 0 3.1% 6.65%;
+		@include from(1441px){
+			justify-content: center;
+		}
 		@include to(1020px){
 			padding: 6.5% 0 50px 65px;
 		}
@@ -1325,6 +1352,8 @@ ul.dots{
 	text-decoration: none;
 	flex-shrink: 0;
 	overflow: hidden;
+	transition: all 0.3s;
+	
 	@include from(1441px){
 		margin: 0 40px;
 		width: min(vw(430), 430px);
@@ -1412,9 +1441,7 @@ ul.dots{
 			margin-bottom: 36px;
 			height: min(vw(250), 250px);
 		}
-		@include to(1024px){
-			height: 150px;
-		}
+		
 		@include to(768px){
 			margin-bottom: 20px;
 		}

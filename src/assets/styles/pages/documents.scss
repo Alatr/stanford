@@ -23,6 +23,9 @@
 	}
 	@include to(576px) {
 		margin: 0 0 44px 0;
+	}
+	@include from(1441px){
+		margin: 0 0 90px 0;
 
 	}
 }
@@ -30,7 +33,7 @@
 .documents-content {
 	transition: all 0.4s;
 	margin-left: 74px;
-	padding: 80px 45px 0 0px;
+	padding: 120px 45px 0 0px;
 
 	@include to(1020px) {
 		margin-left: 0px;
@@ -150,25 +153,45 @@
 		width: 100%; 
 	}
 	&__text{
-		margin-right: 15px;
+		margin-right: 25px;
 		font-family: $default-font2;
 		font-size: min(vw(20), 20px);
-		line-height: lh(40, 20);
+		line-height: lh(30, 20);
 		letter-spacing: 0.1em;
 		text-transform: uppercase;
 		color: #CE8163;
 		@include to(1440px){
+			margin-right: 15px;
 			font-size: 16px;
 		}
 	}
 	&__ico{
-		fill: $wc;
-		stroke: $wc;
+		fill: #FFF0E0;
+		stroke: #FFF0E0;
 		height: 11px;
 		width: 34.5px;
 	}
 }
+.documents-content-circ_logo{
+	position: absolute;
+	top: 50%;
+	right: 0%;
+	width: min(vw(300), 300px);
+	height: min(vw(300), 300px);
+	transform: translate(20%, -50%);
+	fill: #382D42;
+	@include to(1280px){
+		width: 200px;
+		height: 200px;
 
+	}
+	@include to(768px){
+		top: 80%;
+	}
+	@include to(666px){
+		display: none;
+	}
+}
 /*
 * documents end
 */
