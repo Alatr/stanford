@@ -1117,3 +1117,14 @@ body.modal-active{
 .swal2-icon.swal2-success [class^=swal2-success-line]:not(#j){
 	background-color: $mc3;
 }
+
+.news-nav-link__goup:not(#t) span{
+	font-family: $default-font;
+}
+
+.main-overlay .arr_logo_svg{
+	@include from(1441px){
+
+		margin-top: 25%;
+	}
+}

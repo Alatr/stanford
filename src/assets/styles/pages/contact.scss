@@ -71,8 +71,8 @@
 	}
 	&_r{
 		padding: 22px 30px 0 0;
-		max-width: 900px;
-		width: min(vw(900), 900px);
+		max-width: 1000px;
+		width: min(vw(1000), 1000px);
 		@include to(1440px){
 			padding: 0 0 0 0;
 		}

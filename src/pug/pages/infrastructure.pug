@@ -22,7 +22,9 @@ block content
 		.infrastructure-block
 			.js-infrastructure-block.infrastructure-block-map
 			.infra__box
-				
+				button(type="button").js-infrastructure__list-btn.infrastructure__list-btn
+					span Об’єкти інфраструктури
+					+svg('arr_inf')
 				ul.custom-scroll.js-infrastructure-nav-list.infrastructure-nav-list
 					li.mark-item(data-category="sport")
 						+svg('eye')
@@ -94,9 +96,7 @@ block content
 						span.mark-item__icon
 							i.metro
 						span.mark-item__text Метро
-				button(type="button").js-infrastructure__list-btn.infrastructure__list-btn
-					span Об’єкти інфраструктури
-					+svg('arr_inf')
+				
 
 block footer
 	include ../includes/footer.pug

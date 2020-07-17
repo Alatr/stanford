@@ -53,7 +53,38 @@
 		}
 	}
 }
+.stage-modal__close-btn{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	@include to(1280px){
 
+		flex-direction: row-reverse;
+	}
+	svg{
+		min-width: 60px;
+		min-height: 60px;
+		@include to(475px){
+			width: 47px;
+			min-width: auto;
+			height: 47px;
+			min-height: auto;
+
+		}
+	}
+	span{
+		font-weight: 500;
+		font-size: 10px;
+		line-height: 24px;
+		display: flex;
+		align-items: center;
+		text-transform: uppercase;
+		color: #706A75;
+		@include to(1280px){
+			padding: 0 10px;
+		}
+	}
+}
 
 .nav-menu-button__icon line:nth-child(1),
 .nav-menu-button__icon line:nth-child(2) {
@@ -64,7 +95,7 @@
 	stroke: #FFF0E0
 }
 
-.dark .desktop-header {
+.dark:not(#contact-page) .desktop-header {
 	background-color: #34293D;
 }
 

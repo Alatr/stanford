@@ -28,6 +28,7 @@
 
 .filter{
 	position: sticky;
+	position: -webkit-sticky;
 	top: 80px;
 	margin-right: 23px;
 	padding: 40px 35px 127px 45px;
@@ -1386,6 +1387,7 @@ body.modal-active{
 	display: flex;
 	flex-direction: column;
 	width: calc(320px - 80px);
+	z-index: 1;
 	@include from(1441px){
 		width: calc(460px - 80px);
 

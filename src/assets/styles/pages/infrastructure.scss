@@ -54,7 +54,6 @@
 		z-index: 5;
 		width: 380px;
 		@include to(576px){
-			position: static;
 			width: 100%;
 		}
 		@include to(380px){

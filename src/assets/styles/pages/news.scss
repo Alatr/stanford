@@ -65,9 +65,10 @@
 
 	.card{
 		min-width: auto;
-		margin-bottom: 40px;
+		margin-bottom: 80px;
 		width: calc(33.33% - 80px);
 		@include to(1440px){
+			margin-bottom: 50px;
 			width: calc(33.33% - 40px);
 
 		}
