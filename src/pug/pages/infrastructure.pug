@@ -26,6 +26,12 @@ block content
 					span Об’єкти інфраструктури
 					+svg('arr_inf')
 				ul.custom-scroll.js-infrastructure-nav-list.infrastructure-nav-list
+					li.mark-item(data-category="all")
+						+svg('eye')
+						span.mark-item__icon(style="max-width: 25px; min-width: auto;")
+							<img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGlkPSJDYXBhXzEiIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDUxNS41NTYgNTE1LjU1NiIgaGVpZ2h0PSI1MTIiIHZpZXdCb3g9IjAgMCA1MTUuNTU2IDUxNS41NTYiIHdpZHRoPSI1MTIiPjxnPjxwYXRoIGQ9Im0wIDI3NC4yMjYgMTc2LjU0OSAxNzYuODg2IDMzOS4wMDctMzM4LjY3Mi00OC42Ny00Ny45OTctMjkwLjMzNyAyOTAtMTI4LjU1My0xMjguNTUyeiIgZGF0YS1vcmlnaW5hbD0iIzAwMDAwMCIgY2xhc3M9ImFjdGl2ZS1wYXRoIiBzdHlsZT0iZmlsbDojOUE5NTlFIiBkYXRhLW9sZF9jb2xvcj0iIzAwMDAwMCI+PC9wYXRoPjwvZz4gPC9zdmc+"/>
+						span.mark-item__text
+							| Показати все
 					li.mark-item(data-category="sport")
 						+svg('eye')
 						span.mark-item__icon

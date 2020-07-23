@@ -1,77 +1,3 @@
-/* function mapMaker(id, longt, lat) {
-	var id = id;
-	flag_item = 1;
-	var
-		contentString9 = '<div class="map__info-marker">' + '<h3 style="font-size: 30px;text-align: center;">Stanford</h3>' +
-		'<p>Київ, вул.Предславинська, 35 </p>' + '</div>',
-		contentString2 = '<div class="map__info-marker">Стоматологічна клініка</div>',
-		contentString3 = '<div class="map__info-marker">Банкомат Ощадбанк</div>',
-		contentString4 = '<div class="map__info-marker">Спеціалізована школа №89 з <br>поглибленим вивченням іноземних мов</div>',
-		contentString5 = '<div class="map__info-marker">Гімназія №109 ім. Т.Г. Шевченка</div>',
-		contentString6 = '<div class="map__info-marker">Дошкільний навчальний заклад №632</div>',
-		contentString7 = '<div class="map__info-marker">Ощадбанк, АО</div>',
-		contentString8 = '<div class="map__info-marker">КБ ПриватБанк, ПАО</div>';
-
-// 50.437010, 30.541347
-
-	var locations = [
-				//[contentString2, 50.436653, 30.537347, "/img/map/dent.png"],
-				//[contentString3, 50.434541, 30.54343, "/img/map/bank.png"],
-				//[contentString4, 50.439243, 30.537797, "/img/map/Marker.png"],
-				//[contentString5, 50.433926, 30.538774, "/img/map/Marker.png"],
-				//[contentString6, 50.435491, 30.53961, "/img/map/sad.png"],
-				//[contentString7, 50.435456, 30.546176, "/img/map/bank.png"],
-				//[contentString8, 50.439367, 30.544927, "/img/map/bank.png"],
-				[contentString9, 50.422954, 30.522, "./assets/images/inf/icons/marker.png"]
-			];
-	var centerX = longt || 50.423854;
-	var centerY = lat || 30.518;
-
-	if($(window).width() < 748) {
-		centerY = locations[0][2];
-	}
-	var map = new google.maps.Map(document.getElementById(id), {
-			zoom: 16,
-			scrollwheel: false,
-			center: new google.maps.LatLng( centerX, centerY),
-			mapTypeId: google.maps.MapTypeId.ROADMAP
-		});
-
-	var infowindow = new google.maps.InfoWindow();
-	var marker, i;
-
-	for (i = 0; i < locations.length; i++) {
-	    marker = new google.maps.Marker({
-	        position: new google.maps.LatLng(locations[i][1], locations[i][2]),
-	        map: map,
-	        icon: {
-	            url: locations[i][3],
-	            scaledSize: new google.maps.Size(60, 80)
-	        }
-	    });
-	    infowindow.setContent(locations[i][0]);
-	    infowindow.open(map, marker);
-	    google.maps.event.addListener(marker, 'click', (function(marker, i) {
-	        return function() {
-	            infowindow.setContent(locations[i][0]);
-				infowindow.open(map, marker);
-	        }
-	    })(marker, i));
-	}
-
-	$.getJSON("./assets/jsa/es/infmapStyle.json", function(data) {
-         map.setOptions({styles: data});
-     });
-
-}
-if (document.getElementById('map')) {
-	mapMaker('map', 50.423854);
-} */
-
-// if (document.getElementById('map')) {
-// 	mapMaker('map');
-// }
-
 
 
 (function($) {
@@ -218,38 +144,66 @@ if (document.getElementById('map')) {
 
         ];
 
-
+			let activeNames = [];
         // Фильтрация, функция принимает в параметр  категорию из дата атрибута и сравнивает, используя метод гугл API setMap скрывает и показывает 
-        filterMarkers = function(category) {
+        filterMarkers = function(categoryArr) {
             for (i = 0; i < markers1.length; i++) {
                 marker = gmarkers1[i];
-                if (marker.category == category || category == 'main') {
-                    marker.setMap(map);
-                    // marker.setAnimation(google.maps.Animation.DROP);
-                } else {
-                    marker.setMap(null)
-                }
+							if (categoryArr.includes(marker.category)) {
+								marker.setMap(map);
+							} else {
+								marker.setMap(null)
+							}
+							if (categoryArr == 'all'){
+								marker.setMap(map);
+							}
+							// debugger
+							marker.setAnimation(google.maps.Animation.DROP);
             }
-        }
+				}
 
         // функция вешает обработчик клика на все элементы списка и вызывает функцию filterMarkers передавая в нее значение дата атрибута
-        var markItems = document.querySelectorAll('.mark-item');
+        var markItems = $('.mark-item');
 
-        for (var i = 0; i < markItems.length; i++) {
-            markItems[i].addEventListener('click', function() {
-                // console.log(markItems);
+			markItems.on('click', function(){
+				// current category
+				var category = this.dataset.category;
 
-                markItems.forEach(function(item, i) {
-                    if (item.classList.contains('active-map-item')) {
-                        item.classList.remove('active-map-item');
-                    }
-                });
+				// if we click show all marker
+				if (category == 'all'){
+					activeNames = [];
+					markItems.each(function(i, el){
+						$(el).addClass('active-map-item');
+						const categoryCnt = $(el).data().category;
+						if (categoryCnt != 'all'){
+							activeNames.push(categoryCnt)
+						}
+					});
+					//add logo main house
+					activeNames.push('main');
 
-                this.classList.add('active-map-item');
-                var category = this.dataset.category;
-                filterMarkers(category);
-            });
-        }
+					filterMarkers(activeNames);
+					return;
+				} 
+				
+				if ($(this).hasClass('active-map-item')){
+
+					const index = activeNames.findIndex(el => el == category);
+					activeNames.splice(index, 1);
+
+					$(this).removeClass('active-map-item');
+					filterMarkers(activeNames);
+					return;
+				} 
+
+
+				activeNames.push(category)
+				$(this).addClass('active-map-item');
+				// start render
+				filterMarkers(activeNames);
+			});
+				
+			
 
 
 
@@ -286,8 +240,10 @@ if (document.getElementById('map')) {
         // init карты все очевидно 
         var map = new google.maps.Map(document.querySelector('.js-infrastructure-block'), {
             center: {
-                lat: 50.423854,
-                lng: 30.518
+            		
+                lat: 50.422954,
+                	
+                lng: 30.527,
             },
             zoom: 15,
             disableDefaultUI: true,
@@ -671,7 +627,6 @@ $('.js-infrastructure__list-btn').on('click', function (e) {
 	})
 
 });
-console.log($('.js-infrastructure-block.infrastructure-block-map').height());
 
 
 })(jQuery);
